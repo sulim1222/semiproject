@@ -1,0 +1,67 @@
+@charset "EUC-KR";
+#calendar{
+    width: 80%;
+    height: 500px;
+    margin-left: 10%;
+}
+#checkdate{
+    width: 80%;
+    height : 50px;
+    display: flex;
+    margin: auto;
+  	margin-top: 20px;
+    justify-content: space-evenly; 
+}
+#btn{
+	font-family: "Montserrat";
+	font-size : 20px;
+    height: 50px;
+    width: 150px;
+    border-color : rgba(0,0,0,0.5);
+    border-radius: 20px;
+    
+}
+#btn1{
+	font-family: "Montserrat";
+	font-size : 20px;
+	height: 50px;
+    width: 150px;
+   	margin-right: 10px;
+	border-color : rgba(0,0,0,0.5);
+	border-radius: 20px
+
+   	
+}
+
+#btn:hover{
+	background: skyblue;
+	
+
+}
+#btn1:hover{
+	background: aqua;
+}
+p{ 
+    width: 250px;
+}
+#reservation{
+  	border : 1px soild black;
+    width: 80%;
+    height: 800px;
+    margin: auto;
+}
+#reservation>div{
+    
+}
+#ck1{
+	
+	margin-top:10px;
+	font-family: "Montserrat";
+}
+#ck2{
+
+	margin-top:10px;
+	font-family: "Montserrat";
+}
+
+

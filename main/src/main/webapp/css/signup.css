@@ -1,0 +1,84 @@
+#signupContainer {
+    padding: 20px;
+    width: 100%;
+    margin: auto;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+}
+#signupFont {
+    text-align: center;
+    font-size: 45px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 35%;
+    margin: auto;
+}
+.groupJoin{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    gap: 10px;
+}
+.groupJoin label {
+    width: 120px;
+    font-size: 13px;
+}
+.groupJoin input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.groupJoin select {
+    padding: 10px;
+    border-radius: 5px;
+}
+.groupJoin button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.groupJoin span {
+    font-size: 18px;
+}
+.button-group {
+    justify-content: center;
+}
+.button-group button {
+   
+    text-align: center;
+}
+input[type="number"]{
+    width: 30px;
+    -webkit-appearance: none;
+}
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+ } /*56~64*/
+#btn1{
+
+   width: 80px;
+   height: 25px;
+}
+#btn2{
+    height: 25px;
+    width: 80px;
+    margin-left: 0% ;
+}
+#btnclass{
+    display: flex;
+}
+#checkMail{
+    width: 200px;
+    height: 25px;
+}
+#btnclass *{
+    margin-left: 10px ;
+}
