@@ -76,9 +76,9 @@ input::-webkit-inner-spin-button {
     display: flex;
 }
 #checkMail{
-    width: 200px;
+    width: 125px;
     height: 25px;
-}
+} <!--이메일 전송부분-->
 #btnclass *{
     margin-left: 10px ;
 }

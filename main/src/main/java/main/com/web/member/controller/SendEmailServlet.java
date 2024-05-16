@@ -82,9 +82,11 @@ public class SendEmailServlet extends HttpServlet {
             Transport.send(mimeMessage);
             System.out.println("이메일 전송 성공!!");
             JSONObject jobj = new JSONObject();
-            jobj.put("sendEmail",true); // 결과값을 넘겨 줄수있다. 
+            jobj.put("sendEmail",true); // 결과값을 넘겨 줄수있다.
+        	jobj.put("code", "123456");
             response.setContentType("application/x-json; charset=utf-8"); // 보낼 방식 
         	response.getWriter().print(jobj);	// 보낸방법 
+
         } catch(Exception e) {
             // 예외 발생 시
             System.out.println("이메일 전송 실패: " + e.getMessage());
