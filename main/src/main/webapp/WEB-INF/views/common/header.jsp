@@ -19,12 +19,13 @@
 <body>
     <header class="background" id="background">
         <div class="top-section">
-            <ul><%if(m==null){ %>
+            <ul>
+            <%if(m==null){ %>
                 <li><a href="<%=request.getContextPath()%>/member/loginPage">LOGIN</a></li>
                 <li><a href="<%=request.getContextPath()%>/member/signupPage">JOIN</a></li>
                 <%}else{ %>
                 <li><p><%=m.getMemberName()%>반갑습니다<p></li>
-                <li><a href="#">MYPAGE</a></li>
+                <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
                 <%} %>
             </ul>
         </div>
