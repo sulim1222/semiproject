@@ -11,12 +11,12 @@
 	<div id="loginContainer">
 		<form action="<%=request.getContextPath()%>/member/login" method="post">
 			<div id="mainLogin">
-				<img src="<%=request.getContextPath()%>/imges/userImg.png" id="idimg"
+				<img src="<%=request.getContextPath()%>/images/userImg.png" id="idimg"
 					width="30px" height="30px" alt=""> <input type="text"
 					name="memberId" id="memberId" placeholder="아이디">
 			</div>
 			<div id="mainLogin1">
-				<img src="<%=request.getContextPath()%>/imges/pwdImg.png" id="Pwdimg" width="30px"
+				<img src="<%=request.getContextPath()%>/images/pwdImg.png" id="Pwdimg" width="30px"
 					height="30px" alt=""> <input type="password" name="memberPwd"
 					id="memberPwd" placeholder="비밀번호">
 
