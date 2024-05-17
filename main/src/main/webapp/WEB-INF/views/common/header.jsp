@@ -23,6 +23,7 @@
             <%if(m==null){ %>
                 <li><a href="<%=request.getContextPath()%>/member/loginPage">LOGIN</a></li>
                 <li><a href="<%=request.getContextPath()%>/member/signupPage">JOIN</a></li>
+                <li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%}else{ %>
                 <li><p><%=m.getMemberName()%>반갑습니다<p></li>
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>

@@ -43,11 +43,11 @@
 
                     <div class="input-group">
                         <label for="phone">휴대전화</label>
-                        <input type="text" name="phone" maxlength="3">
+                        <input type="number" name="phone" maxlength="3">
                         <span>-</span>
-                        <input type="text" name="phone1" maxlength="4">
+                        <input type="number" name="phone1" maxlength="4">
                         <span>-</span>
-                        <input type="text" name="phone2" maxlength="4">
+                        <input type="number" name="phone2" maxlength="4">
                     </div>
 
                     <button type="submit" class="search">수정하기</button>
