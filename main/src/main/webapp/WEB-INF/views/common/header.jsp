@@ -29,8 +29,7 @@
 
                 <li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%}else{ %>
-                
-                <%} if(!(m==null)){ %>
+                <%if(!(m==null)){ %>
 
                 <li><p><%=m.getMemberName()%>반갑습니다<p></li>
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
@@ -39,7 +38,7 @@
                 <li><p><%=member.getNickname()%>반갑습니다<p></li> <!-- kakao에 대한부분  -->
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
                 <li><a href="<%=request.getContextPath()%>/kakao/logout">LOGOUT</a></li>
-                <%} %>
+                <%} }%>
             </ul>
         </div>
         <div class="menu-section">
