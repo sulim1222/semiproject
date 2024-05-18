@@ -1,6 +1,7 @@
-package main.com.web.reservation.controller;
+package main.com.web.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,19 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-
 /**
- * Servlet implementation class ReservationCheckDateServlet
+ * Servlet implementation class MemberLogoutServlet
  */
-@WebServlet("/reservation/date")
-public class ReservationCheckDateServlet extends HttpServlet {
+@WebServlet("/member/logout")
+public class MemberLogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationCheckDateServlet() {
+    public MemberLogoutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,24 +28,10 @@ public class ReservationCheckDateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String checkInDate = request.getParameter("checkindate"); //
-		String checkOutDate = request.getParameter("checkoutdate");
-		String roomType = request.getParameter("roomType");
-		if(roomType==null) {
-			roomType = "standard";
-		}
-		System.out.println(checkInDate);
-		System.out.println(checkOutDate);
-		
-		JSONObject jobj = new JSONObject(); //json 객체 생성
-		//jobj.put(checkOutDate, jobj); 
-		
-		response.getWriter().print(jobj); // 전달해줌 
-		
-
-
-
-
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		session.invalidate();
+		response.sendRedirect(request.getContextPath()+"/");
 	}
 
 	/**

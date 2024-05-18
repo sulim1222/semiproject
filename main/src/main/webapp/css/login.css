@@ -88,4 +88,9 @@ section>p{
     text-align: center;
     font-size: 40px;
 }
+#kakaoLogin{
+	border: 1px solid black;
+	height: 100px;
+	width: 100px;
+}
 

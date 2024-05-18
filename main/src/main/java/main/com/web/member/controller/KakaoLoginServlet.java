@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import main.com.web.member.dto.Kakao;
 import main.com.web.member.service.KakaoService;
 
 /**
@@ -26,29 +27,30 @@ public class KakaoLoginServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("체크인");
 		String code = request.getParameter("code");
 		String email = request.getParameter("email");
+		System.out.println(code);
 		System.out.println(email);
-//		String id = request.getParameter("id");
-//		System.out.println(code);
-//		System.out.println(id);
-//		String access_Token ="";
-//		String refresh_Token ="";
-//		String reqURL ="https://kauth.kakao.com/oauth/token";
 		HttpSession session = request.getSession();
 		String access_Token = new KakaoService().getAccessToken(code);
 		System.out.println("access_Token :"+access_Token);
-		/* [출처] 카카오 로그인 API - REST API (2)|작성자 dushui */
-		request.setAttribute("session", access_Token); // 세션값 담음 
-
+		//session.setAttribute("session",access_Token);// 세션값 담음
+		//String nickname = request.getParameter("nickname");
+		//System.out.println(nickname);
+		//request.getRequestDispatcher("/index.jsp").forward(request, response);
+		Kakao member = new KakaoService().memberInfo(access_Token);
+		
+		if (member.getNickname() != null) {
+			/*
+			 * session.setAttribute("nickname", member.getNickname());
+			 * session.setAttribute("access_Token", access_Token);
+			 * session.setAttribute("kakaoId", member.getKakaoId());
+			 */
+		     session.setAttribute("kakaoMember", member);
+		   }
 		request.getRequestDispatcher("/").forward(request, response);
-
 	}
 
 	/**

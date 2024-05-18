@@ -12,7 +12,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class Kakao {
-   private String access_token;
-	private String refresh_token;
+	private Long kakaoId;
+	private String nickname;
+	private String account_email;
+	/* [출처] 카카오 로그인 API - REST API(3)|작성자 dushui */
+
+
 	
 }
