@@ -21,13 +21,18 @@
       </div>
       <div id="reservation">
         <div id="roomType">
-        
+        	<button id="StandardSelect">Standard</button>
+        	<button id="DeluxeSelect">Deluxe</button>
+        	<button id="SuiteSelect">Suite</button>
+        </div>
+        <div id="showRoom">
+        	
         </div>
       </div>
     </section>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/google-calendar@6.1.11/index.global.min.js'></script>
- <script src="<%=request.getContextPath()%>/js/reservation.js"></script>
+<script src="<%=request.getContextPath()%>/js/reservation.js"></script>
         </div>
     </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

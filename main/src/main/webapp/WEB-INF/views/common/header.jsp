@@ -62,8 +62,8 @@
                         <a href="<%=request.getContextPath()%>/revation">RESERVATION</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="#">plzfill</a></li>
-                                <li><a href="#">intheblanks</a></li>
+                                <li><a href="<%=request.getContextPath()%>/revation">reservation</a></li>
+                                <li><a href="#">caution</a></li>
                             </ul>
                         </div>
                     </li>
