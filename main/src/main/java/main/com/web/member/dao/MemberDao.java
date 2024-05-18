@@ -3,6 +3,7 @@ package main.com.web.member.dao;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +12,7 @@ import java.util.Properties;
 
 import static main.com.web.common.JDBCTemplate.close;
 
+import main.com.web.member.dto.Kakao;
 import main.com.web.member.dto.Member;
 
 public class MemberDao {
@@ -91,5 +93,42 @@ public class MemberDao {
 			result = true;
 		}
 		return result;
+	}
+	public boolean kakaoselect(Connection conn, String email) {
+		boolean result = false;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int count =0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("duplicateId"));
+			pstmt.setString(1, email); //더간단하게 변경가능
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				count++;
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		if(count==0) {
+			result = true;
+		}
+		return result;
+	}
+	public void KakaoMember(Connection conn, Kakao member) {
+		PreparedStatement pstmt = null;	
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("kakaoInsert"));
+			pstmt.setString(1, member.getAccount_email());
+			pstmt.setString(2, member.getNickname());
+			result = pstmt.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 	}
 }

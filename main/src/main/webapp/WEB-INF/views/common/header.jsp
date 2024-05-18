@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import ="main.com.web.member.dto.Member" %>
+<%@ page import ="main.com.web.member.dto.*" %>
 <%
 	Member m = (Member)session.getAttribute("member");
+	Kakao member = (Kakao)session.getAttribute("kakaoMember"); // kakao 부분
 %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Method Jeju</title>
@@ -18,14 +20,20 @@
 </head>
 <body>
     <header class="background" id="background">
+       	<h1></h1>
         <div class="top-section">
             <ul>
-            <%if(m==null){ %>
+            <%if(m==null&&member==null){ %>
                 <li><a href="<%=request.getContextPath()%>/member/loginPage">LOGIN</a></li>
                 <li><a href="<%=request.getContextPath()%>/member/signupPage">JOIN</a></li>
-                <%}else{ %>
+                <%}else if(!(m==null)){ %>
                 <li><p><%=m.getMemberName()%>반갑습니다<p></li>
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
+                <li><a href="<%=request.getContextPath()%>/member/logout">LOGOUT</a></li>
+                <%}else{ %>
+                <li><p><%=member.getNickname()%>반갑습니다<p></li> <!-- kakao에 대한부분  -->
+                <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
+                <li><a href="<%=request.getContextPath()%>/kakao/logout">LOGOUT</a></li>
                 <%} %>
             </ul>
         </div>
