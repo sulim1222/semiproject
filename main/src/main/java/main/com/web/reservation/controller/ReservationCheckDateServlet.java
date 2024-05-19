@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
+import com.google.gson.Gson;
 
 import main.com.web.reservation.service.ReservationService;
 import main.com.web.room.dto.RoomTest;
@@ -44,9 +47,17 @@ public class ReservationCheckDateServlet extends HttpServlet {
 		List<RoomTest> roomList = new ReservationService().selectRoom(roomType);
 		response.setContentType("application/json;charset=UTF-8");
 		System.out.println(roomList);
-		JSONObject jobj = new JSONObject(); //json 객체 생성
-		jobj.put("roomList", roomList);
-		response.getWriter().print(jobj); // 전달해줌 
+		
+//		JSONArray jsonArray = new JSONArray();
+//		JSONObject jobj = new JSONObject(); //json 객체 생성
+//		for(int i =0; i<roomList.size(); i++) {
+//			jsonArray.add(roomList.get(i));
+//		}
+		//jobj.put("roomList", jsonArray);
+		//response.getWriter().print(jobj); // 전달해줌 
+		Gson gson = new Gson();
+		String json = gson.toJson(roomList);
+		response.getWriter().print(json);
 	}
 
 	/**
