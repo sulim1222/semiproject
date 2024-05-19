@@ -48,14 +48,20 @@ public class MyInfoServlet extends HttpServlet {
 		String newPhone = phone + "-" + phone1 + "-" + phone2;
 
 		int result = new MyPageService().updateMember(memberId, newName, newPassword, newPhone);
-
+		String msg, loc;
 		if (result > 0) {
-			response.sendRedirect(request.getContextPath() + "/mypage/myInfoPage");
+			// 회원 정보 수정 성공
+			msg = "회원 정보를 수정하였습니다.";
+			loc = "/index.jsp"; 
 		} else {
 			// 회원 정보 수정 실패
+			msg = "회원 정보 수정에 실패하였습니다. 다시 시도해주세요!";
+			loc = "/mypage/myInfo";
 		}
-		// 페이지 이동
-
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp")
+		.forward(request, response);
 	}
 
 	/**
