@@ -124,6 +124,7 @@
 	        requestPay();
 	    });
 	});
+	
 </script>
 
 </section>
