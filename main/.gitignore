@@ -2,4 +2,4 @@
 /src/main/resources/
 /src/main/webapp/upload/
 /src/main/webapp/images/
-.DS_Store
+/**/.DS_Store 

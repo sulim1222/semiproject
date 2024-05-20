@@ -7,17 +7,27 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.Buffer;
+import java.sql.Connection;
+
+import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import main.com.web.member.dao.MemberDao;
+import main.com.web.member.dto.Kakao;
+import static main.com.web.common.JDBCTemplate.getConnection;
+import static main.com.web.common.JDBCTemplate.close;
 public class KakaoService {
 	 public String getAccessToken (String authorize_code) {
 	     System.out.println("----------------------------토큰발급---------------------------");
 		 String access_Token = "";
 	     String refresh_Token = "";
 	     String id_token ="";
+	     
 	     
 	     //토큰발급 요청을 보낼 주소
 	     String reqURL = "https://kauth.kakao.com/oauth/token";
@@ -84,7 +94,62 @@ public class KakaoService {
 	        
 	        return access_Token;
 	    }
-//[출처] 카카오 로그인 API - REST API (2)|작성자 dushui
+
+
+	public Kakao memberInfo(String access_Token) {
+		Connection connection = getConnection();
+		Kakao member = new Kakao(); //사용자 정보 
+		
+		String requestURL = "https://kapi.kakao.com/v2/user/me";
+		try {
+			URL url = new URL(requestURL);
+			HttpURLConnection conn = ((HttpURLConnection)url.openConnection()); 
+			conn.setRequestMethod("POST"); // post로 연결설정
+			conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+				int responseCode = conn.getResponseCode();
+				System.out.println("responseCode:"+responseCode); //연결코드
+				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));
+			String line =""; //받아온값
+			String result =""; // 가져온값 
+			while((line=br.readLine())!=null) {
+				result +=line;
+			}
+			System.out.println("response body :"+ result);
+			JsonParser parser = new JsonParser();
+			JsonElement element = parser.parse(result);
+		    JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
+            JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
+            Long id = element.getAsJsonObject().get("id").getAsLong();
+            
+            String email = kakao_account.getAsJsonObject().get("email").getAsString();
+			/*
+			 * String gender = kakao_account.getAsJsonObject().get("gender").getAsString();
+			 * String birthday =
+			 * kakao_account.getAsJsonObject().get("birthday").getAsString(); String
+			 * age_range = kakao_account.getAsJsonObject().get("age_range").getAsString();
+			 */
+            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
+            System.out.println("id: "+ id);
+            System.out.println("nickname: "+nickname);
+            
+            //setter이용하여 KakaoVO에 담기 
+            member.setKakaoId(id);
+            member.setNickname(nickname);
+            member.setAccount_email(email); 
+            boolean duplicate = new MemberDao().kakaoselect(connection,email);
+            close(connection);
+            if(duplicate) {
+            	Connection connto = getConnection();
+            	new MemberDao().KakaoMember(connto,member);
+            	close(connto);
+            }
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return member;
+	}
+	
 
 
 

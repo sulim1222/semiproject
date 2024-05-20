@@ -62,6 +62,7 @@ btn1.addEventListener("click",(e)=>{
 			checkoutdate : a[1]
 		},
 		success :function(response){
+			console.log(response.roomList);
 			console.log(`${a[0]},${a[1]} 값전송성공`);
 		}
 	})
