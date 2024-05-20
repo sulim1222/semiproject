@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Method Jeju</title>
+    
     <link rel="stylesheet" href="./css/index.css"> <!-- index.jsp 파일위치 -->
     <link rel="stylesheet" href="../css/index.css"> <!-- 각 파일에 위치하는값 설정 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
@@ -93,4 +94,5 @@
         <div id="mainTitle" class="main-title hidden">
             <h1></h1>
         </div>
+        <script src="<%=request.getContextPath()%>/js/header.js"></script> <!-- javascript 내용 -->
     </header>

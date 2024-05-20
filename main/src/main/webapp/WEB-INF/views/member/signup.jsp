@@ -22,6 +22,7 @@
 				<option value="@nate.com">nate.com</option>
 			</select>
 		</div>
+		
 		<div id="btnclass">
 			<button type="button" id="btn1" onclick="duplicate()">중복확인</button>
 			<button type="button" id="btn2" onclick="sendMail()">이메일 전송</button>
@@ -58,7 +59,7 @@
 			<input type="number" name="phone2" id="phone2">
 		</div>
 		<div class="groupJoin button-group">
-			<button type="submit" id=allck>가입하기</button>
+			<button type="submit" id=allck><span>가입하기</span></button>
 		</div>
 	</form>
 	<script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>

@@ -46,22 +46,49 @@ p{
 }
 #reservation{
   	border : 1px soild black;
-    width: 80%;
     height: 800px;
-    margin: auto;
+    margin: auto;  
 }
-#reservation>div{
-    
+#roomType{
+    display: flex;
+    flex: auto;
+    justify-content:space-evenly;
+}
+#roomType *buuton{
+   	width: 100px;
+   	height: 70px;
 }
 #ck1{
-	
 	margin-top:10px;
 	font-family: "Montserrat";
 }
 #ck2{
-
 	margin-top:10px;
 	font-family: "Montserrat";
 }
-
+.roomStyle{
+	border: 1px solid black;
+	height:150px; 
+	margin-top: 10px;
+	
+}
+#showRoom{
+	border: 1px solid red;
+	height: 800px;
+	width: 750px;
+	margin: auto;
+}
+.roomStyle>img{
+	 height: 150px;
+	 width: 150px;
+	 border-radius: 20px;
+}
+.btnType{
+	float: right;
+}
+.reservationInfo{
+	width : 100%;
+	height: 150px;
+	border: 1px solid aqua;	
+}
 
