@@ -1,30 +1,25 @@
 package main.com.web.pay.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import main.com.web.pay.model.dto.Payment;
-import main.com.web.pay.model.service.PaymentService;
 import org.json.JSONObject;
+import main.com.web.pay.model.service.PaymentService;
 
 @WebServlet("/pay/savepayment")
 public class SavePaymentInfoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    
+
     private PaymentService paymentService = new PaymentService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // JSON 데이터를 받기 위한 설정
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        // JSON 파싱
         StringBuilder sb = new StringBuilder();
         String line;
         while ((line = request.getReader().readLine()) != null) {
@@ -34,18 +29,21 @@ public class SavePaymentInfoServlet extends HttpServlet {
 
         String impUid = json.getString("imp_uid");
         String merchantUid = json.getString("merchant_uid");
+        String memberId = json.getString("memberId");
+        int payPrice = json.getInt("payPrice");
+        String paymentMethod = json.getString("paymentMethod");
+        String status = json.getString("status");
+        int hotelNo = json.getInt("hotelNo");
+        int reserveNo = json.getInt("reserveNo");
 
-        // 결제 정보를 저장하는 Service 호출
-        boolean result = paymentService.savePaymentInfo(impUid, merchantUid);
+        boolean result = paymentService.savePaymentInfo(impUid, merchantUid, memberId, payPrice, paymentMethod, status, hotelNo, reserveNo);
 
-        // 결과에 따른 응답 설정
         JSONObject jsonResponse = new JSONObject();
-        if (result) {
-            jsonResponse.put("success", true);
-        } else {
-            jsonResponse.put("success", false);
+        jsonResponse.put("success", result);
+        if (!result) {
             jsonResponse.put("message", "결제 정보를 저장하는 데 실패했습니다.");
         }
         response.getWriter().write(jsonResponse.toString());
     }
 }
+

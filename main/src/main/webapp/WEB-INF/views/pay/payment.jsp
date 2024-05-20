@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ page import="com.web.member.dto.Member %> --%>
+<%@ page import="main.com.web.member.dto.*" %>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 
-
-<%-- <%
-	Member m1 = (Member)session.getAttribute("Member");
-	int totalPrice = (int)request.getAttribute("totalPrice");
+<%
+    Member m1 = (Member)session.getAttribute("member");
+    /* int totalPrice = (int)request.getAttribute("totalPrice"); */
 %>
- --%>
 
 <!-- jQuery -->
 <script type="text/javascript"
@@ -67,47 +65,64 @@
         <button type="submit" class="payment-btn" id="payButton">결제하기</button>
     </form>
 </div>
+<script>
+    $(document).ready(function() {
+        // 아임포트 초기화
+        IMP.init('imp66468378'); // Replace with your actual IAMPORT key
 
+        $('#payButton').click(function(event) {
+            event.preventDefault(); // 기본 폼 제출 동작 방지
+            requestPay();
+        });
 
-
-
-	<script>
-    $('#payButton').click(function(event) {
-        event.preventDefault(); // 기본 폼 제출 동작 방지
-        
         function requestPay() {
             IMP.request_pay({
                 pg: 'kakaopay',
                 pay_method: 'card',
                 merchant_uid: 'p_' + new Date().getTime(), // 결제번호
                 name: '주문명: 결제테스트',
-<%--                 amount: <%=totalPrice%>, // 결제 금액
+                amount: '1000',
                 buyer_email: '<%=m1.getMemberId()%>',
                 buyer_name: '<%=m1.getMemberName()%>',
-                buyer_tel: '<%=m1.getMemberPhone()%>' --%>
+                buyer_tel: '<%=m1.getMemberPhone()%>'
             }, function(rsp) {
                 if (rsp.success) {
                     console.log(rsp);
                     alert('결제가 완료되었습니다.');
 
                     // 서버에 결제 정보 전달
-                    jQuery.ajax({
-                        url: '<%=request.getContextPath()%>/pay/paycomplete',
+                    $.ajax({
+                        url: '<%=request.getContextPath()%>/pay/savepayment',
                         method: 'POST',
                         contentType: 'application/json',
                         data: JSON.stringify({
                             imp_uid: rsp.imp_uid, // 아임포트 결제 고유 ID
-                            merchant_uid: rsp.merchant_uid // 상점에서 생성한 주문번호
+                            merchant_uid: rsp.merchant_uid, // 상점에서 생성한 주문번호
+                            memberId: '<%=m1.getMemberId()%>',
+                            payPrice: 1000, //나중에 받아오기
+                            paymentMethod: 'kakaopay',
+                            status: 'paid',
+                            <%-- reserveNo: '<%=' --%>
+                            hotelNo : '1',
+                            reserveNo : '11'
+                            
+                            
                         }),
                         success: function(response) {
                             if (response.success) {
                                 alert('결제 정보가 성공적으로 저장되었습니다.');
                             } else {
-                
-        });
-    </script>
-
-
+                                alert('결제 정보 저장에 실패하였습니다.');
+                            }
+                        }
+                    });
+                } else {
+                    alert('결제에 실패하였습니다. 에러 내용: ' + rsp.error_msg);
+                }
+            });
+        }
+    });
+</script>
 
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

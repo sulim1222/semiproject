@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="main.com.web.reservation.dto.*, java.util.List" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%
+	List<Reserve> reservations = (List<Reserve>)request.getAttribute("reservations");
+%>
+
 <link rel="stylesheet" href="../css/mypage.css">
      <section class="sectionflex">
         <aside class="aside">
@@ -37,17 +42,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <%if(reservations.isEmpty()){ %>
+                    <tr>
+                    	<td colspan="6">조회된 예약정보가 없습니다.</td>
+                    </tr>
+                    <%}else{
+                    	for(Reserve r : reservations){%>
                         <tr>
-                            <td>J24060201</td>
-                            <td>Method Hotel Jeju</td>
-                            <td>스탠다드</td>
-                            <td>2024/06/02</td>
-                            <td>2024/06/03</td>
-                            <td>100,000원</td>
+                            <td><%=r.getReserveNo() %></td>
+                            <td><%=r.getLocation() %></td>
+                            <td><%=r.getRoomType() %></td>
+                            <td><%=r.getCheckInDate()%></td>
+                            <td><%=r.getCheckOutDate()%></td>
+                            <td><%=r.getPayPrice() %></td>
                             <td>
                                 <button type="button" onclick="cancel();">취소</button>
                             </td>
                         </tr>
+                        <%}
+                    	}%>
                     </tbody>
                 </table>
             </div>
