@@ -154,17 +154,33 @@ SuiteSelect.addEventListener("click",(e)=>{
 				$showRoom.firstChild.remove();
 			}
 			for(let i =0; i<response.length; i++){
-			const $roomdiv = document.createElement('div');
-			$roomdiv.className = "roomStyle";
-			const $roomImg = document.createElement('img');
-			$roomImg.src =`./imges/room/${i+1}-SW.png`;
-			$roomdiv.appendChild($roomImg); //이미지 추가 
-			showRoom.appendChild($roomdiv); //showRoom(div)추가 
+				const $roomdiv = document.createElement('div'); //showroom에 들어갈 div
+				$roomdiv.className = "roomStyle";  //shworoom에 들어갈
+				const $roomImg = document.createElement('img');
+				const $infoData = document.createElement('div'); //정보 및 데이터 
+				const $reservationBtn = document.createElement('button'); //버튼생성				
+				const $btnText = document.createTextNode("예약");
+				const roomimgdiv =document.createElement('div');
+				const reservationInfo = document.createElement('div');				
+				$roomImg.src =`./imges/room/${i+1}-SW.png`;
+				$($roomImg).css("width","230px");
+				$($roomImg).css("height","150px");
+				$($roomdiv).css("display","flex");
 				
+				$reservationBtn.appendChild($btnText);
+				roomimgdiv.appendChild($roomImg); //이미지 추가
+				reservationInfo.appendChild($reservationBtn);
+				console.log($reservationBtn);
+				$reservationBtn.className="btnType" //버튼 class 
+				reservationInfo.className="reservationInfo"; // 버튼 및 정보 class 
+				$roomdiv.appendChild(roomimgdiv); //이미지 추가 
+				$roomdiv.appendChild(reservationInfo);
+				showRoom.appendChild($roomdiv); //showRoom(div)추가 
 			}
 			console.log(`${a[0]},${a[1]} 값전송성공`);
 		}
 	})
 })
+
 
 
