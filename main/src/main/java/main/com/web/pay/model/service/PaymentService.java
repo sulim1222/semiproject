@@ -96,4 +96,11 @@ public class PaymentService {
 	        JsonObject jsonResponse = new Gson().fromJson(content.toString(), JsonObject.class);
 	        return jsonResponse.get("response").getAsJsonObject().get("access_token").getAsString();
 	    }
+	    
+	    public boolean savePaymentInfo(String impUid, String merchantUid) {
+	        Connection conn = getConnection(); // 데이터베이스 연결
+	        int result = paymentDao.savePaymentInfo(conn, impUid, merchantUid);
+	        JDBCTemplate.close(conn); // 데이터베이스 연결 종료
+	        return result > 0; // 결과가 0보다 크면 true 반환, 아니면 false 반환
+	    }
 	}
