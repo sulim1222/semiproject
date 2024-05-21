@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class Payments {
+public class Payment {
 	private int payNo;
 	private int reserveNo;
 	private int payCoupon;

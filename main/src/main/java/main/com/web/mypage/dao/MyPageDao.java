@@ -7,10 +7,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import main.com.web.member.dao.MemberDao;
+import main.com.web.reservation.dto.Reserve;
 public class MyPageDao {
 	private Properties sql = new Properties(); //properties 값을 가져온다
 	{
@@ -40,5 +44,43 @@ public class MyPageDao {
 		}
 		return result;
 	}
-
+	public List<Reserve> selectMyReservation(Connection conn, String loginId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Reserve> reservations = new ArrayList<Reserve>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectMyReservation"));
+			pstmt.setString(1, loginId);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				reservations.add(MyPageDao.getReservation(rs));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return reservations;
+	}
+	private static Reserve getReservation(ResultSet rs) throws SQLException {
+		return Reserve.builder()
+				.reserveNo(rs.getInt("reserveno"))
+				.location(rs.getString("location"))
+				.memberId(rs.getString("memberid"))
+				.memberName(rs.getString("membername"))
+				.roomType(rs.getString("roomtype"))
+				.bedType(rs.getString("bedtype"))
+				.checkInDate(rs.getDate("checkindate"))
+				.checkOutDate(rs.getDate("checkoutdate"))
+				.memberPhone(rs.getString("memberphone"))
+				.payPrice(rs.getInt("payprice"))
+				.roomPeopleNo(rs.getInt("roompeopleno"))
+				.memberAddress(rs.getString("memberaddress"))
+				.reserveDate(rs.getDate("reservedate"))
+				.build();
+	}
 }

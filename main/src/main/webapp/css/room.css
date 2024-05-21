@@ -1,0 +1,289 @@
+*{
+  font-family: "Montserrat", sans-serif;
+  /* border: 1px solid magenta; */
+}
+
+.slideshow-container {
+  /* margin-top: 100px; */
+  position: relative;
+  width: 100%; /* 이미지의 너비에 따라 조정 */
+  margin: auto; /*이미지를 가운데 정렬하기 위해 필요 */
+  overflow: hidden; /* 이미지를 감싸는 영역을 넘어가는 내용 숨김 */
+  margin-bottom: 0;
+}
+
+.sharing {
+  position: absolute;
+  bottom: 20px; /* 이미지 하단에서 20px 위에 위치 */
+  left: 50%;
+  transform: translateX(-50%);
+  /* background-color: rgba(0, 0, 0, 0.5); 반투명 배경 */
+  color: white;
+  padding: 10px 20px;
+  /* border-radius: 5px; */
+  /* font-size: 1000px; */
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.fa-solid fa-share-nodes fa-xl:hover{
+  color: rgb(155, 102, 189);
+}
+
+
+
+/* Style the previous and next buttons */
+.prev, .next {
+  position: absolute;
+  top: 50%; /* 이미지의 중앙에 위치 */
+  transform: translateY(-50%);
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  color: white;
+  background-color: rgba(184, 165, 101, 0.5);
+  border: none;
+  z-index: 1000;
+  text-align: center;
+  line-height: 30px;
+}
+
+/* Position the next button on the right side */
+.next {
+  right: 0;
+}
+
+/* Position the previous button on the left side */
+.prev {
+  left: 0;
+}
+
+
+.slide {
+  /* display: none; 초기에는 슬라이드를 숨김 */
+  /* opacity: 1000; 초기에 투명하게 설정 */
+  transition: opacity 0.5s ease; /* 부드러운 전환 효과 설정 */
+  width: 100%;
+  height: 600px;
+}
+
+.slide.active {
+  /* display: block; 활성화된 슬라이드는 보이도록 설정 */
+  opacity: 1; /* 활성화된 슬라이드는 완전히 나타나도록 설정 */
+}
+
+
+
+
+.standard-detail{
+  /* line-height: 200%; */
+  /* border: 1px solid magenta;
+  width: 90%;
+  padding: 45px;
+  height: 300px;
+  display: flex;
+  justify-content: center; 
+  background-color: rgb(213, 203, 179);
+  margin: 20px auto;
+  border-radius: 80px; */
+  display: flex;
+  flex-direction: column; /* 아이콘과 설명을 세로로 정렬하기 위해 */
+  align-items: center; /* 가운데 정렬 */
+  justify-content: center; /* 가운데 정렬 */
+  /* border: 1px solid magenta; */
+  width: 100%;
+  padding: 45px;
+  height: 180px;
+  background-color: rgb(239, 234, 223);
+  margin: 0px auto;
+  margin-top: 0;
+  /* border-radius: 80px; */
+}
+
+
+
+.icon-container{
+  font-family: "Noto Sans KR";
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly; /* 아이콘들을 균등한 간격으로 정렬 */
+  width: 80%; /* 부모 요소의 너비에 따라 조절 */
+}
+
+
+.icon-container i{
+  width: 20%;
+  text-align: center;
+  /* margin: 0 20px; 좌우 여백 조정 */
+}
+
+
+.icon-title{
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.icon-description{
+  font-family: "Noto Sans KR";
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+.icon-title p{
+  margin-top: 10px;
+  width: 20%;
+  font-weight: bolder;
+  /* text-align: center; */
+  align-content: center;
+  color: #b99664;
+  font-size: 13px;
+  /* margin: 0 20px; 좌우 여백 조정 */
+}
+
+.icon-description p{
+  color: rgb(109, 109, 109);
+  margin-top: 5px;
+  width: 20%;
+  text-align: center;
+  font-weight: bolder;
+  /* margin: 0 20px; 좌우 여백 조정 */
+}
+
+
+
+
+.standard-info{
+  font-family: "Noto Sans KR";
+  line-height: 200%;
+  width: 50%;
+  height: 290px;
+  margin: 40px;
+  padding: 30px;
+  font-size: 20px;  
+  line-height: 35px; 
+  color: rgb(187, 187, 187);
+}
+
+.standard-title,
+.standard-facility-title,
+.service-title{
+  font-family: "Noto Sans KR";
+  height: 70px;
+  width: 100%;
+  font-size: 30px;
+  box-shadow: 10px;
+  color: rgb(0, 0, 0);
+}
+
+
+/* .standart-facilty{
+  font-family: "Noto Sans KR";
+  line-height: 200%;
+  width: 50%;
+  height: 290px;
+  margin: 40px;
+  padding: 30px;
+  font-size: 20px;  
+  line-height: 35px; 
+  color: rgb(187, 187, 187);
+
+} */
+
+.facility-list{                   
+  /* border: 1px solid red; */
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+}
+
+.facility-list li {
+  width: 50%; /* 부모 요소의 절반만큼 너비를 가짐 */
+  list-style: inside circle;
+}
+
+.service,
+.standard-facilty{
+  font-family: "Noto Sans KR";
+  line-height: 200%;
+  width: 50%;
+  height: 300px;
+  margin: 40px;
+  padding: 30px;
+  font-size: 20px;  
+  line-height: 35px; 
+  color: rgb(187, 187, 187);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 5s ease-in-out forwards;;
+}
+
+
+
+.service-inform{
+  font-family: "Noto Sans KR";
+  /* line-height: 200%; */
+  /* width: 50%; */
+  height: 190px;
+  margin-top: 33px;
+  padding: 30px;
+  font-size: 20px;  
+  line-height: 35px; 
+  color: rgb(187, 187, 187);
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+
+}
+
+.reservation_btn{
+  margin-bottom: 70px;
+  text-align: center;
+}
+
+#room_reservation_btn{
+  font-size: 20px;
+  letter-spacing: 5px;
+  color: white;
+  background-color: #bf9f71;
+  border: none;
+  width: 250px;
+  height: 70px;
+  background-color: #e6d67d; /* 기본 배경색 */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 55%;
+  /* border-top-left-radius: 20%; */
+}
+
+#room_reservation_btn:hover {
+  /* border: 0.5px solid rgb(3, 3, 1); */
+  background-color: #c4a820; /* 마우스를 올렸을 때 배경색 변경 */
+  font-size: 21px;
+
+}
+
+.standard-info {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
