@@ -85,7 +85,7 @@ public class MemberDao {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}finally {
+		}finally { 
 			close(rs);
 			close(pstmt);
 		}

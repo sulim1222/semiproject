@@ -1,31 +1,23 @@
-package main.com.web.mypage.controller;
+package main.com.web.qna.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-
-import main.com.web.member.dto.Member;
-import main.com.web.mypage.service.MyPageService;
-import main.com.web.reservation.dto.Reserve;
 
 /**
- * Servlet implementation class MyPageController
+ * Servlet implementation class FaqPayServlet
  */
-@WebServlet("/mypage/myReservationPage")
-public class MyReservationController extends HttpServlet {
+@WebServlet("/qna/faqPay")
+public class FaqPayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyReservationController() {
+    public FaqPayServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,18 +26,8 @@ public class MyReservationController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		System.out.println("마이페이지(예약/결제 내역) 이동");
-		
-		HttpSession session = request.getSession();
-		Member loginMember = (Member) session.getAttribute("member");
-		String loginId = loginMember.getMemberId();
-		
-		List<Reserve> reservations = new MyPageService().selectMyReservation(loginId);
-		request.setAttribute("reservations", reservations);
-		
-		
-		
-		request.getRequestDispatcher("/WEB-INF/views/mypage/myReservation.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
