@@ -22,6 +22,7 @@
 				<option value="@nate.com">nate.com</option>
 			</select>
 		</div>
+		
 		<div id="btnclass">
 			<button type="button" id="btn1" onclick="duplicate()">중복확인</button>
 			<button type="button" id="btn2" onclick="sendMail()">이메일 전송</button>

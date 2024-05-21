@@ -13,8 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Method Jeju</title>
     
-    <link rel="stylesheet" href="./css/index.css"> <!-- index.jsp 파일위치 -->
-    <link rel="stylesheet" href="../css/index.css"> <!-- 각 파일에 위치하는값 설정 -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/css/index.css"> <!-- index.jsp 파일위치 -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
@@ -28,17 +27,18 @@
                 <li><a href="<%=request.getContextPath()%>/member/loginPage">LOGIN</a></li>
                 <li><a href="<%=request.getContextPath()%>/member/signupPage">JOIN</a></li>
 
-                <li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%}else{ %>
                 <%if(!(m==null)){ %>
-
-                <li><p><%=m.getMemberName()%>반갑습니다<p></li>
+				
+                <li><p><%=m.getMemberName()%>님 반갑습니다<p></li>
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
                 <li><a href="<%=request.getContextPath()%>/member/logout">LOGOUT</a></li>
+				<li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%}else{ %>
-                <li><p><%=member.getNickname()%>반갑습니다<p></li> <!-- kakao에 대한부분  -->
+                <li><p><%=member.getNickname()%>님 반갑습니다<p></li> <!-- kakao에 대한부분  -->
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
                 <li><a href="<%=request.getContextPath()%>/kakao/logout">LOGOUT</a></li>
+				<li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%} }%>
             </ul>
         </div>
@@ -50,12 +50,12 @@
                         <a href="jejumain.html">HOME</a>
                     </li>
                     <li class="submenu-parent">
-                        <a href="#">ROOMS</a>
+                        <a href="<%=request.getContextPath()%>/room/standardroom.do">ROOMS</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="jejuroom.html">Standard</a></li>
-                                <li><a href="#">Deluxe</a></li>
-                                <li><a href="#">Suite</a></li>
+                                <li><a href="<%=request.getContextPath() %>/room/standardroom.do">Standard</a></li>
+                                <li><a href="<%=request.getContextPath() %>/room/deluxeroom.do">Deluxe</a></li>
+                                <li><a href="<%=request.getContextPath() %>/room/suiteroom.do">Suite</a></li>
                             </ul>
                         </div>
                     </li>
@@ -94,4 +94,5 @@
         <div id="mainTitle" class="main-title hidden">
             <h1></h1>
         </div>
+        <script src="<%=request.getContextPath()%>/js/header.js"></script> <!-- javascript 내용 -->
     </header>
