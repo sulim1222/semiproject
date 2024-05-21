@@ -150,37 +150,69 @@ SuiteSelect.addEventListener("click",(e)=>{
 		},
 			success :function(response){
 			console.log(response);
+			
 			while($showRoom.firstChild){
 				$showRoom.firstChild.remove();
-			}
-			for(let i =0; i<response.length; i++){
-				const $roomdiv = document.createElement('div'); //showroom에 들어갈 div
-				$roomdiv.className = "roomStyle";  //shworoom에 들어갈
-				const $roomImg = document.createElement('img');
-				const $infoData = document.createElement('div'); //정보 및 데이터 
-				const $reservationBtn = document.createElement('button'); //버튼생성				
-				const $btnText = document.createTextNode("예약");
-				const roomimgdiv =document.createElement('div');
-				const reservationInfo = document.createElement('div');				
-				$roomImg.src =`./imges/room/${i+1}-SW.png`;
-				$($roomImg).css("width","230px");
-				$($roomImg).css("height","150px");
-				$($roomdiv).css("display","flex");
-				
-				$reservationBtn.appendChild($btnText);
-				roomimgdiv.appendChild($roomImg); //이미지 추가
-				reservationInfo.appendChild($reservationBtn);
-				console.log($reservationBtn);
-				$reservationBtn.className="btnType" //버튼 class 
-				reservationInfo.className="reservationInfo"; // 버튼 및 정보 class 
-				$roomdiv.appendChild(roomimgdiv); //이미지 추가 
-				$roomdiv.appendChild(reservationInfo);
-				showRoom.appendChild($roomdiv); //showRoom(div)추가 
+			}	
+			for(let i =0; i<response.length; i++){	
+						
 			}
 			console.log(`${a[0]},${a[1]} 값전송성공`);
 		}
 	})
 })
+$("span").click(e=>{
+	e.target
+})
+
+const ajaxScript = (num)=>{
+	var pageSize = 10;
+	var totalPage = 0;
+	var curPage = num;
+	$.ajax({
+		url:"http://localhost:9090/main/reservation/date",
+		type : "POST",
+		data : {
+			checkindate : a[0],
+			checkoutdate : a[1],
+			roomType : "Suite" //스위트로 설정 
+		},
+		dataType : "json",
+		success:function(roomList){
+			console.log(roomList);
+			var totalCount = roomLis.length; // 받아온 객체의 전체값을 가져옴 
+			if(totalCount !=0){
+				totalPages =Math.ceil(totalCount/pageSize);
+				var htmlStr = pageLink(curPage , totalPage ,"getAddr");
+				
+			}else{
+				console.log("검색된 주소가 없음");
+			}
+		} 
+	}) 
+}
 
 
 
+// ajax로 페이징처리
+function pageLink(curPage, totalPages, funName){
+	var pageUrl = "";
+	var pageLimt = 5;
+	var startPage = parseInt((curPage-1)/pageLimt) * pageLimt +1; //시작 페이지 
+	// 1~ 5면 1~5page bar 형성 6이면 6~10까지 page 생성
+	var endPage = startPage + pageLimt - 1;
+	
+	if(totalPages < endPage){
+		endPage = totalPages;
+	}
+	var nextpage = endPage +1;
+	
+	if(curPage >1 && pageLimt <curPage){
+		pageUrl += "<a href=javascript:"+funName + "(1)</a>";
+		
+	}
+	if(curPage>pageLimt){
+	
+	}
+	
+}
