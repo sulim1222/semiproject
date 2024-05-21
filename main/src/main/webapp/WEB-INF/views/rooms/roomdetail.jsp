@@ -107,9 +107,6 @@
 
 
 
-
-
-
 	<script src="<%= request.getContextPath()%>/js/room.js"></script>
     </section>
 

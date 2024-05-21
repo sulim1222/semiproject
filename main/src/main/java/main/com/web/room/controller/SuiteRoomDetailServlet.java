@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class StandardRoomDetailServlet
+ * Servlet implementation class SuiteRoomDetailServlet
  */
-@WebServlet("/room/standardroom.do")
-public class StandardRoomDetailServlet extends HttpServlet {
+@WebServlet("/room/suiteroom.do")
+public class SuiteRoomDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StandardRoomDetailServlet() {
+    public SuiteRoomDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,16 +28,17 @@ public class StandardRoomDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//(사용자가 선택한 방) db에서 starndardroom에 대한 정보를 가져옴
+		
+		//클라이언트가 클릭한 room정보를 가져오기
 		String roomType=request.getParameter("room");
-		
-		//HttpServletRequest, HttpSession, ServletContext
-		//setAttribute("key",Object value); -> getAttribute("key");
-		request.setAttribute("room", 
-				new String[]{"1-ST.png","2-ST.png","3-ST.png","4-ST.png","5-ST.png"});
-		
-		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/rooms/roomdetail.jsp");
+				
+		//jsp에 보낼 데이터 준비하기 key:value
+		request.setAttribute("room",new String[] {"1-SU.png","2-SU.png","3-SU.png","4-SU.png","5-SU.png"});
+				
+		//jsp에 전달
+		RequestDispatcher rd=request.getRequestDispatcher("WEB-INF/views/rooms/roomdetail.jsp");
 		rd.forward(request,response);
+		
 	}
 
 	/**
