@@ -88,23 +88,118 @@ function fetchRooms(roomType, page) {
                 $showRoom.firstChild.remove();
             }
             roomList.forEach((room, i) => {
-                const $roomdiv = document.createElement('div');
-                $roomdiv.className = "roomStyle";
+                const $detail = document.createElement('div');
+                $detail.className = "detail";
+
+                const $roomCard = document.createElement('div');
+                $roomCard.className = "room-card";
+
                 const $roomImg = document.createElement('img');
+                $roomImg.className = "room-img";
                 $roomImg.src = `./imges/room/${room.roomUrl}`;
-                const $roomInfo = document.createElement('p');
-                $roomInfo.textContent = `Room No: ${room.roomNo}, Price: ${room.roomPrice}, Amenity: ${room.roomAmenity}, Area: ${room.roomArea}, Info: ${room.roomInfo}, Location: ${room.location}, Category: ${room.category}, Service: ${room.hotelService}`;
-                $roomdiv.appendChild($roomImg);
-                $roomdiv.appendChild($roomInfo);
-                $showRoom.appendChild($roomdiv);
+
+                const $roomInfo = document.createElement('div');
+                $roomInfo.className = "room-info";
+
+                const $roomTitle = document.createElement('h3');
+                $roomTitle.className = "room-title";
+                $roomTitle.textContent = `Room No: ${room.roomNo}`;
+
+                const $roomPrice = document.createElement('p');
+                $roomPrice.className = "room-price";
+                $roomPrice.textContent = `가격: ${room.roomPrice}`;
+
+                const $roomAmenity = document.createElement('p');
+                $roomAmenity.className = "room-amenity";
+                $roomAmenity.textContent = `부대시설: ${room.roomAmenity}`;
+
+                const $roomArea = document.createElement('p');
+                $roomArea.className = "room-area";
+                $roomArea.textContent = `Area: ${room.roomArea}`;
+
+                const $roomInfoText = document.createElement('p');
+                $roomInfoText.className = "room-info-text";
+                $roomInfoText.textContent = `Info: ${room.roomInfo}`;
+
+                const $roomCategory = document.createElement('p');
+                $roomCategory.className = "room-category";
+                $roomCategory.textContent = `Category: ${room.category}`;
+
+                const $roomService = document.createElement('p');
+                $roomService.className = "room-service";
+                $roomService.textContent = `서비스: ${room.hotelService}`;
+                //$roomInfo.appendChild($roomTitle);
+                $roomInfo.appendChild($roomPrice);
+                $roomInfo.appendChild($roomAmenity);
+                $roomInfo.appendChild($roomArea);
+                $roomInfo.appendChild($roomInfoText);
+                //$roomInfo.appendChild($roomCategory);
+                $roomInfo.appendChild($roomService);
+                $roomCard.appendChild($roomImg);
+                $roomCard.appendChild($roomInfo);
+                // 자차 유무 선택
+                const $carOption = document.createElement('div');
+                $carOption.className = "car-option";
+                $carOption.innerHTML = `
+                    <label for="car-${i}">자차 유무:</label>
+                    <select id="car-${i}" name="car">
+                        <option value="yes">있음</option>
+                        <option value="no">없음</option>
+                    </select>
+                `;
+                // 침대 타입 선택
+                const $bedType = document.createElement('div');
+                $bedType.className = "bed-type";
+                $bedType.innerHTML = `
+                    <label for="bed-${i}">침대 타입:</label>
+                    <select id="bed-${i}" name="bed">
+                    <option value="twin">Twin</option>
+                    <option value="double">Double</option>
+                    </select>
+                `;
+                // 인원 선택
+                const $peopleCount = document.createElement('div');
+                $peopleCount.className = "people-count";
+                $peopleCount.innerHTML = `
+                    <label for="people-${i}">인원:</label>
+                    <select id="people-${i}" name="people">
+                    <option value="2">2</option>
+                    <option value="4">4</option>
+                    </select>
+                `;
+                // 요청사항 입력
+                const $request = document.createElement('div');
+                $request.className = "request";
+                $request.innerHTML = `
+                    <label for="request-${i}">요청사항</label>
+                    <input type="text" id="request-${i}" name="request" placeholder="요청사항을 입력하세요">
+                `;
+                // 예약 버튼 추가
+                const $reserveButton = document.createElement('button');
+                $reserveButton.className = "reserve-button";
+                $reserveButton.textContent = "예약하기";
+                $reserveButton.addEventListener('click', (e) => {
+                // 예약 버튼 클릭 이벤트 처리
+                console.dir(e.target);
+    			console.log(roomList[i]); // 외부 범위의 roomList에 접근
+    			location.assign();
+    			alert('예약이 완료되었습니다.');
+                });
+                // detail div에 요소 추가
+                $detail.appendChild($carOption);
+                $detail.appendChild($bedType);
+                $detail.appendChild($peopleCount);
+                $detail.appendChild($request);
+                $detail.appendChild($reserveButton);
+                // roomCard에 detail 추가
+                $roomCard.appendChild($detail);
+                $showRoom.appendChild($roomCard);
             });
             updatePageBar(page, totalData, roomType);
             console.log(`${a[0]}, ${a[1]} 값 전송 성공`);
-        }
-    });
-}
-
-function updatePageBar(curPage, totalData, roomType) {
+        }});
+	}
+	function updatePageBar(curPage, totalData, roomType) {
     const itemsPerPage = 3;
     const totalPages = Math.ceil(totalData / itemsPerPage);
     const pageLimit = 5;
