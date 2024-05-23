@@ -1,13 +1,17 @@
 package main.com.web.room.controller;
 
 import java.io.IOException;
+import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import main.com.web.room.dto.Room;
+import main.com.web.room.service.RoomService;
 
 /**
  * Servlet implementation class StandardRoomDetailServlet
@@ -36,8 +40,21 @@ public class StandardRoomDetailServlet extends HttpServlet {
 		request.setAttribute("room", 
 				new String[]{"1-ST.png","2-ST.png","3-ST.png","4-ST.png","5-ST.png"});
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/WEB-INF/views/rooms/roomdetail.jsp");
-		rd.forward(request,response);
+		RoomService rs=new RoomService();
+		Room room=rs.getARoomService();
+		System.out.println(room);
+		
+		HttpSession session=request.getSession();
+		session.setAttribute("rooms",room);
+		request.getRequestDispatcher("/WEB-INF/views/rooms/roomdetail.jsp").forward(request,response);
+		
+		
+//		RoomService roomsr = new RoomService();
+//	     	List<Room> rooms=roomsr.GetAllRooms();
+//
+//	        request.setAttribute("rooms", rooms);
+//	        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/rooms/roomdetail.jsp");
+//	        dispatcher.forward(request, response);
 	}
 
 	/**
