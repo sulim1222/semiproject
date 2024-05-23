@@ -44,7 +44,7 @@
                     <tbody>
                     <%if(reservations.isEmpty()){ %>
                     <tr>
-                    	<td colspan="6">조회된 예약정보가 없습니다.</td>
+                    	<td colspan="7">조회된 예약정보가 없습니다.</td>
                     </tr>
                     <%}else{
                     	for(Reserve r : reservations){%>
@@ -56,7 +56,7 @@
                             <td><%=r.getCheckOutDate()%></td>
                             <td><%=r.getPayPrice() %></td>
                             <td>
-                                <button type="button" onclick="cancel();">취소</button>
+                                <button type="button" onclick="cancelPay();">취소</button>
                             </td>
                         </tr>
                         <%}

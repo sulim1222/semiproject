@@ -38,9 +38,16 @@ public class MyReservationController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("member");
-		String loginId = loginMember.getMemberId();
 		
-		List<Reserve> reservations = new MyPageService().selectMyReservation(loginId);
+		 if (loginMember == null) {
+		        response.sendRedirect(request.getContextPath() + "/member/loginPage"); // 로그인 페이지로 리디렉션
+		        return;
+		    }
+		
+		
+		int loginMemberNo = loginMember.getMemberNo();
+		
+		List<Reserve> reservations = new MyPageService().selectMyReservation(loginMemberNo);
 		request.setAttribute("reservations", reservations);
 		
 		
