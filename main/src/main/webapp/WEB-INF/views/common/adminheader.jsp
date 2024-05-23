@@ -18,6 +18,31 @@
 <title>관리자페이지</title>
 </head>
 
+
+<body>
+	<header>
+		<div id="logo" >
+            <img src="./img/logo.png" alt="logo" width="150px" height="80px">
+        </div>
+        <div id="menu">
+            <ul>
+                <li>
+                    <a href="<%=request.getContextPath()%>/reserve/reserveupdate.do">Reservation</a>
+                </li>
+                <li>
+                    <a href="<%=request.getContextPath()%>/rooms/roomsupdate.do">Rooms</a>
+                </li>
+                <li>
+                    <a href="<%=request.getContextPath()%>/enjoy/enjoyupdate.do">Enjoy</a>
+                </li>
+                <li>
+                    <a href="<%=request.getContextPath()%>/qna/qnaupdate.do">Q&A</a>
+                </li>
+            </ul>
+        </div>
+	</header>
+
+	
 <style>
 	header{
 		background-color:lightgray;
@@ -73,32 +98,4 @@
 	div#roomType{display:none;}
 
 </style>
-
-<body>
-	<header>
-		<div id="logo" >
-            <img src="./img/logo.png" alt="logo" width="150px" height="80px">
-        </div>
-        <div id="menu">
-            <ul>
-                <li>
-                    <a href="<%=request.getContextPath()%>/reserve/reserveupdate.do">Reservation</a>
-                </li>
-                <li>
-                    <a href="<%=request.getContextPath()%>/rooms/roomsupdate.do">Rooms</a>
-                </li>
-                <li>
-                    <a href="<%=request.getContextPath()%>/enjoy/enjoyupdate.do">Enjoy</a>
-                </li>
-                <li>
-                    <a href="<%=request.getContextPath()%>/qna/qnaupdate.do">Q&A</a>
-                </li>
-            </ul>
-        </div>
-	</header>
-	
-	
-	
-	
-	
 
