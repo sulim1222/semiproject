@@ -1,6 +1,8 @@
 package main.com.web.reservation.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,9 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 import com.google.gson.Gson;
 
@@ -39,27 +38,38 @@ public class ReservationCheckDateServlet extends HttpServlet {
 		String checkInDate = request.getParameter("checkindate"); //
 		String checkOutDate = request.getParameter("checkoutdate");
 		String roomType = request.getParameter("roomType");
+		List<RoomTest> roomList = null;
 		if(roomType==null) {
 			roomType = "Standard";
 		}
-		System.out.println(checkInDate);
-		System.out.println(checkOutDate);
-		List<RoomTest> roomList = new ReservationService().selectRoom(roomType);
+		System.out.println("파라미터에서가져온값"+checkInDate);
+		System.out.println("파라미터에서가져온값"+checkOutDate);
+		/*
+		 * SimpleDateFormat sdf = new SimpleDateFormat(); Date date =
+		 * java.sql.Date.valueOf(checkInDate); Date date1 =
+		 * java.sql.Date.valueOf(checkOutDate); System.out.println(date);
+		 * System.out.println(date1);
+		 */
+		if(checkInDate ==null && checkOutDate ==null) {
+		roomList = new ReservationService().selectRoom(roomType);
+		}else {
+		roomList = new ReservationService().selectRoom(roomType,checkInDate,checkOutDate);
+		}
 		response.setContentType("application/json;charset=UTF-8");
 		System.out.println(roomList);
+		System.out.println(roomList.size());
 		
-//		JSONArray jsonArray = new JSONArray();
-//		JSONObject jobj = new JSONObject(); //json 객체 생성
-//		for(int i =0; i<roomList.size(); i++) {
-//			jsonArray.add(roomList.get(i));
-//		}
-		//jobj.put("roomList", jsonArray);
-		//response.getWriter().print(jobj); // 전달해줌 
 		Gson gson = new Gson();
 		String json = gson.toJson(roomList);
 		response.getWriter().print(json);
+		
+		//페이지 전환 내용 
+	
+		StringBuffer pageBar = new StringBuffer(); //페이지 전환 pagebar 생성
+		 int totalDate = roomList.size();  // 전체 데이터 변환
+		 int totalpage = 3; //페이지에 출력할 갯수 
+			/* ing pageNo = ((cPage)) */
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

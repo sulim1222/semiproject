@@ -9,9 +9,9 @@
              <!-- Enjoy 서브 메뉴 모음  -->
              <div class="sub-content">
                 <ul>
-                    <li><a href="#">Tour</a></li>
-                    <li><a href="#">Restaurant</a></li>
-                    <li><a href="#">Cafe</a></li>
+                	<li><a href="<%=request.getContextPath() %>/qna/faqAll">ALL</a></li>
+                    <li><a href="<%=request.getContextPath() %>/qna/faqPay">PAY</a></li>
+                    <li><a href="<%=request.getContextPath() %>/qna/faqEtc">ETC</a></li>
                 </ul>
             </div>
             <table class="faq-table">

@@ -68,9 +68,8 @@ p{
 }
 .roomStyle{
 	border: 1px solid black;
-	height:150px; 
-	margin-top: 10px;
-	
+	height:200px; 
+	margin-top: 30px;
 }
 #showRoom{
 	border: 1px solid red;
@@ -78,17 +77,130 @@ p{
 	width: 750px;
 	margin: auto;
 }
-.roomStyle>img{
-	 height: 150px;
-	 width: 150px;
-	 border-radius: 20px;
+/* .selectRoom{
+	margin-top : 40px;
+	border: 1px solid black;
+	width :100%px;
+	height: 200px;
+	display: flex;
 }
-.btnType{
-	float: right;
+.selectRoom img{
+	 width: 300px;
+    height: 200px;
+    border: 1px solid black;
 }
-.reservationInfo{
-	width : 100%;
-	height: 150px;
-	border: 1px solid aqua;	
+.roomInfoTop{
+	width: 60%;
+	height: 200px;
+	border: 1px solid red;
 }
+.requestInput{
+ 	width: 210px;
+ 	height: 120px;
+ 	margin-left:25% ;
+}
+.selectType{
+	display: flex;
+	justify-content: space-around;
+
+}
+.roomBottom{
+	border: 1px solid black;
+	display: flex;
+	
+}
+.roomBottom button{
+	width: 200px;
+	height: 52px;
+}
+.roomBottom p{
+	margin: auto;
+	margin-left: 80px; 
+} */
+/* General styling for body */
+showRoom {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+/* Container for room selection */
+.selectRoom {
+    margin-top: 40px;
+    width: 100%;
+    height: 200px;
+    display: flex;    
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+/* Image styling */
+.selectRoom img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+}
+/* Container for room info */
+.roomInfoTop {
+    width: 60%;
+    height: 200px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/* Input styling */
+.requestInput {
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-radius: 4px;
+}
+/* Select dropdown styling */
+.selectType {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.selectType select {
+    width: 30%;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #fff;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+/* Styling for the bottom section */
+.roomBottom {
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.roomBottom p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+.roomBottom button {
+    width: 200px;
+    height: 52px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+.roomBottom button:hover {
+    background-color: #0056b3;
+}
+
+
 

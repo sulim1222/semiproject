@@ -73,6 +73,7 @@ const duplicate =()=> $.ajax({
 		if(response.duplicate){
 			alert("사용가능한 아이디입니다");
 			console.log($("#btn1"));
+			//show할수있게끔 중복확인되면  이메일 전송칸 보이게끔 로직구현
 			/*$("#btn1").attr("disabled","disabled");*/
 			$duplicate = true;
 		}else{

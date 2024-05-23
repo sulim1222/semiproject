@@ -2,6 +2,7 @@ package main.com.web.member.controller;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.mail.Message;
 import javax.mail.Session;
@@ -83,7 +84,15 @@ public class SendEmailServlet extends HttpServlet {
             System.out.println("이메일 전송 성공!!");
             JSONObject jobj = new JSONObject();
             jobj.put("sendEmail",true); // 결과값을 넘겨 줄수있다.
-        	jobj.put("code", "123456");
+            String code1="";
+            
+            for(int i =0; i<6; i++) {
+            	double num = Math.random();
+            	int rndNum = (int)(num*10);
+            	code1 +=""+rndNum;
+            }
+        	jobj.put("code", code1);
+        	System.out.println(code1);
             response.setContentType("application/x-json; charset=utf-8"); // 보낼 방식 
         	response.getWriter().print(jobj);	// 보낸방법 
 
