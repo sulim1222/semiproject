@@ -24,12 +24,12 @@
 			<div id="check">
 				<label for="checkId">아이디 저장</label> <input type="checkbox"
 					id="checkId" value="idCheck"> <input type="submit"
-					value="로그인"  size=15> <br>
+					value="로그인"  > <br>
 			</div>
 		</form>
 		<div id="kakaoLogin">
 		<a href="https://kauth.kakao.com/oauth/authorize?client_id=a567f7c380e11df07ed70d544e8f86d8&redirect_uri=http://localhost:9090/main/kakaologin&response_type=code"><img height="38px" src="<%=request.getContextPath()%>/imges/kakao_login.png" /></a>
-		</div>
+		 </div>
 		<div id="submenu">
 			<a href="<%=request.getContextPath()%>/member/signupPage">회원가입</a> 
 			| <a

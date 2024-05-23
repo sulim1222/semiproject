@@ -1,4 +1,4 @@
-package main.com.web.reserveAdmin.common;
+package main.com.web.admin.reserve.common;
 
 import java.io.FileReader;
 import java.io.IOException;

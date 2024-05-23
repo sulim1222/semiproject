@@ -44,5 +44,4 @@ public class MailCheckServlet extends HttpServlet {
         response.setContentType("application/x-json; charset=utf-8"); // 보낼 방식 
     	response.getWriter().print(jobj);
 	}
-
 }

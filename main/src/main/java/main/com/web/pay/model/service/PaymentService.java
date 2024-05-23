@@ -13,17 +13,30 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import main.com.web.pay.model.dao.PaymentDao;
+import main.com.web.reservation.dao.ReservationDao;
+import main.com.web.reservation.dto.Reserve;
 
 public class PaymentService {
 
 	 private static final String IAMPORT_API_KEY = "4618247488373851"; //내 API Key
 	    private static final String IAMPORT_API_SECRET = "ou0o1JEwZY0nbMY8EzeUkr4mYpuR2qQhDYAaobi1gPEj70uP6jKTr5GqfF0NQyEt30Q2arW1heit3qE0"; //내 API Secret
-	    private PaymentDao dao;
+	    private PaymentDao paymentDao;
+	    private static ReservationDao reserveDao = new ReservationDao(); 
 
 	    public PaymentService() {
-	        this.dao = new PaymentDao();
+	        this.paymentDao = new PaymentDao();
 	    }
 
+	    //결제 완료 페이지에 방금 결제한 예약정보
+	    public static Reserve selectMyReserve(int reserveNo) {
+	    	Connection conn = getConnection();
+	    	Reserve result = reserveDao.selectMyReserve(conn, reserveNo);
+	    	close(conn);
+			return result;
+		}
+	   
+	    
+	    
 //	    public boolean verifyAndSavePayment(String impUid, String merchantUid) throws Exception {
 //	    	Connection conn = getConnection();
 //	        if (verifyPayment(impUid)) {
@@ -102,7 +115,7 @@ public class PaymentService {
 	        boolean result = false;
 	        
 	        try {
-	            int insertResult = dao.savePaymentInfo(conn, impUid, merchantUid, memberId, payPrice, paymentMethod, status, hotelNo, reserveNo);
+	            int insertResult = paymentDao.savePaymentInfo(conn, impUid, merchantUid, memberId, payPrice, paymentMethod, status, hotelNo, reserveNo);
 	            if (insertResult > 0) {
 	                commit(conn);
 	                result = true;

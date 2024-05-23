@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import main.com.web.member.dao.MemberDao;
 import main.com.web.reservation.dto.Reserve;
+import main.com.web.review.dto.Review;
 public class MyPageDao {
 	private Properties sql = new Properties(); //properties 값을 가져온다
 	{
@@ -44,14 +45,14 @@ public class MyPageDao {
 		}
 		return result;
 	}
-	public List<Reserve> selectMyReservation(Connection conn, String loginId) {
+	public List<Reserve> selectMyReservation(Connection conn, int loginMemberNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Reserve> reservations = new ArrayList<Reserve>();
 		
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectMyReservation"));
-			pstmt.setString(1, loginId);
+			pstmt.setInt(1, loginMemberNo);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -66,9 +67,40 @@ public class MyPageDao {
 		}
 		return reservations;
 	}
+	
+	public List<Review> selectMyReview(Connection conn, int loginMemberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Review> reviews = new ArrayList<Review>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectMyReview"));
+			pstmt.setInt(1, loginMemberNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				reviews.add(MyPageDao.getReview(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return reviews;
+	}
+	
+	private static Review getReview(ResultSet rs) throws SQLException{
+		return Review.builder()
+				.reviewNo(rs.getInt("reviewno"))
+				.reviewContent(rs.getString("reviewcontent"))
+				.memberNo(rs.getInt("memberNo"))
+				.category("category")
+				.build();
+	}
 	private static Reserve getReservation(ResultSet rs) throws SQLException {
 		return Reserve.builder()
-				.reserveNo(rs.getInt("reserveno"))
+				.reserveNo(rs.getString("reserveno"))
 				.location(rs.getString("location"))
 				.memberId(rs.getString("memberid"))
 				.memberName(rs.getString("membername"))

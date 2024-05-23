@@ -1,7 +1,10 @@
 package main.com.web.reservation.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,13 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-
 import com.google.gson.Gson;
 
 import main.com.web.reservation.service.ReservationService;
-import main.com.web.room.dto.RoomTest;
+import main.com.web.room.dto.Room;
 
 /**
  * Servlet implementation class ReservationCheckDateServlet
@@ -35,30 +35,51 @@ public class ReservationCheckDateServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String checkInDate = request.getParameter("checkindate"); //
-		String checkOutDate = request.getParameter("checkoutdate");
-		String roomType = request.getParameter("roomType");
-		if(roomType==null) {
-			roomType = "Standard";
-		}
-		System.out.println(checkInDate);
-		System.out.println(checkOutDate);
-		List<RoomTest> roomList = new ReservationService().selectRoom(roomType);
-		response.setContentType("application/json;charset=UTF-8");
-		System.out.println(roomList);
-		
-//		JSONArray jsonArray = new JSONArray();
-//		JSONObject jobj = new JSONObject(); //json 객체 생성
-//		for(int i =0; i<roomList.size(); i++) {
-//			jsonArray.add(roomList.get(i));
-//		}
-		//jobj.put("roomList", jsonArray);
-		//response.getWriter().print(jobj); // 전달해줌 
-		Gson gson = new Gson();
-		String json = gson.toJson(roomList);
-		response.getWriter().print(json);
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String checkInDate = request.getParameter("checkindate");
+        String checkOutDate = request.getParameter("checkoutdate");
+        String roomType = request.getParameter("roomType");
+
+        List<Room> roomList = new ArrayList<Room>();
+        System.out.println("파라미터에서 가져온 값: " + checkInDate);
+        System.out.println("파라미터에서 가져온 값: " + checkOutDate);
+        int currentPage = 0; // 현재 페이지
+        int itemsPerPage = 3; // 페이지당 데이터 출력 수
+        System.out.println("1" + itemsPerPage);
+        String pageParam = request.getParameter("page");
+        if (pageParam != null && !pageParam.isEmpty()) {
+            try {
+                currentPage = Integer.parseInt(pageParam);
+                System.out.println("2" + itemsPerPage);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                System.out.println("3" + itemsPerPage);
+                currentPage = 1;
+            }
+        } else {
+            currentPage = 1; // 페이지 파라미터가 없는 경우 기본값으로 1을 설정합니다.
+        }
+        if (roomType == null) {
+            roomType = "Standard";
+        }
+        // 페이징 처리
+        System.out.println("Current Page: " + currentPage);
+        System.out.println("Items Per Page: " + itemsPerPage);
+        roomList = new ReservationService().selectPagedRooms(roomType, currentPage, itemsPerPage);
+        int totalData = new ReservationService().selectAllCountRoom(roomType); // totalData
+        System.out.println(totalData);
+        System.out.println("Fetched roomList: " + roomList);
+
+        // JSON 응답에 roomList와 totalData 포함
+        Map<String, Object> result = new HashMap<>();
+        result.put("roomList", roomList);
+        result.put("totalData", totalData);
+        System.out.println(totalData);
+        response.setContentType("application/json;charset=UTF-8");
+        Gson gson = new Gson();
+        String json = gson.toJson(result);
+        response.getWriter().print(json);
+    }
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

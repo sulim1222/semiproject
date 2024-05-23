@@ -24,10 +24,10 @@
 		</div>
 		
 		<div id="btnclass">
-			<button type="button" id="btn1" onclick="duplicate()">중복확인</button>
-			<button type="button" id="btn2" onclick="sendMail()">이메일 전송</button>
-			<div id="sibal">
-				<input type="number" id="checkMail">
+			<button  type="button" id="btn1" onclick="duplicate()">중복확인</button>
+			<button  type="button" id="btn2" onclick="sendMail()">이메일 전송</button>
+			<div id="sibal" style="visibility: hidden">
+				<input  type="number" id="checkMail">
 				<button type ="button" onclick="checkMailbtn()">확인</button>
 			</div>
 		</div>

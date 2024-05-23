@@ -11,19 +11,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 
+
 public class Reserve {
-	private Integer reserveNo;
-	private String location;
-	private String memberId;
-	private String memberName;
+	private String reserveNo;
 	private String roomType; //타입 지정
-	private String bedType;
+	private int payPrice;
+	private String memberName;
+	private String memberPhone;
+	private String memberAddress;
 	private Date checkInDate; //check인 날짜
 	private Date checkOutDate; // check아웃 날짜 지정
-	private String memberPhone;
-	private int payPrice;
+	private String memberId;
 	private int roomPeopleNo;
-	private String memberAddress;
+	private String location;
+	private String bedType;
 	private Date reserveDate;
+	private String requestMemo;
 		
 }

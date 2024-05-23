@@ -15,23 +15,25 @@
 .sharing {
   position: absolute;
   bottom: 20px; /* 이미지 하단에서 20px 위에 위치 */
-  left: 50%;
-  transform: translateX(-50%);
+  right: 10px;
+  /* transform: translateX(0%); */
   /* background-color: rgba(0, 0, 0, 0.5); 반투명 배경 */
-  color: white;
+  color: black;
   padding: 10px 20px;
   /* border-radius: 5px; */
-  /* font-size: 1000px; */
   border: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 20px;
 }
 
-.fa-solid fa-share-nodes fa-xl:hover{
-  color: rgb(155, 102, 189);
+.sharing-container{
+	cursor: pointer;
+}
+
+.sharing-container:hover .fa-share-nodes {
+  color: pink !important;  
 }
 
 

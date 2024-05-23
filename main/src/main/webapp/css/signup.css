@@ -73,12 +73,19 @@ input::-webkit-inner-spin-button {
     margin-left: 0% ;
 }
 #btnclass{
+	/* border : 3px solid red; */
     display: flex;
+    height: 40px;
+    width: 450px;
+    justify-content: center;
 }
 #checkMail{
     width: 125px;
     height: 25px;
 } <!--이메일 전송부분-->
-#btnclass *{
-    margin-left: 10px ;
+#btnclass button {
+   
+}
+#btn2{
+	visibility: hidden;
 }

@@ -1,4 +1,4 @@
-package main.com.reserveAdmin.controller;
+package main.com.web.admin.reserve.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class InputNewReserve
  */
-@WebServlet("/reserve/inputnewreserve.do")
-public class InputNewReserve extends HttpServlet {
+@WebServlet("/reserve/insertnewreserve.do")
+public class InsertNewReserve extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InputNewReserve() {
+    public InsertNewReserve() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,7 +26,7 @@ public class InputNewReserve extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/member/reserveList.jsp").forward(request,response);
+		request.getRequestDispatcher("/WEB-INF/views/member/insertNewReserve.jsp").forward(request,response);
 	}
 
 	/**

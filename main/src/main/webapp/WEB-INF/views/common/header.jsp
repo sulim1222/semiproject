@@ -43,20 +43,20 @@
             </ul>
         </div>
         <div class="menu-section">
-        
             <div class="logo"><img src="../images/logoBlack.png" alt="호텔로고"></div>
+
             <div class="menu">
                 <ul>
                     <li class="submenu-parent">
                         <a href="jejumain.html">HOME</a>
                     </li>
                     <li class="submenu-parent">
-                        <a href="#">ROOMS</a>
+                        <a href="<%=request.getContextPath()%>/room/standardroom.do">ROOMS</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="jejuroom.html">Standard</a></li>
-                                <li><a href="#">Deluxe</a></li>
-                                <li><a href="#">Suite</a></li>
+                                <li><a href="<%=request.getContextPath() %>/room/standardroom.do">Standard</a></li>
+                                <li><a href="<%=request.getContextPath() %>/room/deluxeroom.do">Deluxe</a></li>
+                                <li><a href="<%=request.getContextPath() %>/room/suiteroom.do">Suite</a></li>
                             </ul>
                         </div>
                     </li>
