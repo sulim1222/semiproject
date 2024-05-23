@@ -50,7 +50,7 @@ public class ReservationCheckDateServlet extends HttpServlet {
 		 * java.sql.Date.valueOf(checkOutDate); System.out.println(date);
 		 * System.out.println(date1);
 		 */
-		if(checkInDate ==null && checkOutDate ==null) {
+		if(checkInDate ==null || checkOutDate ==null) {
 		roomList = new ReservationService().selectRoom(roomType);
 		}else {
 		roomList = new ReservationService().selectRoom(roomType,checkInDate,checkOutDate);
@@ -65,11 +65,7 @@ public class ReservationCheckDateServlet extends HttpServlet {
 		
 		//페이지 전환 내용 
 	
-		StringBuffer pageBar = new StringBuffer(); //페이지 전환 pagebar 생성
-		 int totalDate = roomList.size();  // 전체 데이터 변환
-		 int totalpage = 3; //페이지에 출력할 갯수 
-			/* ing pageNo = ((cPage)) */
-	}
+		}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
