@@ -1,7 +1,8 @@
 package main.com.web.reservation.service;
 
 import static main.com.web.common.JDBCTemplate.getConnection;
-import static main.com.web.reserveAdmin.common.JDBCTemplate.close;
+
+import static main.com.web.common.JDBCTemplate.close;
 //import static main.com.web.reserveAdmin.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
