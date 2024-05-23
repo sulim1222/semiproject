@@ -85,6 +85,7 @@
 
             
             <!-- 페이징 번호 -->
+            <!-- 페이징 처리해야함, 임시로 작성  -->
             <div class="paging">
                 <span>1</span>
                 <span>2</span>
