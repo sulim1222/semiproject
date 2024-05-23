@@ -1,11 +1,10 @@
-package main.com.reserveAdmin.dao;
+package main.com.web.admin.reserve.dao;
 
-import static main.com.web.reserveAdmin.common.JDBCTemplate.close;
+import static main.com.web.admin.reserve.common.JDBCTemplate.close;
 
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import main.com.web.reserveAdmin.dto.Member;
+import main.com.web.admin.reserve.dto.Member;
 
 public class AdminReserveDao {
 
@@ -35,8 +34,8 @@ public class AdminReserveDao {
 		List<Member> members=new ArrayList<>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("selectMemberAll"));
-//			pstmt.setInt(1, (cPage-1)*numPerpage+1);
-//			pstmt.setInt(2, cPage*numPerpage);
+			pstmt.setInt(1, (cPage-1)*numPerpage+1);
+			pstmt.setInt(2, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				members.add(AdminReserveDao.getMember(rs));
@@ -68,10 +67,10 @@ public class AdminReserveDao {
 		return result;
 	}
 	public List<Member> searchMember(Connection conn, 
-			String type, String keyword, int cPage, int numPerpage){
+			String type, String keyword, String location, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<Member> result=new ArrayList<>();
+		List<Member> members=new ArrayList<>();
 		try {
 			String sql=this.sql.getProperty("selectSearchMember");
 			if (type.equals("roomType")) {
@@ -82,19 +81,20 @@ public class AdminReserveDao {
 			pstmt=conn.prepareStatement(sql);
 			if(type.equals("memberName") || type.equals("reserveNo") || type.equals("roomType")) {
 				pstmt.setString(1, "%"+keyword.toUpperCase()+"%");
+				pstmt.setString(2, location);
 			}
 			pstmt.setInt(2, (cPage-1)*numPerpage+1);
 			pstmt.setInt(3, cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				result.add(AdminReserveDao.getMember(rs));
+				members.add(AdminReserveDao.getMember(rs));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
-		}return result;
+		}return members;
 	}
 	
 	public int searchMemberCount(Connection conn,String type, String keyword) {
@@ -160,36 +160,87 @@ public class AdminReserveDao {
 	
 	
 	
+	public int insertNewMember(Connection conn, Member m) {
+	    PreparedStatement pstmt = null;
+	    int result = 0;
+	    try {
+	        pstmt = conn.prepareStatement(sql.getProperty("insertNewMember"));
+	              
+	        pstmt.setString(1, m.getLocation());       // LOCATION
+	        pstmt.setString(2, m.getMemberId());       // MEMBERID
+	        pstmt.setString(3, m.getMemberName());     // MEMBERNAME
+	        pstmt.setString(4, m.getRoomType());       // ROOMTYPE
+	        pstmt.setString(5, m.getBedType());        // BEDTYPE
+	        pstmt.setDate(6, m.getCheckInDate());      // CHECKINDATE
+	        pstmt.setDate(7, m.getCheckOutDate());     // CHECKOUTDATE
+	        pstmt.setString(8, m.getMemberPhone());    // MEMBERPHONE
+	        pstmt.setInt(9, m.getPayPrice());         // PAYPRICE
+	        pstmt.setInt(10, m.getRoomPeopleNo());     // ROOMPEOPLENO
+	        pstmt.setString(11, m.getMemberAddress()); // MEMBERADDRESS
+	        pstmt.setString(12, m.getRequestMemo()); // REQUESTMEMO
+	        result = pstmt.executeUpdate();
+	    } catch(SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(pstmt);
+	    }
+	    return result;
+	}
 	
-//	public int inputNewMember(Connection conn, Member m) {
-//		PreparedStatement pstmt=null;
-//		int result=0;
-//		try {
-//			pstmt=conn.prepareStatement(sql.getProperty("insertNewMember"));
-//			pstmt.setInt(1, m.getReserveNo());
-//			pstmt.setString(2, m.getMemberId());
-//			pstmt.setString(3, m.getMemberName());
-//			pstmt.setString(4,m.getRoomType());
-//			pstmt.setDate(5, m.getCheckInDate());
-//			pstmt.setDate(6, m.getCheckOutDate());
-//			pstmt.setString(7, m.getMemberPhone());
-//			pstmt.setInt(8, m.getPayPrice());
-//			pstmt.setInt(9, m.getRoomPeopleNo());
-//			pstmt.setString(10, m.getMemberAddress());
-//			pstmt.setDate(11, m.getReserveDate());
-//			result=pstmt.executeUpdate();
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(pstmt);
-//		}return result;
-//	}
+	
+	public Member selectByReserveNo(Connection conn, String reserveNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(sql.getProperty("selectByReserveNo"));
+			pstmt.setString(1, reserveNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=getMember(rs);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	
+	public int updateReserve(Connection conn, Member m) {
+	    PreparedStatement pstmt = null;
+	    int result = 0;
+	    try {
+	        pstmt = conn.prepareStatement(sql.getProperty("updateReserve"));
+	              
+	        pstmt.setString(1, m.getLocation());    
+	        pstmt.setString(2, m.getMemberId());      
+	        pstmt.setString(3, m.getMemberName());    
+	        pstmt.setString(4, m.getRoomType());     
+	        pstmt.setString(5, m.getBedType());       
+	        pstmt.setDate(6, m.getCheckInDate());     
+	        pstmt.setDate(7, m.getCheckOutDate());    
+	        pstmt.setString(8, m.getMemberPhone());   
+	        pstmt.setInt(9, m.getPayPrice());       
+	        pstmt.setInt(10, m.getRoomPeopleNo());     
+	        pstmt.setString(11, m.getMemberAddress()); 
+	        pstmt.setString(12, m.getRequestMemo()); 
+	        result = pstmt.executeUpdate();
+	    } catch(SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close(pstmt);
+	    }
+	    return result;
+	}
 	
 	
 	
 	public static Member getMember(ResultSet rs) throws SQLException{
 		return Member.builder()
-				.reserveNo(rs.getInt("RESERVENO"))
+				.reserveNo(rs.getString("RESERVENO"))
 				.location(rs.getString("LOCATION"))
 				.memberId(rs.getString("MEMBERID"))
 				.memberName(rs.getString("MEMBERNAME"))
@@ -201,7 +252,7 @@ public class AdminReserveDao {
 				.payPrice(rs.getInt("PAYPRICE"))
 				.roomPeopleNo(rs.getInt("ROOMPEOPLENO"))
 				.memberAddress(rs.getString("MEMBERADDRESS"))
-				.reserveDate(rs.getDate("reservedate"))
+				.reserveDate(rs.getDate("RESERVEDATE"))
 				.build();
 	}
 	
@@ -209,24 +260,7 @@ public class AdminReserveDao {
 	
 	
 	
-//	public Member selectMemberByReserveNo(Connection conn, String reserveNo) {
-//		PreparedStatement pstmt=null;
-//		ResultSet rs=null;
-//		Member m=null;
-//		try {
-//			pstmt=conn.prepareStatement(sql.getProperty("selectMemberByReserveNo"));
-//			pstmt.setString(1, reserveNo);
-//			rs=pstmt.executeQuery();
-//			if(rs.next()) m=getMember(rs);
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(pstmt);
-//		}return m;
-//		
-//	}
-//	
+
 	
 	
 	

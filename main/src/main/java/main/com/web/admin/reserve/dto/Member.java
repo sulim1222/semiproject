@@ -1,4 +1,4 @@
-package main.com.web.reserveAdmin.dto;
+package main.com.web.admin.reserve.dto;
 
 import java.sql.Date;
 
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class Member {
 
 	private String memberId;
-	private int reserveNo;
+	private String reserveNo;
 	private String location;
 	private String memberName;
 	private String roomType;
@@ -26,4 +26,6 @@ public class Member {
 	private int roomPeopleNo;
 	private String memberAddress;
 	private Date reserveDate;
+	private String requestMemo;
+	private String memberNo;
 }

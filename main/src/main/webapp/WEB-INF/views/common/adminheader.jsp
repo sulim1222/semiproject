@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="main.com.web.reserveAdmin.dto.Member" %> 
+<%@ page import="main.com.web.admin.reserve.dto.Member" %> 
 <!DOCTYPE html>
 <html lang="ko">
 <html>
