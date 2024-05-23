@@ -1,4 +1,4 @@
-package main.com.reserveAdmin.controller;
+package main.com.web.admin.reserve.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.com.web.reserveAdmin.dto.Member;
-import main.com.web.reserveAdmin.service.AdminReserveService;
+import main.com.web.admin.reserve.dto.Member;
+import main.com.web.admin.reserve.service.AdminReserveService;
 
 /**
  * Servlet implementation class reserveListLocation
@@ -59,7 +59,8 @@ public class reserveListLocation extends HttpServlet {
 			pageBar.append("<span>[이전]</span>");
 		} else {
 			pageBar.append("<a href='" + request.getRequestURI() 
-							+ "?cPage=" + (pageNo - 1) 
+			 				+ "?location=" + location
+							+ "&cPage=" + (pageNo - 1) 
 							+ "&numPerpage="
 							+ numPerpage + "'>[이전]</a>");
 		}
@@ -69,9 +70,11 @@ public class reserveListLocation extends HttpServlet {
 				pageBar.append("<span>" + pageNo + "</span>");
 			} else {
 				pageBar.append("<a href='" 
-								+ request.getRequestURI() + "?cPage=" 
-								+ (pageNo) + "&numPerpage="
-								+ numPerpage + "'>" + pageNo + "</a>");
+								+ request.getRequestURI() 
+								+ "?location=" + location
+								+ "&cPage=" + (pageNo)
+								+ "&numPerpage="+ numPerpage 
+								+ "'>" + pageNo + "</a>");
 			}
 			pageNo++;
 		}
@@ -81,8 +84,10 @@ public class reserveListLocation extends HttpServlet {
 		} else {
 			pageBar.append("<a href='" 
 							+ request.getRequestURI() 
-							+ "?cPage=" + (pageNo) + "&numPerpage=" 
-							+ numPerpage + "'>[다음]</a>");
+							+ "?location=" + location
+							+ "&cPage=" + (pageNo) 
+							+ "&numPerpage=" + numPerpage 
+							+ "'>[다음]</a>");
 		}
 
 		request.setAttribute("pageBar", pageBar);
