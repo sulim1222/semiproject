@@ -23,6 +23,3 @@ public class Room {
 	private String roomUrl;
 	
 }
-
-
-

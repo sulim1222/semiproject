@@ -13,6 +13,7 @@ import java.util.Properties;
 import static main.com.web.common.JDBCTemplate.*;
 
 import main.com.web.reservation.dto.Reserve;
+import main.com.web.room.dto.Room;
 import main.com.web.room.dto.RoomTest;
 
 public class ReservationDao {
@@ -25,26 +26,10 @@ public class ReservationDao {
 			e.printStackTrace();
 		}
 	}
-	public List<RoomTest> selectRoom(Connection conn, String roomType) {
-		List<RoomTest> roomList =new ArrayList<RoomTest>();
-		PreparedStatement pstmt =null;
-		ResultSet rs = null;
-		try {
-			pstmt =conn.prepareStatement(sql.getProperty("selectRoom"));
-			pstmt.setString(1, roomType);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				roomList.add(getRoomTest(rs));
-			}
-		}catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return roomList;
-	}
-	public RoomTest getRoomTest(ResultSet rs) throws SQLException {
-		return RoomTest.builder().roomNo(rs.getInt("roomNo")).roomPrice(rs.getInt("roomPrice")).location(rs.getString("roomPrice"))
-			.roomAmenity(rs.getString("roomAmenity")).roomCount(rs.getInt("roomCount")).rooArea(rs.getInt("rooArea")).roomPeoleNo(rs.getInt("roomPeoleNo")).roomType(rs.getString("roomType")).roomInform(rs.getString("roomInform")).bedType(rs.getString("bedType")).build();		
-	}
+
+	
+	
+	
 	
 	//결제 완료페이지에 출력할 Reserve(동훈)
 	public Reserve selectMyReserve(Connection conn, int reserveNo) {
@@ -84,6 +69,66 @@ public class ReservationDao {
 				.memberAddress(rs.getString("memberaddress"))
 				.reserveDate(rs.getDate("reservedate"))
 				.build();
+	}
+	//날짜(x) roomType(o) 단순 페이징 처리를 위한 메서드 
+	public List<Room> selectNoDateRoom(Connection conn, String roomType) {
+		
+		return null;
+	}
+	//room 정보담는 Resultset 
+	private Room getRoom(ResultSet rs)throws  SQLException{
+		return Room.builder().roomNo(rs.getInt("roomNo"))
+				.roomPrice(rs.getInt("roomPrice"))
+				.roomAmenity(rs.getString("roomAmenity"))
+				.roomArea(rs.getFloat("roomArea"))
+				.roomInfo(rs.getString("roomInfo"))
+				.location(rs.getString("location"))
+				.category(rs.getString("category"))
+				.hotelService(rs.getString("hotelService"))
+				.roomUrl(rs.getString("roomUrl"))
+				.build();
+	}
+
+	public List<Room> selectPagedRooms(Connection conn, String roomType, int currentPage, int itemsPerPage) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Room> roomList =new  ArrayList<Room>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectPagedRooms"));
+			pstmt.setString(1, roomType);
+	        pstmt.setInt(2, (currentPage - 1) * itemsPerPage + 1); // OFFSET 계산
+	        pstmt.setInt(3, currentPage * itemsPerPage); // FETCH 계산
+	        rs = pstmt.executeQuery();
+			while(rs.next()) {
+				roomList.add(getRoom(rs));
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return roomList;
+	}
+
+	public int selectAllCountRoom(Connection conn, String roomType) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectAllCountRoom"));
+			pstmt.setString(1, roomType);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				result++;
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

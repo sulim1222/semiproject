@@ -52,167 +52,83 @@
     });
     calendar.render();
   });
-btn1.addEventListener("click",(e)=>{
-	$.ajax({
-		type : "get",
-		async : true,
-		url : 'http://localhost:9090/main/reservation/date',
-		dataType : "json",
-		data : {
-			checkindate : a[0],
-			checkoutdate : a[1]
-		},
-			success :function(response){
-			console.log(response);
-			for(let i =0; i<response.length; i++){
-			const $roomdiv = document.createElement('div');
-			$roomdiv.className = "roomStyle";
-			const $roomImg = document.createElement('img');
-			$roomImg.src =`./imges/room/${i+1}-ST.png`;
-			$roomdiv.appendChild($roomImg); //이미지 추가 
-			showRoom.appendChild($roomdiv); //showRoom(div)추가 
-				
-			}
-			console.log(`${a[0]},${a[1]} 값전송성공`);
-		}
-	})
-})
+btn1.addEventListener("click", e => {
+    fetchRooms("Standard", 1);
+});
 
-StandardSelect.addEventListener("click",(e)=>{
-	$.ajax({
-		type : "get",
-		async : true,
-		url : 'http://localhost:9090/main/reservation/date',
-		dataType : "json",
-		data : {
-			checkindate : a[0],
-			checkoutdate : a[1],
-			roomType : "Standard"
-		},
-			success :function(response){
-			console.log(response);
-			while($showRoom.firstChild){
-				$showRoom.firstChild.remove();
-			}
-			for(let i =0; i<response.length; i++){
-			const $roomdiv = document.createElement('div');
-			$roomdiv.className = "roomStyle";
-			const $roomImg = document.createElement('img');
-			$roomImg.src =`./imges/room/${i+1}-ST.png`;
-			$roomdiv.appendChild($roomImg); //이미지 추가 
-			showRoom.appendChild($roomdiv); //showRoom(div)추가 
-				
-			}
-			console.log(`${a[0]},${a[1]} 값전송성공`);
-		}
-	})
-})
+StandardSelect.addEventListener("click", e => {
+    fetchRooms("Standard", 1);
+});
 
-DeluxeSelect.addEventListener("click",(e)=>{
-	$.ajax({
-		type : "get",
-		async : true,
-		url : 'http://localhost:9090/main/reservation/date',
-		dataType : "json",
-		data : {
-			checkindate : a[0],
-			checkoutdate : a[1],
-			roomType : "Deluxe"
-		},
-			success :function(response){
-			console.log(response);
-			while($showRoom.firstChild){
-				$showRoom.firstChild.remove();
-			}
-			for(let i =0; i<response.length; i++){
-			const $roomdiv = document.createElement('div');
-			$roomdiv.className = "roomStyle";
-			const $roomImg = document.createElement('img');
-			$roomImg.src =`./imges/room/${i+1}-DL.png`;
-			$roomdiv.appendChild($roomImg); //이미지 추가 
-			showRoom.appendChild($roomdiv); //showRoom(div)추가 
-				
-			}
-			console.log(`${a[0]},${a[1]} 값전송성공`);
-		}
-	})
-})
-SuiteSelect.addEventListener("click",(e)=>{
-	$.ajax({
-		type : "get",
-		async : true,
-		url : 'http://localhost:9090/main/reservation/date',
-		dataType : "json",
-		data : {
-			checkindate : a[0],
-			checkoutdate : a[1],
-			roomType : "Suite"
-		},
-			success :function(response){
-			console.log(response);
-			
-			while($showRoom.firstChild){
-				$showRoom.firstChild.remove();
-			}	
-			for(let i =0; i<response.length; i++){	
-						
-			}
-			console.log(`${a[0]},${a[1]} 값전송성공`);
-		}
-	})
-})
-$("span").click(e=>{
-	e.target
-})
+DeluxeSelect.addEventListener("click", e => {
+    fetchRooms("Deluxe", 1);
+});
 
-const ajaxScript = (num)=>{
-	var pageSize = 10;
-	var totalPage = 0;
-	var curPage = num;
-	$.ajax({
-		url:"http://localhost:9090/main/reservation/date",
-		type : "POST",
-		data : {
-			checkindate : a[0],
-			checkoutdate : a[1],
-			roomType : "Suite" //스위트로 설정 
-		},
-		dataType : "json",
-		success:function(roomList){
-			console.log(roomList);
-			var totalCount = roomLis.length; // 받아온 객체의 전체값을 가져옴 
-			if(totalCount !=0){
-				totalPages =Math.ceil(totalCount/pageSize);
-				var htmlStr = pageLink(curPage , totalPage ,"getAddr");
-				
-			}else{
-				console.log("검색된 주소가 없음");
-			}
-		} 
-	}) 
+SuiteSelect.addEventListener("click", e => {
+    fetchRooms("Suite", 1);
+});
+
+function fetchRooms(roomType, page) {
+    $.ajax({
+        type: "get",
+        async: true,
+        url: 'http://localhost:9090/main/reservation/date',
+        dataType: "json",
+        data: {
+            checkindate: a[0],
+            checkoutdate: a[1],
+            roomType: roomType,
+            page: page,
+            itemsPerPage: 3 // 페이지 당 아이템 수 설정
+        },
+        success: function (response) {
+            const roomList = response.roomList;
+            const totalData = response.totalData;
+            while ($showRoom.firstChild) {
+                $showRoom.firstChild.remove();
+            }
+            roomList.forEach((room, i) => {
+                const $roomdiv = document.createElement('div');
+                $roomdiv.className = "roomStyle";
+                const $roomImg = document.createElement('img');
+                $roomImg.src = `./imges/room/${room.roomUrl}`;
+                const $roomInfo = document.createElement('p');
+                $roomInfo.textContent = `Room No: ${room.roomNo}, Price: ${room.roomPrice}, Amenity: ${room.roomAmenity}, Area: ${room.roomArea}, Info: ${room.roomInfo}, Location: ${room.location}, Category: ${room.category}, Service: ${room.hotelService}`;
+                $roomdiv.appendChild($roomImg);
+                $roomdiv.appendChild($roomInfo);
+                $showRoom.appendChild($roomdiv);
+            });
+            updatePageBar(page, totalData, roomType);
+            console.log(`${a[0]}, ${a[1]} 값 전송 성공`);
+        }
+    });
 }
 
+function updatePageBar(curPage, totalData, roomType) {
+    const itemsPerPage = 3;
+    const totalPages = Math.ceil(totalData / itemsPerPage);
+    const pageLimit = 5;
+    let startPage = parseInt((curPage - 1) / pageLimit) * pageLimit + 1;
+    let endPage = startPage + pageLimit - 1;
+    endPage = totalPages < endPage ? totalPages : endPage;
 
+    let pageUrl = "";
 
-// ajax로 페이징처리
-function pageLink(curPage, totalPages, funName){
-	var pageUrl = "";
-	var pageLimt = 5;
-	var startPage = parseInt((curPage-1)/pageLimt) * pageLimt +1; //시작 페이지 
-	// 1~ 5면 1~5page bar 형성 6이면 6~10까지 page 생성
-	var endPage = startPage + pageLimt - 1;
-	
-	if(totalPages < endPage){
-		endPage = totalPages;
-	}
-	var nextpage = endPage +1;
-	
-	if(curPage >1 && pageLimt <curPage){
-		pageUrl += "<a href=javascript:"+funName + "(1)</a>";
-		
-	}
-	if(curPage>pageLimt){
-	
-	}
-	
+    if (curPage > 1) {
+        pageUrl += `<a href='javascript:fetchRooms("${roomType}", ${curPage - 1})'>이전</a>&nbsp;&nbsp;`;
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        if (i === curPage) {
+            pageUrl += `<strong>${i}</strong>&nbsp;&nbsp;`;
+        } else {
+            pageUrl += `<a href='javascript:fetchRooms("${roomType}", ${i})'>${i}</a>&nbsp;&nbsp;`;
+        }
+    }
+
+    if (endPage < totalPages) {
+        pageUrl += `<a href='javascript:fetchRooms("${roomType}", ${endPage + 1})'>다음</a>&nbsp;&nbsp;`;
+    }
+
+    document.getElementById("pageBar").innerHTML = pageUrl;
 }

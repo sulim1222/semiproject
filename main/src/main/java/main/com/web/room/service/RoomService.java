@@ -4,6 +4,7 @@ import static main.com.web.reserveAdmin.common.JDBCTemplate.close;
 import static main.com.web.reserveAdmin.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import main.com.web.room.dao.RoomDao;
@@ -31,4 +32,5 @@ public class RoomService {
 		close(conn);
 		return room;
 	}
+
 }
