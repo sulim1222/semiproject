@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import static main.com.web.common.JDBCTemplate.*;
+
+import main.com.web.reservation.dto.Reserve;
 import main.com.web.room.dto.RoomTest;
 
 public class ReservationDao {
@@ -42,4 +45,45 @@ public class ReservationDao {
 		return RoomTest.builder().roomNo(rs.getInt("roomNo")).roomPrice(rs.getInt("roomPrice")).location(rs.getString("roomPrice"))
 			.roomAmenity(rs.getString("roomAmenity")).roomCount(rs.getInt("roomCount")).rooArea(rs.getInt("rooArea")).roomPeoleNo(rs.getInt("roomPeoleNo")).roomType(rs.getString("roomType")).roomInform(rs.getString("roomInform")).bedType(rs.getString("bedType")).build();		
 	}
+	
+	//결제 완료페이지에 출력할 Reserve(동훈)
+	public Reserve selectMyReserve(Connection conn, int reserveNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Reserve reserve = new Reserve();
+		
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectMytReserve"));
+			pstmt.setInt(1, reserveNo);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) reserve = getReserve(rs);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return reserve;
+	}
+
+	private Reserve getReserve(ResultSet rs) throws SQLException{
+		return Reserve.builder()
+				.reserveNo(rs.getString("reserveno"))
+				.location(rs.getString("location"))
+				.memberId(rs.getString("memberid"))
+				.memberName(rs.getString("membername"))
+				.roomType(rs.getString("roomtype"))
+				.bedType(rs.getString("bedtype"))
+				.checkInDate(rs.getDate("checkindate"))
+				.checkOutDate(rs.getDate("checkindate"))
+				.memberPhone(rs.getString("memberphone"))
+				.payPrice(rs.getInt("payprice"))
+				.roomPeopleNo(rs.getInt("roompeopleno"))
+				.memberAddress(rs.getString("memberaddress"))
+				.reserveDate(rs.getDate("reservedate"))
+				.build();
+	}
+
 }

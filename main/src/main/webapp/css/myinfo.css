@@ -1,0 +1,105 @@
+@charset "UTF-8";
+.sectionflex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px 0;
+}
+
+.aside {
+    width: 20%;
+    background-color: #f9f7f7;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.aside ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.aside ul li {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+}
+
+.aside ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    line-height: 1.5;
+}
+
+.aside ul li a:hover {
+    color: #555;
+}
+
+.main {
+    width: 75%;
+    padding: 20px;
+    background-color: #f9f7f7;
+    border-radius: 10px;
+}
+
+#title {
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.separator {
+    height: 2px;
+    background-color: #666;
+    margin: 20px 0;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.input-group label {
+    width: 120px;
+    margin-right: 10px;
+}
+
+.input-group span {
+    margin: 0 5px;
+}
+
+.input-group input[type="text"],
+.input-group input[type="password"] {
+    flex: 1;
+    max-width: 200px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* 전체 박스를 맞추기 위해 사용 */
+}
+.input-group input[type="number"]{
+    width: 30px;
+    -webkit-appearance: none;
+}
+
+.input-group button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.input-group button:hover {
+    background-color: #0056b3;
+}

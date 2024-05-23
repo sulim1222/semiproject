@@ -111,6 +111,8 @@
                         success: function(response) {
                             if (response.success) {
                                 alert('결제 정보가 성공적으로 저장되었습니다.');
+                                window.location.href = '<%=request.getContextPath()%>/pay/paycompletePage';
+
                             } else {
                                 alert('결제 정보 저장에 실패하였습니다.');
                             }
