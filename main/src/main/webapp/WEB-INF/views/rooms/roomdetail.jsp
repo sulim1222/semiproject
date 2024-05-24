@@ -27,7 +27,7 @@
         <div class="slideshow-container">
            <%for(String image:images){ %>
             <div class="slide fade">
-                <img src=""<%=request.getContextPath() %>/images/rooms/<%=image %>" alt="첫번째사진" width="100%" height="600px">
+                <img src="<%=request.getContextPath() %>/images/rooms/<%=image %>" alt="첫번째사진" width="100%" height="600px">
             </div>
             <%} %>
             <div class="sharing">공유하기

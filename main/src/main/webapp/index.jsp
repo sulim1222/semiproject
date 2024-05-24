@@ -8,5 +8,6 @@
           <a href="<%=request.getContextPath()%>/room/deluxeroom.do?room=deluxe">Deluxe</a>
           <a href="<%=request.getContextPath()%>/room/suiteroom.do?room=suite">Suite</a>
         </div>
+        
     </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

@@ -38,7 +38,7 @@ public class ReservationDao {
 		Reserve reserve = new Reserve();
 		
 		try {
-			pstmt = conn.prepareStatement(sql.getProperty("selectMytReserve"));
+			pstmt = conn.prepareStatement(sql.getProperty("selectMyReserve"));
 			pstmt.setString(1, reserveNo);
 			rs = pstmt.executeQuery();
 			

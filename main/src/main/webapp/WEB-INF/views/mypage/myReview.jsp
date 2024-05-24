@@ -12,7 +12,7 @@
 	<aside class="aside">
 		<nav>
 			<ul>
-				<li>MyPage</li>
+				<li>MyPage<hr></li>
 				<li><a
 					href="<%=request.getContextPath() %>/mypage/myReservationPage">예약/결제
 						내역</a></li>
@@ -32,8 +32,9 @@
 			<table class="reservationInfo">
 				<thead>
 					<tr>
-						<th>ㅇ</th>
+						<th>No</th>
 						<th>카테고리</th>
+						<th>사진</th>
 						<th>리뷰내용</th>
 						
 					</tr>
@@ -41,13 +42,16 @@
 				<tbody>
 					<% if(reviews.isEmpty()) { %>
 					<tr>
-						<td colspan="7">조회된 리뷰가 없습니다.
+						<td colspan="4">조회된 리뷰가 없습니다.
 					</tr>
 					<% } else {
+						/* 영역 클릭하면 그 리뷰로 가기
+						*/
 						for(Review r : reviews) {%>
 					<tr>
 						<td><%=r.getReviewNo() %></td>
 						<td><%=r.getCategory() %></td>
+						<td><!-- <img src="">  --></td>
 						<td><%=r.getReviewContent() %></td>
 					</tr>
 						<%}
