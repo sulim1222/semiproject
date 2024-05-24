@@ -29,9 +29,9 @@ public class MyPageService {
 	}
 
 
-	public List<Reserve> selectMyReservation(int loginMemberNo) {
+	public List<Reserve> selectMyReservation(String id) {
 		Connection conn = getConnection();
-		List<Reserve> reservations = dao.selectMyReservation(conn, loginMemberNo);
+		List<Reserve> reservations = dao.selectMyReservation(conn, id);
 		if(reservations.isEmpty()) System.out.println("조회된 예약 없음");
 		close(conn);
 		return reservations;

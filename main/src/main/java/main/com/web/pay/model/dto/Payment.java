@@ -1,5 +1,7 @@
 package main.com.web.pay.model.dto;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,14 +12,16 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class Payment {
-	private int payNo;
-	private int reserveNo;
+	private String payNo;
 	private int payCoupon;
 	private String payMethod;
 	private int payPrice;
-	private int payDate;
-	private int payBank;
-	private String hotelNo;
+	private Date payDate;
+	private String payBank;
+	private String reserveNo;
+	private String location;
+	private String merchant_uid;
+	private String status;
 	
 	
 }

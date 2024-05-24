@@ -45,14 +45,14 @@ public class MyPageDao {
 		}
 		return result;
 	}
-	public List<Reserve> selectMyReservation(Connection conn, int loginMemberNo) {
+	public List<Reserve> selectMyReservation(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Reserve> reservations = new ArrayList<Reserve>();
 		
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectMyReservation"));
-			pstmt.setInt(1, loginMemberNo);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {

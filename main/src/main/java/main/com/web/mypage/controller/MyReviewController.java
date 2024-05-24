@@ -45,8 +45,7 @@ public class MyReviewController extends HttpServlet {
 		int loginMemberNo = loginMember.getMemberNo();
 		
 		List<Review> reviews = new MyPageService().selectMyReview(loginMemberNo);
-		
-		
+		request.setAttribute("reviews", reviews);	
 		request.getRequestDispatcher("/WEB-INF/views/mypage/myReview.jsp").forward(request, response);
 	}
 
