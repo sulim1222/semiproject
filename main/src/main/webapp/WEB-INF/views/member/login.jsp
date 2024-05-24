@@ -24,7 +24,7 @@
 			<div id="check">
 				<label for="checkId">아이디 저장</label> <input type="checkbox"
 					id="checkId" value="idCheck"> <input type="submit"
-					value="로그인"  size=15> <br>
+					value="로그인"  > <br>
 			</div>
 		</form>
 		<div id="kakaoLogin">

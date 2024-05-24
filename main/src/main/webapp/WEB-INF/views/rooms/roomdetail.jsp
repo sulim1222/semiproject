@@ -56,7 +56,11 @@
             <div class="icon-description">
                 <p>SINGLE/DOUBLE</p>
                 <p><%=room.getRoomArea() %>m2</p>
+<<<<<<< HEAD
                 <p>2~4명</p>
+=======
+                <%-- <p><%=room.getRoomPeopleNo() %>명</p> --%> <!-- 여기서 에러나요! -->
+>>>>>>> branch 'dev' of https://github.com/JuniorSinior/synergy.git
                 <p>3PM/12AM</p>
             </div>
         </div>

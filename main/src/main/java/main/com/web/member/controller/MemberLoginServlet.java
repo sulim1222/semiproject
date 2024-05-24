@@ -43,9 +43,13 @@ public class MemberLoginServlet extends HttpServlet {
 		String memberPwd = request.getParameter("memberPwd");
 		Member m = new MemberService().memberLogin(memberId,memberPwd);
 		if(m!=null) {
+			if(m.getMemberId().equals("admin")) {
+				request.getRequestDispatcher("/reserve/reserveupdate.do").forward(request, response);
+			}else {
 			HttpSession session =request.getSession();
 			session.setAttribute("member", m);
 			response.sendRedirect(request.getContextPath()+"/");
+			}
 		}else {
 			System.out.println("문제가있음");
 			System.out.println(m.toString());

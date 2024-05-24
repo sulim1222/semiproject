@@ -43,7 +43,8 @@
             </ul>
         </div>
         <div class="menu-section">
-            <div class="logo"><img src="/images/logoBlack.png" alt="호텔로고"></div>
+            <div class="logo"><img src="../images/logoBlack.png" alt="호텔로고"></div>
+
             <div class="menu">
                 <ul>
                     <li class="submenu-parent">

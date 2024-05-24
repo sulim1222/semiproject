@@ -72,9 +72,12 @@ const duplicate =()=> $.ajax({
 	success : function(response){ // success : ajax통신 성공시 function : 함수 실행
 		if(response.duplicate){
 			alert("사용가능한 아이디입니다");
-			console.log($("#btn1"));
+			console.log($("#btn2"));
 			//show할수있게끔 중복확인되면  이메일 전송칸 보이게끔 로직구현
 			/*$("#btn1").attr("disabled","disabled");*/
+			
+			$("#btn2").css("visibility","visible");
+			console.log("dd");
 			$duplicate = true;
 		}else{
 			alert("중복된 아이디입니다");
@@ -99,6 +102,7 @@ const sendMail =()=> $.ajax({
 			sessionStorage.setItem("mailcode",response.code); //key value 방식으로  세션값을 저장
 			document.getElementById("btn2").innerText="재전송";
 			code = sessionStorage.getItem("mailcode");
+			$("#sibal").css("visibility","visible");
 			setTimeout((e)=>{
 				sessionStorage.clear();
 			},1800)

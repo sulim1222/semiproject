@@ -1,12 +1,16 @@
 package main.com.web.pay.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.json.JSONObject;
+
 import main.com.web.pay.model.service.PaymentService;
 
 @WebServlet("/pay/savepayment")
@@ -37,13 +41,19 @@ public class SavePaymentInfoServlet extends HttpServlet {
         int reserveNo = json.getInt("reserveNo");
 
         boolean result = paymentService.savePaymentInfo(impUid, merchantUid, memberId, payPrice, paymentMethod, status, hotelNo, reserveNo);
-
-        JSONObject jsonResponse = new JSONObject();
-        jsonResponse.put("success", result);
-        if (!result) {
-            jsonResponse.put("message", "결제 정보를 저장하는 데 실패했습니다.");
+        request.setAttribute("reserveNo", reserveNo);
+        
+        
+        if (result) {
+            // 결제 저장 성공 시 예약완료페이지로
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/pay/paycompletePage");
+            request.setAttribute("paymentInfo", json.toString()); // 또는 필요한 데이터를 개별적으로 설정
+            dispatcher.forward(request, response);
+        } else {
+            // 결제 저장 실패 시 다른 페이지로 리디렉션
+            response.sendRedirect(request.getContextPath() + "/errorPage.jsp?message=결제 정보를 저장하는 데 실패했습니다.");
         }
-        response.getWriter().write(jsonResponse.toString());
+        
     }
 }
 
