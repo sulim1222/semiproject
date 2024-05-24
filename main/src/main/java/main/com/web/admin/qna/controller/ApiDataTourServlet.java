@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-@WebServlet("/api/tour")
+/*@WebServlet("/api/tour")*/
 public class ApiDataTourServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
