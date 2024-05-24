@@ -1,11 +1,15 @@
 package main.com.web.pay.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import main.com.web.member.dto.Member;
 
 /**
  * Servlet implementation class PaymentController
@@ -26,6 +30,9 @@ public class PaymentController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session =  request.getSession();
+		Member member = (Member)session.getAttribute("member");
+		if(member!=null) {
 		System.out.println("결제페이지 이동");
 		String checkInDate = request.getParameter("checkindate"); // 체크인 날짜
 		String checkOutDate = request.getParameter("checkoutdate"); // 체크아웃 날짜
@@ -44,6 +51,10 @@ public class PaymentController extends HttpServlet {
 		System.out.println("주차여부"+car);
 		System.out.println("침대 타입"+bedType);
 		request.getRequestDispatcher("/WEB-INF/views/pay/payment.jsp").forward(request, response);
+		}
+		else {
+		 response.sendRedirect("/main/member/loginPage");	
+		}
 	}
 
 	/**

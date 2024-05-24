@@ -42,4 +42,21 @@ public class ReservationService {
 		return result;
 	}
 
+	public List<Room> containerDate(String checkInDate, String checkOutDate, String roomType, int currentPage,
+		int itemsPerPage) {		
+		Connection conn = getConnection();
+		List<Room> roomList= new ReservationDao().containerDate(conn,checkInDate,checkOutDate,roomType,currentPage,itemsPerPage);
+		close(conn);
+		return roomList;
+	}
+
+	public int containerAllCount(String roomType, String checkInDate, String checkOutDate) {
+		Connection conn = getConnection();
+		int result = new ReservationDao().containerAllCount(conn,roomType,checkInDate,checkOutDate);
+		close(conn);
+		return result;
+	}
+
+	
+
 }

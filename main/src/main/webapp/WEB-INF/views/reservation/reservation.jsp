@@ -25,8 +25,8 @@
                     <button id="DeluxeSelect">Deluxe</button>
                     <button id="SuiteSelect">Suite</button>
                 </div>
-                <div id="showRoom"></div> <!-- 여기에 방 정보가 표시될 것으로 보입니다. -->
-                <div id="pageBar"></div> <!-- 이곳에 페이징 처리가 될 페이지 바가 표시될 것입니다. -->
+                <div id="showRoom"></div> <!-- 방표시 -->
+                <div id="pageBar"></div>  <!-- 페이징 처리 -->
             </div>
         </section>
         <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
