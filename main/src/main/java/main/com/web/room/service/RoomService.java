@@ -12,23 +12,24 @@ import main.com.web.room.dto.Room;
 public class RoomService {
 	private RoomDao dao=new RoomDao();
 	
-	public List<Room> GetAllRooms() {
+	public List<Room> GetAllRoomsService() {
 	      Connection conn=getConnection();
 	      List<Room> rooms=dao.getAllRooms(conn);
 	      close(conn);
 	      return rooms;
 	   }
 	
-	public List<Room> getRoomDetailService(){
+	public Room getRoomDetailService(String roomType,String location){
 		Connection conn=getConnection();
-		List<Room> rooms=dao.getRoomDetail(conn);
-		close(conn);
-		return rooms;
-	}
-	public Room getARoomService() {
-		Connection conn=getConnection();
-		Room room=dao.getARoom(conn);
+		Room room=dao.getRoomDetail(conn,roomType,location);
 		close(conn);
 		return room;
 	}
+	
+//	public Room getARoomService() {
+//		Connection conn=getConnection();
+//		Room room=dao.getARoom(conn);
+//		close(conn);
+//		return room;
+//	}
 }

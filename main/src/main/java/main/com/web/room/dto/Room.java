@@ -21,6 +21,7 @@ public class Room {
 	private String category;
 	private String hotelService;
 	private String roomUrl;
+
 }
 
 
