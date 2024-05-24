@@ -1,9 +1,10 @@
 package main.com.web.reservation.controller;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import main.com.web.reservation.service.ReservationService;
-import main.com.web.room.dto.RoomTest;
+import main.com.web.room.dto.Room;
 
 /**
  * Servlet implementation class ReservationCheckDateServlet
@@ -34,38 +35,52 @@ public class ReservationCheckDateServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String checkInDate = request.getParameter("checkindate"); //
-		String checkOutDate = request.getParameter("checkoutdate");
-		String roomType = request.getParameter("roomType");
-		List<RoomTest> roomList = null;
-		if(roomType==null) {
-			roomType = "Standard";
-		}
-		System.out.println("파라미터에서가져온값"+checkInDate);
-		System.out.println("파라미터에서가져온값"+checkOutDate);
-		/*
-		 * SimpleDateFormat sdf = new SimpleDateFormat(); Date date =
-		 * java.sql.Date.valueOf(checkInDate); Date date1 =
-		 * java.sql.Date.valueOf(checkOutDate); System.out.println(date);
-		 * System.out.println(date1);
-		 */
-		if(checkInDate ==null || checkOutDate ==null) {
-		roomList = new ReservationService().selectRoom(roomType);
-		}else {
-		roomList = new ReservationService().selectRoom(roomType,checkInDate,checkOutDate);
-		}
-		response.setContentType("application/json;charset=UTF-8");
-		System.out.println(roomList);
-		System.out.println(roomList.size());
-		
-		Gson gson = new Gson();
-		String json = gson.toJson(roomList);
-		response.getWriter().print(json);
-		
-		//페이지 전환 내용 
-	
-		}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String checkInDate = request.getParameter("checkindate");
+        String checkOutDate = request.getParameter("checkoutdate");
+        String roomType = request.getParameter("roomType");
+
+        List<Room> roomList = new ArrayList<Room>();
+        System.out.println("파라미터에서 가져온 값: " + checkInDate);
+        System.out.println("파라미터에서 가져온 값: " + checkOutDate);
+        int currentPage = 0; // 현재 페이지
+        int itemsPerPage = 3; // 페이지당 데이터 출력 수
+        System.out.println("1" + itemsPerPage);
+        String pageParam = request.getParameter("page");
+        if (pageParam != null && !pageParam.isEmpty()) {
+            try {
+                currentPage = Integer.parseInt(pageParam);
+                System.out.println("2" + itemsPerPage);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+                System.out.println("3" + itemsPerPage);
+                currentPage = 1;
+            }
+        } else {
+            currentPage = 1; // 페이지 파라미터가 없는 경우 기본값으로 1을 설정합니다.
+        }
+        if (roomType == null) {
+            roomType = "Standard";
+        }
+        // 페이징 처리
+        System.out.println("Current Page: " + currentPage);
+        System.out.println("Items Per Page: " + itemsPerPage);
+        roomList = new ReservationService().selectPagedRooms(roomType, currentPage, itemsPerPage);
+        int totalData = new ReservationService().selectAllCountRoom(roomType); // totalData
+        System.out.println(totalData);
+        System.out.println("Fetched roomList: " + roomList);
+
+        // JSON 응답에 roomList와 totalData 포함
+        Map<String, Object> result = new HashMap<>();
+        result.put("roomList", roomList);
+        result.put("totalData", totalData);
+        System.out.println(totalData);
+        response.setContentType("application/json;charset=UTF-8");
+        Gson gson = new Gson();
+        String json = gson.toJson(result);
+        response.getWriter().print(json);
+    }
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
