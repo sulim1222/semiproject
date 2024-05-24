@@ -27,6 +27,22 @@ public class PaymentController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("결제페이지 이동");
+		String checkInDate = request.getParameter("checkindate"); // 체크인 날짜
+		String checkOutDate = request.getParameter("checkoutdate"); // 체크아웃 날짜
+		System.out.println("체크인날짜:"+checkInDate);
+		System.out.println("체크아웃날짜:"+checkOutDate);
+		String roomNo1 = request.getParameter("roomNo"); // roomNo 룸넘버
+		String roomPepleNo1  = request.getParameter("peopelNo");
+		String car = request.getParameter("car");
+		String bedType = request.getParameter("bedType");
+		String Mrequest = request.getParameter("Mrequest");
+		int roomNo = Integer.parseInt(roomNo1);
+		int roomPepleNo =Integer.parseInt(roomPepleNo1);
+		System.out.println(Mrequest);
+		System.out.println("인원"+roomPepleNo);
+		System.out.println("룸넘버"+roomNo);
+		System.out.println("주차여부"+car);
+		System.out.println("침대 타입"+bedType);
 		request.getRequestDispatcher("/WEB-INF/views/pay/payment.jsp").forward(request, response);
 	}
 

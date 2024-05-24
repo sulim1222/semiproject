@@ -75,7 +75,6 @@ const duplicate =()=> $.ajax({
 			console.log($("#btn2"));
 			//show할수있게끔 중복확인되면  이메일 전송칸 보이게끔 로직구현
 			/*$("#btn1").attr("disabled","disabled");*/
-			
 			$("#btn2").css("visibility","visible");
 			console.log("dd");
 			$duplicate = true;
