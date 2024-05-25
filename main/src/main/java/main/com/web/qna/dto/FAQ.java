@@ -1,6 +1,6 @@
 package main.com.web.qna.dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 
-public class faqDto {
+public class FAQ {
 	private int faqAllNo;
     private String faqCategory;
     private String faqTitle;
@@ -21,6 +21,8 @@ public class faqDto {
     private Date faqDate;
     private String hotelNo;
 	
+    
+    
 	
 
    
