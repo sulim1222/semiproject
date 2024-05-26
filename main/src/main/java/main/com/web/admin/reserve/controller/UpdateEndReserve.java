@@ -55,7 +55,7 @@ public class UpdateEndReserve extends HttpServlet {
 		String location=request.getParameter("location");
 		Date checkInDate=Date.valueOf(request.getParameter("checkInDate"));
 		Date checkOutDate=Date.valueOf(request.getParameter("checkOutDate"));
-	
+		Date updateReserveDate=Date.valueOf(request.getParameter("updateReserveDate"));
 		String memberAddress=request.getParameter("memberAddress");
 		String requestMemo=request.getParameter("requestMemo");
 		
@@ -73,6 +73,7 @@ public class UpdateEndReserve extends HttpServlet {
 				.payPrice(payPrice)
 				.roomPeopleNo(roomPeopleNo)
 				.memberAddress(memberAddress)
+				.updateReserveDate(updateReserveDate)
 				.reserveDate(reserveDate)
 				.requestMemo(requestMemo)
 				.build();
@@ -82,7 +83,7 @@ public class UpdateEndReserve extends HttpServlet {
 		String msg="", again="";
 		if(result>0) {
 			msg="수정이 완료 되었습니다.";
-			again="/";
+			again="/reserve/reserveupdate.do";
 		}else {
 			msg="수정되지 않았습니다. 다시 실행해주세요";
 			again="/reserve/updatereserve.do";
@@ -90,7 +91,7 @@ public class UpdateEndReserve extends HttpServlet {
 		request.setAttribute("msg",msg);
 		request.setAttribute("again", again);
 		
-		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request,response);
+		request.getRequestDispatcher("/WEB-INF/views/common/adminmsg.jsp").forward(request,response);
 	}
 
 	/**

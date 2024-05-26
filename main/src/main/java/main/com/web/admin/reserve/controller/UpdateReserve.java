@@ -33,8 +33,6 @@ public class UpdateReserve extends HttpServlet {
 		String reserveNo =request.getParameter("reserveNo");
 	   
 		Member m=new AdminReserveService().selectByReserveNo(reserveNo);
-		System.out.println(reserveNo);
-		System.out.println(m);
 		request.setAttribute("member",m);
 		request.getRequestDispatcher("/WEB-INF/views/member/updateReserve.jsp").forward(request,response);
 	}

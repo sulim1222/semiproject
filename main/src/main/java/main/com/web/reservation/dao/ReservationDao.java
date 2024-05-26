@@ -1,20 +1,21 @@
 package main.com.web.reservation.dao;
 
+import static main.com.web.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static main.com.web.common.JDBCTemplate.*;
-
 import main.com.web.reservation.dto.Reserve;
 import main.com.web.room.dto.Room;
-import main.com.web.room.dto.RoomTest;
 
 public class ReservationDao {
 	private Properties sql = new Properties();
@@ -131,4 +132,70 @@ public class ReservationDao {
 		return result;
 	}
 
+	public List<Room> containerDate(Connection conn, String checkInDateStr, String checkOutDateStr, String roomType, int currentPage, int itemsPerPage) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Room> roomList = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date checkInDate = new Date(sdf.parse(checkInDateStr).getTime());
+            Date checkOutDate = new Date(sdf.parse(checkOutDateStr).getTime());
+
+            pstmt = conn.prepareStatement(sql.getProperty("selectPagedRoomsWithDate"));
+            pstmt.setString(1, roomType);
+            pstmt.setDate(2, checkInDate);
+            pstmt.setDate(3, checkOutDate);
+            pstmt.setDate(4, checkInDate);
+            pstmt.setDate(5, checkOutDate);
+            pstmt.setInt(6, (currentPage - 1) * itemsPerPage + 1);
+            pstmt.setInt(7, currentPage * itemsPerPage);
+            rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                roomList.add(getRoom(rs));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return roomList;
+    }
+
+    // other methods...
+
+
+	public int containerAllCount(Connection conn, String roomType, String checkInDateStr, String checkOutDateStr) {
+        int result = 0;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            Date checkInDate = new Date(sdf.parse(checkInDateStr).getTime());
+            Date checkOutDate = new Date(sdf.parse(checkOutDateStr).getTime());
+
+            pstmt = conn.prepareStatement(sql.getProperty("selectAllCountRoomWithDate"));
+            pstmt.setString(1, roomType);
+            pstmt.setDate(2, checkInDate);
+            pstmt.setDate(3, checkOutDate);
+            pstmt.setDate(4, checkInDate);
+            pstmt.setDate(5, checkOutDate);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                result = rs.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return result;
+    }
+
+    // other methods...
 }
