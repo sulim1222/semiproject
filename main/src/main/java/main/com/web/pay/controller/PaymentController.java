@@ -50,6 +50,10 @@ public class PaymentController extends HttpServlet {
 		System.out.println("룸넘버"+roomNo);
 		System.out.println("주차여부"+car);
 		System.out.println("침대 타입"+bedType);
+		String price= request.getParameter("price");
+		System.out.println(price); //금액 String으로 받아옴
+		int roomPrice = Integer.parseInt(price);
+
 		request.getRequestDispatcher("/WEB-INF/views/pay/payment.jsp").forward(request, response);
 		}
 		else {

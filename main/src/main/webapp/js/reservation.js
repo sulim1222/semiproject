@@ -41,7 +41,9 @@ btn.addEventListener("click",e=>{
         checkindate2.innerText="체크아웃 날짜: "+a[1];
       }
     }else{
+
       alert("초기화 버튼을 눌러주세요");
+      
     }
 } 
     console.log(info.dateStr); // 시작날짜 
@@ -91,7 +93,7 @@ function fetchRooms(roomType, page) {
             roomList.forEach((room, i) => {
                 const $detail = document.createElement('div');
                 $detail.className = "detail";
-
+	
                 const $roomCard = document.createElement('div');
                 $roomCard.className = "room-card";
 
@@ -201,7 +203,15 @@ function fetchRooms(roomType, page) {
                	// 예약 버튼 클릭 이벤트 처리
                 //console.dir(e.target);
     			//console.log(roomList[i]); // 외부 범위의 roomList에 접근
-    			location.assign(`http://localhost:9090/main/pay/paymentPage?roomNo=${roomList[i].roomNo}&checkindate=${a[0]}&checkoutdate=${a[1]}&Mrequest=${request}&bedType=${bedType}&car=${car}&peopelNo=${roomPeopleNo.substring(0,roomPeopleNo.length-1)}`);
+					const date1 = new Date(a[1]);
+					const date0 = new Date(a[0]);
+					console.log(date0);
+					console.log(date1);
+					let diff = Math.abs(date1.getTime() - date0.getTime());
+					diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+					console.log("날짜"+diff);
+					console.log("room가격"+room.price);
+    			location.assign(`http://localhost:9090/main/pay/paymentPage?roomNo=${roomList[i].roomNo}&checkindate=${a[0]}&checkoutdate=${a[1]}&Mrequest=${request}&bedType=${bedType}&car=${car}&peopelNo=${roomPeopleNo.substring(0,roomPeopleNo.length-1)}&price=${diff*Number(room.roomPrice)}`);
                 });
                 // detail div에 요소 추가
                 $detail.appendChild($carOption);
