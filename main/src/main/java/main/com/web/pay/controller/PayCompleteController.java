@@ -8,42 +8,44 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import main.com.web.pay.model.dto.Payment;
 import main.com.web.pay.model.service.PaymentService;
 import main.com.web.reservation.dto.Reserve;
+import main.com.web.reservationdetail.dto.ReservationDetail;
 
-/**
- * Servlet implementation class PayComplete
- */
 @WebServlet("/pay/paycompletePage")
 public class PayCompleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PayCompleteController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private PaymentService paymentService = new PaymentService();
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("결제완료 페이지 이동");
-		int reserveNo = (int)request.getAttribute("reserveNo");
-		Reserve myReserve = new PaymentService().selectMyReserve(reserveNo);
-		request.setAttribute("myReserve", myReserve);
-		
-		request.getRequestDispatcher("/WEB-INF/views/pay/payComplete.jsp").forward(request, response);
+	public PayCompleteController() {
+		super();
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String reserveNo = request.getParameter("reserveNo");
+		System.out.println(reserveNo);
+		if (reserveNo != null && !reserveNo.isEmpty()) {
+			Reserve myReserve = paymentService.selectMyReserve(reserveNo);
+			Payment payment = paymentService.selectPayment(reserveNo);
+			ReservationDetail myReserveDetail = paymentService.selectMyReserveDetail(reserveNo);
+			
+			
+			request.setAttribute("myReserve", myReserve);
+			request.setAttribute("payment", payment);
+			request.setAttribute("myReserveDetail", myReserveDetail);
+			System.out.println(myReserve);
+			System.out.println(payment);
+			System.out.println(myReserveDetail);
+			request.getRequestDispatcher("/WEB-INF/views/pay/payComplete.jsp").forward(request, response);
+		} else {
+			response.sendRedirect(request.getContextPath() + "/errorPage");
+		}
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.sendRedirect(request.getContextPath());
+	}
 }
