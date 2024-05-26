@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
 <%@ include file="../common/header.jsp" %>
-<link rel="stylesheet" href="../css/faq.css"> 
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/faqAll.css">
 
 
  <section class="main-section">
         <div class="main-content">
-             <!-- Enjoy 서브 메뉴 모음  -->
+             <!--qna 서브 메뉴 모음  -->
              <div class="sub-content">
                 <ul>
                 	<li><a href="<%=request.getContextPath() %>/qna/faqAll">ALL</a></li>
@@ -20,7 +22,7 @@
                         <th>NO</th>
                         <th>카테고리</th>
                         <th>제목</th>
-                        <th>작성시간</th>
+                   
                     </tr>
                 </thead>
                 <tbody>
@@ -28,7 +30,7 @@
                         <td>10</td>
                         <td>PAY</td>
                         <td>회원가입 OR 탈퇴는 어떻게 하나요</td>
-                        <td>2024.05.05</td>
+                  
                     </tr>
                     <tr class="faq-answer">
                         <td colspan="4">회원가입 OR 탈퇴는 다음과 같은 절차를 따릅니다...</td>
@@ -37,7 +39,7 @@
                         <td>09</td>
                         <td>PAY</td>
                         <td>회원가입 OR 탈퇴는 어떻게 하나요</td>
-                        <td>2024.05.05</td>
+                     
                     </tr>
                     <tr class="faq-answer">
                         <td colspan="4">회원가입 OR 탈퇴는 다음과 같은 절차를 따릅니다...</td>
@@ -46,7 +48,7 @@
                         <td>08</td>
                         <td>PAY</td>
                         <td>회원가입 OR 탈퇴는 어떻게 하나요</td>
-                        <td>2024.05.05</td>
+                      
                     </tr>
                     <tr class="faq-answer">
                         <td colspan="4">회원가입 OR 탈퇴는 다음과 같은 절차를 따릅니다...</td>
@@ -55,7 +57,7 @@
                         <td>07</td>
                         <td>PAY</td>
                         <td>회원가입 OR 탈퇴는 어떻게 하나요</td>
-                        <td>2024.05.05</td>
+                       
                     </tr>
                     <tr class="faq-answer">
                         <td colspan="4">회원가입 OR 탈퇴는 다음과 같은 절차를 따릅니다...</td>
@@ -64,7 +66,7 @@
                         <td>06</td>
                         <td>PAY</td>
                         <td>회원가입 OR 탈퇴는 어떻게 하나요</td>
-                        <td>2024.05.05</td>
+                       
                     </tr>
                     <tr class="faq-answer">
                         <td colspan="4">회원가입 OR 탈퇴는 다음과 같은 절차를 따릅니다...</td>
@@ -73,7 +75,7 @@
                         <td>05</td>
                         <td>PAY</td>
                         <td>회원가입 OR 탈퇴는 어떻게 하나요</td>
-                        <td>2024.05.05</td>
+                      
                     </tr>
                     <tr class="faq-answer">
                         <td colspan="4">회원가입 OR 탈퇴는 다음과 같은 절차를 따릅니다...</td>
