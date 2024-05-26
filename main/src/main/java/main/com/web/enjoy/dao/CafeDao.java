@@ -33,8 +33,8 @@ public class CafeDao {
 	        
 	        try {
 	            pstmt = conn.prepareStatement(sql.getProperty("selectAllCafes"));
-	            int start = (cPage - 1) * numPerpage + 1; // 시작 행 번호
-	            int end = cPage * numPerpage; // 끝 행 번호
+	            int start = (cPage - 1) * numPerpage + 1; 
+	            int end = cPage * numPerpage; 
 	            pstmt.setInt(1, start);
 	            pstmt.setInt(2, end);
 	            rs = pstmt.executeQuery();

@@ -17,10 +17,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 const imageSrc = this.querySelector('img').src;
                 const title = this.querySelector('h2').textContent;
                 const details = this.getAttribute('data-details');
+                const cafeId = this.getAttribute('data-id');
 
                 popupImage.src = imageSrc;
                 popupTitle.textContent = title;
                 popupDetails.textContent = details;
+                popup.setAttribute('data-cafe-id', cafeId);
 
                 displayReviews(name);
                 selectedRating = 0;
@@ -59,19 +61,41 @@ document.addEventListener('DOMContentLoaded', function () {
     window.submitReview = function () {
         const reviewText = document.getElementById('review').value;
         const cafeName = popupTitle.textContent;
+        const cafeId = popup.getAttribute('data-cafe-id');
         if (reviewText === "" || selectedRating === 0) {
             alert("별점과 리뷰를 모두 입력해주세요.");
             return;
         }
 
-        const review = { name: `임${cafeName.charAt(0)}ㅇ`, rating: selectedRating, text: reviewText };
-        if (!cafeReviews[cafeName]) {
-            cafeReviews[cafeName] = [];
-        }
-        cafeReviews[cafeName].push(review);
+        const review = { 
+            cafeId: cafeId,
+            name: `임${cafeName.charAt(0)}ㅇ`, 
+            rating: selectedRating, 
+            text: reviewText 
+        };
 
-        displayReviews(cafeName);
-        document.getElementById('review').value = ''; // 리뷰 입력 필드 초기화
+        fetch('<%=request.getContextPath()%>/enjoy/submitReview', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(review)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                if (!cafeReviews[cafeName]) {
+                    cafeReviews[cafeName] = [];
+                }
+                cafeReviews[cafeName].push(review);
+
+                displayReviews(cafeName);
+                document.getElementById('review').value = ''; // 리뷰 입력 필드 초기화
+                alert('리뷰가 성공적으로 제출되었습니다.');
+            } else {
+                alert('리뷰 제출에 실패했습니다. 다시 시도해주세요.');
+            }
+        });
     };
 
     // 팝업 닫기 이벤트

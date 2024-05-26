@@ -38,7 +38,7 @@
         </div>
     </div>
 </section>
-<!-- 팝업 HTML 추가 -->
+<!-- 팝업 -->
 <div id="popup" style="display:none;">
     <div class="popup-content">
         <span class="close">&times;</span>
@@ -57,6 +57,7 @@
         <div id="reviews"></div>
     </div>
 </div>
+
 
 <script src="<%=request.getContextPath()%>/js/cafe.js"></script>
 <%@ include file="../common/footer.jsp" %>

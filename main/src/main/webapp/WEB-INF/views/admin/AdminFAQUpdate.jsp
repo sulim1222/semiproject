@@ -13,7 +13,7 @@
 
     <main class="main">
         <h2>FAQ 수정</h2>
-        <form action="<%=request.getContextPath()%>/admin/faqUpdate" method="post">
+        <form action="<%=request.getContextPath()%>/admin/updateFAQ" method="post">
             <input type="hidden" name="faqAllNo" value="<%= faq.getFaqAllNo() %>">
             
             <label for="faqCategory">카테고리:</label>
