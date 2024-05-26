@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.com.web.admin.reserve.dto.Member;
 import main.com.web.admin.reserve.service.AdminReserveService;
 
 /**
- * Servlet implementation class UpdateReserve
+ * Servlet implementation class DeleteReserve
  */
-@WebServlet("/reserve/updatereserve.do")
-public class UpdateReserve extends HttpServlet {
+@WebServlet("/reserve/deleteReserve.do")
+public class DeleteReserve extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateReserve() {
+    public DeleteReserve() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,12 +29,26 @@ public class UpdateReserve extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String reserveNo =request.getParameter("reserveNo");
-	   
-		Member m=new AdminReserveService().selectByReserveNo(reserveNo);
-		request.setAttribute("member",m);
-		request.getRequestDispatcher("/WEB-INF/views/member/updateReserve.jsp").forward(request,response);
-	}
+		
+		 	String reserveNo = request.getParameter("reserveNo");
+
+	        AdminReserveService service = new AdminReserveService();
+
+	        int result = service.deleteReserve(reserveNo);
+
+	        if (result > 0) {
+	            response.getWriter().write("Success");
+	        } else {
+	            response.getWriter().write("Failed");
+	        }
+	    
+        
+    }
+		
+		
+		
+		
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

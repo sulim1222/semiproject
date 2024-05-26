@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+.faq-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.category {
+    margin: 0 10px;
+    font-size: 18px;
+    text-decoration: none;
+    color: #000;
+}
+
+.category:hover {
+    text-decoration: underline;
+}
+
+.faq-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-top: 40px;
+}
+
+.faq-table th, .faq-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.faq-table th {
+    background-color: #f2f2f2;
+    font-size: 16px;
+}
+
+.faq-table td {
+    font-size: 14px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination a {
+    margin: 0 5px;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #000;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.pagination a.active {
+    background-color: #000;
+    color: #fff;
+}
+
+
+.faq-question:hover {
+    text-decoration: underline;
+}
+/* FAQ 답변 숨기기 */
+.faq-answer {
+    display: none;
+}
+.faq-answer.active {
+    display: table-row;
+}
+.faq-table th, .faq-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+.faq-table th {
+    background-color: #f2f2f2;
+    font-size: 16px;
+}
+.faq-table td {
+    font-size: 14px;
+}

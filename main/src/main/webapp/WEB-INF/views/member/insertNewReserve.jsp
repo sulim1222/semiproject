@@ -16,7 +16,7 @@
 				<th>
 					<input type="text" id="payPrice" name="payPrice" readonly>
 				</th>
-				<th>등록날짜</th>
+				<th>예약날짜</th>
 				<th>
 					<input type="date" id="reserveDate" name="reserveDate"  readonly>
 				</th>
@@ -30,9 +30,9 @@
 				<th>
 					<input type="text" placeholder="(-)제외하고 입력해주세요"name="memberPhone">
 				</th>
-				<th>고객번호</th>
+				<th>예약수정날짜</th>
 				<th>
-					<input type="text" name="memberNo">
+					<input type="date" id="updateReserveDate" name="updateReserveDate" readonly>
 				</th>
 			</tr>
 			<tr>
@@ -49,7 +49,7 @@
 				<th>
 					<select name="roomType">
 							<option value="standard">standard</option>
-							<option value="seluxe">seluxe</option>
+							<option value="deluxe">deluxe</option>
 							<option value="suite">suite</option>
 					</select>
 				</th>
@@ -136,6 +136,7 @@
 	}
 	
 	document.getElementById('reserveDate').valueAsDate = new Date();
+	document.getElementById('updateReserveDate').valueAsDate = new Date();
 </script>
 
 
@@ -160,7 +161,7 @@
          text-align: center;
      }
      form {
-         padding: 2rem;
+         padding: 1rem;
      }
      table {
          width: 100%;

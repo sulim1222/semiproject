@@ -57,6 +57,7 @@ public class InsertNewEndReserve extends HttpServlet {
 		String location=request.getParameter("location");
 		Date checkInDate=Date.valueOf(request.getParameter("checkInDate"));
 		Date checkOutDate=Date.valueOf(request.getParameter("checkOutDate"));
+		Date updateReserveDate=Date.valueOf(request.getParameter("updateReserveDate"));
 		String memberAddress=request.getParameter("memberAddress");
 		String requestMemo=request.getParameter("requestMemo");
 		
@@ -75,6 +76,7 @@ public class InsertNewEndReserve extends HttpServlet {
 				.roomPeopleNo(roomPeopleNo)
 				.memberAddress(memberAddress)
 				.reserveDate(reserveDate)
+				.updateReserveDate(updateReserveDate)
 				.requestMemo(requestMemo)
 				.build();
 	
@@ -82,7 +84,7 @@ public class InsertNewEndReserve extends HttpServlet {
 		String msg="", again="";
 		if(result>0) {
 			msg="신규 등록 되었습니다.";
-			again="/";
+			again="/reserve/reserveupdate.do";
 		}else {
 			msg="등록 실패하였습니다. 다시 입력해주세요";
 			again="/reserve/insertnewreserve.do";
@@ -91,7 +93,7 @@ public class InsertNewEndReserve extends HttpServlet {
 	request.setAttribute("msg",msg);
 	request.setAttribute("again", again);
 	
-	request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request,response);
+	request.getRequestDispatcher("/WEB-INF/views/common/adminmsg.jsp").forward(request,response);
 	
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

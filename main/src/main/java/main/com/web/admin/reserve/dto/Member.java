@@ -26,6 +26,7 @@ public class Member {
 	private int roomPeopleNo;
 	private String memberAddress;
 	private Date reserveDate;
+	private Date updateReserveDate;
 	private String requestMemo;
 	private String memberNo;
 }

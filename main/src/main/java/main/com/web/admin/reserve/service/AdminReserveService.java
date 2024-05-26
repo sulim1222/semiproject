@@ -1,6 +1,7 @@
 package main.com.web.admin.reserve.service;
 
 import static main.com.web.admin.reserve.common.JDBCTemplate.close;
+
 import static main.com.web.admin.reserve.common.JDBCTemplate.commit;
 import static main.com.web.admin.reserve.common.JDBCTemplate.getConnection;
 import static main.com.web.admin.reserve.common.JDBCTemplate.rollback;
@@ -84,15 +85,14 @@ public class AdminReserveService {
 		
 	}
 	
+	public int deleteReserve(String reserveNo) {
+		Connection conn = getConnection();
+        int result = dao.deleteReserve(conn, reserveNo);
+        if (result > 0) commit(conn);
+        else rollback(conn);
+        close(conn);
+        return result;
+	}
 	
 	
-	
-	//	public int inputNewMember(Member m) {
-//		Connection conn=getConnection();
-//		int result=dao.inputNewMember(conn,m);
-//		if(result>0) commit(conn);
-//		else rollback(conn);
-//		close(conn);
-//		return result;
-//	}
 }
