@@ -4,9 +4,9 @@
     <section class="main-section">
         <div class="main-content">
             <!-- 여기에 메인 컨텐츠 추가해주세용 -->
-          <a href="<%=request.getContextPath()%>/room/standardroom.do">Standard</a>
-          <a href="<%=request.getContextPath()%>/room/deluxeroom.do?room=deluxe">Deluxe</a>
-          <a href="<%=request.getContextPath()%>/room/suiteroom.do?room=suite">Suite</a>
+          <a href="<%=request.getContextPath()%>/room/standardroom.do?room=Standard&location=제주">Standard</a>
+          <a href="<%=request.getContextPath()%>/room/standardroom.do?room=Deluxe&location=제주">Deluxe</a>
+          <a href="<%=request.getContextPath()%>/room/standardroom.do?room=Suite&location=제주">Suite</a>
         </div>
         
     </section>

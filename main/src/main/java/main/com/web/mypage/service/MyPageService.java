@@ -58,6 +58,10 @@ public class MyPageService {
 	    try {
 	        conn.setAutoCommit(false); // 자동 커밋 해제
 
+	        
+	        
+	        
+	        
 	        // 예약 정보 삭제
 	        int result1 = dao.cancelReservationInfo(conn, reserveNo);
 	        // 결제 정보 삭제

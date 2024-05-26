@@ -11,37 +11,41 @@ import javax.servlet.http.HttpServletResponse;
 import main.com.web.pay.model.dto.Payment;
 import main.com.web.pay.model.service.PaymentService;
 import main.com.web.reservation.dto.Reserve;
+import main.com.web.reservationdetail.dto.ReservationDetail;
 
 @WebServlet("/pay/paycompletePage")
 public class PayCompleteController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private PaymentService paymentService = new PaymentService();
+	private static final long serialVersionUID = 1L;
+	private PaymentService paymentService = new PaymentService();
 
-    public PayCompleteController() {
-        super();
-    }
+	public PayCompleteController() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String reserveNo = request.getParameter("reserveNo");
-        if (reserveNo != null) {
-            Reserve myReserve = paymentService.selectMyReserve(reserveNo);
-            Payment payment = paymentService.selectPayment(reserveNo);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String reserveNo = request.getParameter("reserveNo");
+		System.out.println(reserveNo);
+		if (reserveNo != null && !reserveNo.isEmpty()) {
+			Reserve myReserve = paymentService.selectMyReserve(reserveNo);
+			Payment payment = paymentService.selectPayment(reserveNo);
+			ReservationDetail myReserveDetail = paymentService.selectMyReserveDetail(reserveNo);
+			
+			
+			request.setAttribute("myReserve", myReserve);
+			request.setAttribute("payment", payment);
+			request.setAttribute("myReserveDetail", myReserveDetail);
+			System.out.println(myReserve);
+			System.out.println(payment);
+			System.out.println(myReserveDetail);
+			request.getRequestDispatcher("/WEB-INF/views/pay/payComplete.jsp").forward(request, response);
+		} else {
+			response.sendRedirect(request.getContextPath() + "/errorPage");
+		}
+	}
 
-            if (myReserve != null && payment != null) {
-                request.setAttribute("myReserve", myReserve);
-                request.setAttribute("payment", payment);
-                request.getRequestDispatcher("/WEB-INF/views/pay/payComplete.jsp").forward(request, response);
-            } else {
-                System.out.println("myReserve 또는 payment가 Null");
-                response.sendRedirect(request.getContextPath());
-            }
-        } else {
-            System.out.println("reserveNo가 Null입니다.");
-            response.sendRedirect(request.getContextPath());
-        }
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath());
-    }
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.sendRedirect(request.getContextPath());
+	}
 }

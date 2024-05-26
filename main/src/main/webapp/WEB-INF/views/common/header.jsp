@@ -33,12 +33,10 @@
                 <li><p><%=m.getMemberName()%>님 반갑습니다<p></li>
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
                 <li><a href="<%=request.getContextPath()%>/member/logout">LOGOUT</a></li>
-				<li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%}else{ %>
                 <li><p><%=member.getNickname()%>님 반갑습니다<p></li> <!-- kakao에 대한부분  -->
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
                 <li><a href="<%=request.getContextPath()%>/kakao/logout">LOGOUT</a></li>
-				<li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%} }%>
             </ul>
         </div>
