@@ -7,7 +7,6 @@
     String searchType=request.getParameter("searchType");
     String searchKeyword=request.getParameter("searchKeyword");
     List<Member> members=(List<Member>)request.getAttribute("members");
-    /* String pageBar=(String)request.getAttribute("pageBar"); */
     String location=(String)request.getAttribute("location");
     Member mem=(Member) request.getAttribute("member");
    
@@ -28,17 +27,24 @@
     </aside>
 
     <main class="main">
-        <span id="title">
-        <% if ("서울".equals(location)) { %>
-        	Seoul Reservation List
-    	<% }else if("부산".equals(location)) { %>
-    		Busan Reservation List
-    	<% }else if("제주".equals(location)) { %>
-    		Jeju Reservation List
-    	<% } else{ %>
-    		Reservation
-    	<% } %>
-    	</span>
+    	<div id="titleContainer">
+	    	<div id="title">
+	        <% if ("서울".equals(location)) { %>
+	        	Seoul Reservation List
+	    	<% }else if("부산".equals(location)) { %>
+	    		Busan Reservation List
+	    	<% }else if("제주".equals(location)) { %>
+	    		Jeju Reservation List
+	    	<% } else{ %>
+	    		Reservation
+	    	<% } %>
+	    	</div>
+	    	<div id="btn5">
+	    		<button class="btn5" onclick="location.assign('<%=request.getContextPath()%>/')">
+					<img src="<%=request.getContextPath()%>/imges/admin/homepage.jpg" >
+				</button>
+	    	</div>
+    	</div>
     	
         <div class="separator"></div>
 
@@ -109,7 +115,10 @@
 						    <td><%=m.getReserveDate() %></td>
 						    <td>
 						        <input type="button" class="btn" value="수정" onclick="location.assign('<%=request.getContextPath()%>/reserve/updatereserve.do?reserveNo=<%=m.getReserveNo()%>')">
-						        <input type="button" class="btn" value="삭제" id="deleteReserve" reserveNoData="<=%m.getReserveNo()%>">
+						        <form action="<%=request.getContextPath()%>/reserve/deleteReserve.do" method="post" style="display:inline;">
+                                    <input type="hidden" name="reserveNo" value="<%=m.getReserveNo()%>">
+                                    <input type="submit" class="btn" value="삭제" onclick="return confirm('정말 삭제하시겠습니까?')">
+                                </form>
 						    </td>
 						</tr>
 						<% } %>
@@ -148,7 +157,7 @@
         });
     };
     
-    document.addEventListener("dateDelete", function() {
+    <%-- document.addEventListener("dateDelete", function() {
         const deleteButton = document.querySelectorAll("#deleteReserve");
 
         deleteButton.forEach(button => {
@@ -171,11 +180,7 @@
                 }
             });
         });
-    });
-    
-    
-    
-    
+    }); --%>
     
     
     
@@ -187,6 +192,9 @@
         }
     }; --%>
 <style>
+	#btn5 {
+    margin-left: auto;
+}
 	
 	#pageBar{
 		display: flex;
@@ -233,7 +241,7 @@
 	
 	.aside ul li{
 	    margin-bottom: 20px; /* 간격 축소 */
-	    font-size: 18px; /* 글꼴 크기 축소 */
+	    font-size: 22px; /* 글꼴 크기 축소 */
 	    transition: all 0.3s ease-in-out; /* 부드러운 변화 효과 */
 	}
 	
@@ -395,6 +403,28 @@
 	    border-radius: 4px;
 	    cursor: pointer;
 	}
+	
+	.btn5 {
+	    background-color: transparent; /* 버튼 배경색 제거 */
+	    border: none; /* 버튼 테두리 제거 */
+	    cursor: pointer; /* 커서 모양 변경 */
+	    padding: 0; /* 버튼 안쪽 여백 제거 */
+	    
+	}
+
+	.btn5 img {
+	    display: block; /* 이미지 블록 요소로 표시 */
+	    width: 30px; /* 이미지 너비 설정 */
+	    height: 30px; /* 이미지 높이 설정 */
+	    object-fit: cover; /* 이미지가 컨테이너에 맞게 조절되도록 설정 */
+	}
+	
+	#titleContainer {
+    	display: flex;
+    	justify-content: space-between;
+    	align-items: center;
+	}
+	
     
 </style>
 
