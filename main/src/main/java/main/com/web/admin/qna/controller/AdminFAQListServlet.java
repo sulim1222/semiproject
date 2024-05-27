@@ -58,13 +58,13 @@ public class AdminFAQListServlet extends HttpServlet {
         int pageBarSize = 5;
         int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
         int pageEnd = pageNo + pageBarSize - 1;
-
+        
         StringBuffer pageBar = new StringBuffer();
         if (pageNo == 1) {
             pageBar.append("<span>[이전]</span>");
         } else {
             pageBar.append("<a href='" + request.getRequestURI()
-                    + "?cPage=" + (pageNo - 1) + "&numPerpage=" + numPerpage + "&searchCategory=" + searchCategory + "&searchKeyword=" + searchKeyword + "'>[이전]</a>");
+                    + "?cPage=" + (pageNo - 1) + "'>[이전]</a>");
         }
 
         while (!(pageNo > pageEnd || pageNo > totalPage)) {
@@ -72,7 +72,7 @@ public class AdminFAQListServlet extends HttpServlet {
                 pageBar.append("<span>" + pageNo + "</span>");
             } else {
                 pageBar.append("<a href='" + request.getRequestURI()
-                        + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "&searchCategory=" + searchCategory + "&searchKeyword=" + searchKeyword + "'>" + pageNo + "</a>");
+                        + "?cPage=" + (pageNo) + "'>" + pageNo + "</a>");
             }
             pageNo++;
         }
@@ -81,7 +81,7 @@ public class AdminFAQListServlet extends HttpServlet {
             pageBar.append("<span>[다음]</span>");
         } else {
             pageBar.append("<a href='" + request.getRequestURI()
-                    + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "&searchCategory=" + searchCategory + "&searchKeyword=" + searchKeyword + "'>[다음]</a>");
+                    + "?cPage=" + (pageNo) + "'>[다음]</a>");
         }
 
         request.setAttribute("pageBar", pageBar.toString());
