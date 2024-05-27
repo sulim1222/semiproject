@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../common/header.jsp" %>
-<link rel="stylesheet" href="../css/onetoone.css"><!-- 각 파일에 위치하는값 설정 --> 
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/onetoone.css"><!-- 각 파일에 위치하는값 설정 --> 
 
   <div id="mainTitle" class="main-title">
             <h1>Q&a</h1>

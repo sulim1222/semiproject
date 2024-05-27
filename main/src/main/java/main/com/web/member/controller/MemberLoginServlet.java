@@ -1,6 +1,7 @@
 package main.com.web.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,8 +54,9 @@ public class MemberLoginServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/");
 			}
 		}else {
-			System.out.println("문제가있음");
-			System.out.println(m.toString());
+		
+			request.setAttribute("loginError", "비밀번호 및 아이디를 확인해주세요");
+			request.getRequestDispatcher("/WEB-INF/views/member/login.jsp").forward(request, response);
 		}
 		
 	}

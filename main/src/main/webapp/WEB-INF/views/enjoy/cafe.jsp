@@ -5,7 +5,7 @@
 <%@ page import="main.com.web.member.dto.Member" %>
 
 <%@ include file="../common/header.jsp" %>
-<link rel="stylesheet" href="../css/cafe.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/cafe.css">
 
 <%
     List<Cafe> cafes = (List<Cafe>) request.getAttribute("cafes");
