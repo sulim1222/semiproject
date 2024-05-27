@@ -72,6 +72,11 @@
         <% } %>
     </div> --%>
         
+        
+        <div id="pageBar">
+    	<%=request.getAttribute("pageBar") %>
+   		 </div>
+   		 
 </section>
 
 <!-- 필드에 사용자 정보 추가 -->

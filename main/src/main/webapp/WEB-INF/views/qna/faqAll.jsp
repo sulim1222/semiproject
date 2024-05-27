@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="main.com.web.qna.dto.FAQ" %>    
-<%@ page import="main.com.web.member.dto.Member" %>    
+<%@ page import="main.com.web.qna.dto.FAQ" %>
+<%@ page import="main.com.web.member.dto.Member" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/faqAll.css">
 
@@ -46,7 +46,16 @@
         <% } else { %>
         <p>faq 목록이 없습니다.</p>
         <% } %>
+        
+        
+        
+         <div id="pageBar">
+    	<%=request.getAttribute("pageBar") %>
+   		 </div>
+         
     </section>
+    
+   
 
 <script src="<%=request.getContextPath()%>/js/faq.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

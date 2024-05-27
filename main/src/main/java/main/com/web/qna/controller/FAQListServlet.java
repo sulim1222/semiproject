@@ -23,14 +23,14 @@ public class FAQListServlet extends HttpServlet {
         try {
             cPage = Integer.parseInt(request.getParameter("cPage"));
         } catch (NumberFormatException e) {
-            // 기본값으로 cPage를 1로 설정합니다.
+            cPage = 1;
         }
 
         int numPerpage = 10;
         try {
             numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
         } catch (NumberFormatException e) {
-            // 기본값으로 numPerpage를 10으로 설정합니다.
+            numPerpage = 10;
         }
 
         FAQService service = new FAQService();
@@ -38,7 +38,7 @@ public class FAQListServlet extends HttpServlet {
         int totalData = service.selectFAQAllCount();
 
         int totalPage = (int) Math.ceil((double) totalData / numPerpage);
-        int pageBarSize = 10;
+        int pageBarSize = 5;
         int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
         int pageEnd = pageNo + pageBarSize - 1;
 
@@ -46,7 +46,7 @@ public class FAQListServlet extends HttpServlet {
         if (pageNo == 1) {
             pageBar.append("<span>[이전]</span>");
         } else {
-            pageBar.append("<a href='" + request.getRequestURL()
+            pageBar.append("<a href='" + request.getRequestURI()
                     + "?cPage=" + (pageNo - 1) + "&numPerpage=" + numPerpage + "'>[이전]</a>");
         }
 
@@ -69,7 +69,7 @@ public class FAQListServlet extends HttpServlet {
 
         request.setAttribute("pageBar", pageBar.toString());
         request.setAttribute("faqs", faqs);
-        request.getRequestDispatcher("/WEB-INF/views/qna/FAQAll.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/qna/faqAll.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

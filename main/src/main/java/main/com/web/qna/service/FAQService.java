@@ -14,7 +14,9 @@ public class FAQService {
 
     public List<FAQ> selectFAQAll(int cPage, int numPerpage) {
         Connection conn = getConnection();
-        List<FAQ> faqs = dao.selectFAQAll(conn, cPage, numPerpage);
+        int start = (cPage - 1) * numPerpage + 1;
+        int end = cPage * numPerpage;
+        List<FAQ> faqs = dao.selectFAQAll(conn, start, end);
         close(conn);
         return faqs;
     }

@@ -26,15 +26,13 @@ public class FAQDao {
         }
     }
 
-    public List<FAQ> selectFAQAll(Connection conn, int cPage, int numPerpage) {
+    public List<FAQ> selectFAQAll(Connection conn, int start, int end) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<FAQ> faqs = new ArrayList<>();
 
         try {
             pstmt = conn.prepareStatement(sql.getProperty("selectFAQAll"));
-            int start = (cPage - 1) * numPerpage + 1;
-            int end = cPage * numPerpage;
             pstmt.setInt(1, start);
             pstmt.setInt(2, end);
             rs = pstmt.executeQuery();

@@ -82,7 +82,7 @@
                         <div class="submenu">
                             <ul>
                                 <li><a href="<%=request.getContextPath()%>/qna/FAQList">FAQ</a></li>
-                                <li><a href="<%=request.getContextPath()%>/qna/Inquirylist">Q&A</a></li>
+                                <li><a href="<%=request.getContextPath()%>/qna/submitInquiry">Q&A</a></li>
                             </ul>
                         </div>
                     </li>
