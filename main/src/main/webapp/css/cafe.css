@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 /* Reset CSS */
 * {
     margin: 0;
@@ -157,9 +158,6 @@
 }
 /*푸터끝*/
 
-
-
-
 .main-content {
     width: 1024px;
     background-color: #f0f0f2;
@@ -169,8 +167,6 @@
     flex-wrap: wrap;
     justify-content: center;
 }
-
-
 
 .restaurant {
     width: calc(33.33% - 20px);
@@ -189,7 +185,8 @@
 
 .restaurant img {
     width: 100%;
-    height: auto;
+    height: 200px; /* 이미지의 높이 고정 */
+    object-fit: cover; /* 이미지를 박스에 맞게 조정 */
     border-radius: 10px 10px 0 0;
 }
 
@@ -215,12 +212,6 @@
     color: #666;
 }
 
-
-
-
-
-
-
 .main-section {
     position: relative;
 }
@@ -232,7 +223,7 @@
     position: absolute;
     top: 0;
     width: 100%;
-    
+    margin-bottom: 20px;
 }
 
 .sub-content ul {
@@ -258,10 +249,6 @@
     font-size: 20px; /* 텍스트 크기를 20px로 설정 */
 }
 
-
-
-/*  */
-
 /* 팝업창 스타일 */
 .popup {
     position: fixed;
@@ -273,18 +260,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1050;
 }
 
 .popup-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    width: 70%;
+    width: 80%; /* 팝업 창의 너비를 조정 */
+    max-width: 600px; /* 팝업 창의 최대 너비를 설정 */
     display: flex;
-    position: relative; /* 여기에 추가 */
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
+
 .popup-left {
-    flex: 1;
+    width: 100%;
 }
 
 .popup-left img {
@@ -293,8 +285,8 @@
 }
 
 .popup-right {
-    flex: 2;
-    margin-left: 20px;
+    width: 100%;
+    margin-top: 20px; /* 모바일에서는 margin-left 대신 margin-top 사용 */
 }
 
 .popup-right h2 {
@@ -313,7 +305,6 @@
 #average-rating span {
     color: #FFD700; /* 별 색상을 노란색으로 설정 */
 }
-
 
 textarea {
     width: 100%;
@@ -339,15 +330,13 @@ button:hover {
 
 .close {
     position: absolute;
-    top: 10px; /* 위치 조정 */
-    right: 10px; /* 위치 조정 */
+    top: 10px;
+    right: 10px;
     font-size: 24px;
     cursor: pointer;
-    color: black; /* X 아이콘 색상을 보이게 하려면 여기를 조정하세요 */
+    color: black;
 }
 
-
-/*  */
 .review-list {
     width: 100%;
     margin-top: 20px;
@@ -364,7 +353,6 @@ button:hover {
     margin-right: 10px;
     font-size: 20px; /* 아이콘 크기 설정 */
 }
-
 
 .review-details {
     flex-grow: 1;

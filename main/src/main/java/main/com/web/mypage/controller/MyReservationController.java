@@ -45,9 +45,9 @@ public class MyReservationController extends HttpServlet {
 		    }
 		
 		
-		int loginMemberNo = loginMember.getMemberNo();
+		String loginMemberId = loginMember.getMemberId();
 		
-		List<Reserve> reservations = new MyPageService().selectMyReservation(loginMemberNo);
+		List<Reserve> reservations = new MyPageService().selectMyReservation(loginMemberId);
 		request.setAttribute("reservations", reservations);
 		
 		

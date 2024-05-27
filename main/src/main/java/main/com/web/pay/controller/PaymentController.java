@@ -11,13 +11,18 @@ import javax.servlet.http.HttpSession;
 
 import main.com.web.member.dto.Member;
 
+import main.com.web.pay.model.service.PaymentService;
+import main.com.web.room.dto.Room;
+
 /**
  * Servlet implementation class PaymentController
  */
 @WebServlet("/pay/paymentPage")
 public class PaymentController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+    private PaymentService paymentService = new PaymentService();
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,14 +44,17 @@ public class PaymentController extends HttpServlet {
 		System.out.println("체크인날짜:"+checkInDate);
 		System.out.println("체크아웃날짜:"+checkOutDate);
 		String roomNo1 = request.getParameter("roomNo"); // roomNo 룸넘버
-		String roomPepleNo1  = request.getParameter("peopelNo");
+		String roomPeopleNo1  = request.getParameter("peopelNo");
 		String car = request.getParameter("car");
 		String bedType = request.getParameter("bedType");
-		String Mrequest = request.getParameter("Mrequest");
+		String roomRequest = request.getParameter("roomRequest");
 		int roomNo = Integer.parseInt(roomNo1);
-		int roomPepleNo =Integer.parseInt(roomPepleNo1);
-		System.out.println(Mrequest);
-		System.out.println("인원"+roomPepleNo);
+
+		int roomPeopleNo =Integer.parseInt(roomPeopleNo1);
+
+		Room r = paymentService.selectRoom(roomNo);
+		request.setAttribute("room", r);
+
 		System.out.println("룸넘버"+roomNo);
 		System.out.println("주차여부"+car);
 		System.out.println("침대 타입"+bedType);

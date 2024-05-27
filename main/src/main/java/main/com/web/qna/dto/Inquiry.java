@@ -15,7 +15,7 @@ import oracle.sql.DATE;
 @Builder
 
 
-public class OneToOne {
+public class Inquiry {
 	private int onToOneInquiryId;
 	private String inquiryType;
 	private String title;
