@@ -41,7 +41,7 @@
             </ul>
         </div>
         <div class="menu-section">
-            <div class="logo"><img src="../images/logoBlack.png" alt="호텔로고"></div>
+            <div class="logo"><img src="<%=request.getContextPath()%>/imges/hotellogo.png" alt="호텔로고"></div>
 
             <div class="menu">
                 <ul>
