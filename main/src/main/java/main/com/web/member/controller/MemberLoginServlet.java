@@ -44,7 +44,9 @@ public class MemberLoginServlet extends HttpServlet {
 		Member m = new MemberService().memberLogin(memberId,memberPwd);
 		if(m!=null) {
 			if(m.getMemberId().equals("admin")) {
-				request.getRequestDispatcher("/reserve/reserveupdate.do").forward(request, response);
+				HttpSession session =request.getSession();
+				session.setAttribute("member", m);
+				response.sendRedirect(request.getContextPath()+"/reserve/reserveupdate.do");
 			}else {
 			HttpSession session =request.getSession();
 			session.setAttribute("member", m);
