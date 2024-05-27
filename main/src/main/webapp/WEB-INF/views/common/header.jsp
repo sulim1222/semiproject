@@ -41,7 +41,7 @@
             </ul>
         </div>
         <div class="menu-section">
-            <div class="logo"><img src="../images/logoBlack.png" alt="호텔로고"></div>
+            <div class="logo"><img src="<%=request.getContextPath()%>/imges/hotellogo.png" alt="호텔로고"></div>
 
             <div class="menu">
                 <ul>
@@ -52,9 +52,9 @@
                         <a href="<%=request.getContextPath()%>/room/standardroom.do">ROOMS</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="<%=request.getContextPath() %>/room/standardroom.do">Standard</a></li>
-                                <li><a href="<%=request.getContextPath() %>/room/deluxeroom.do">Deluxe</a></li>
-                                <li><a href="<%=request.getContextPath() %>/room/suiteroom.do">Suite</a></li>
+                                <li><a href="<%=request.getContextPath() %>/room/standardroom.do?room=Standard&location=제주">Standard</a></li>
+                                <li><a href="<%=request.getContextPath()%>/room/standardroom.do?room=Deluxe&location=제주">Deluxe</a></li>
+                                <li> <a href="<%=request.getContextPath()%>/room/standardroom.do?room=Suite&location=제주">Suite</a></li>
                             </ul>
                         </div>
                     </li>

@@ -77,14 +77,22 @@
 }
 
 .input-group input[type="text"],
-.input-group input[type="password"]
-.input-group input[type="number"] {
+.input-group input[type="password"] {
     flex: 1;
     max-width: 200px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box; /* 전체 박스를 맞추기 위해 사용 */
+}
+.input-group input[type="number"] {
+    flex: 1;
+    max-width: 60px; 
+    padding: 8px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -webkit-appearance: none;
 }
 
 

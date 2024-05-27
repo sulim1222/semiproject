@@ -1,5 +1,8 @@
 @charset "EUC-KR";
 /* Reset CSS */
+.main-section{
+	
+}
 * {
     margin: 0;
     padding: 0;
@@ -19,6 +22,7 @@
 }
 /* top(로그인 부분) */
 .top-section {
+   
     display: flex;
     justify-content: space-between;
     align-items: flex-start;

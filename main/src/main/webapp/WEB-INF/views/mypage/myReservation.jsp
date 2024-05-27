@@ -66,6 +66,11 @@
                     } %>
                 </tbody>
             </table>
+            <!-- 맨 위로 버튼 -->
+<!--             <div class="btn_gotop" style="display:none">
+				<a href="javascript:void(0);">TOP</a>
+			</div> -->
+			
             <!-- 모달창 -->
             <div id="myModal" class="modal">
                 <div class="modal-content">
@@ -81,8 +86,23 @@
             </div>
         </div>
     </main>
+    <!-- 맨위로 버튼 -->
+<!-- 	<script>
 
-    <script>
+		$(document).ready(function(){
+		//따라다니는 TOP버튼
+		$(window).on("scroll touchmove mousewheel DOMMouseScroll", function(e) {
+		if($(window).scrollTop() >= 20) $(".btn_gotop").fadeIn();
+		else $(".btn_gotop").fadeOut();
+		});
+		$(".btn_gotop").click(function(){
+			$("html,body").animate({ scrollTop: 0 }, "fast");
+			});
+		});
+
+	</script> -->
+
+	<script>
         var modal = document.getElementById("myModal");
         var span = document.getElementsByClassName("close")[0];
         var myReserveNo = null;

@@ -1,6 +1,8 @@
-package main.com.web.admin.reserve.controller;
+package main.com.web.admin.sales.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,19 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.com.web.admin.reserve.service.AdminReserveService;
+import com.google.gson.Gson;
+
+import main.com.web.admin.reserve.dto.Sales;
+import main.com.web.admin.sales.service.AdminSalesService;
 
 /**
- * Servlet implementation class DeleteReserve
+ * Servlet implementation class SalesByMonth
  */
-@WebServlet("/reserve/deleteReserve.do")
-public class DeleteReserve extends HttpServlet {
+@WebServlet("/sales/salesupdate.do")
+public class SalesByMonth extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteReserve() {
+    public SalesByMonth() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,33 +35,16 @@ public class DeleteReserve extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		 	String reserveNo = request.getParameter("reserveNo");
+		
+        List<Sales> sales = new AdminSalesService().salesByMonth();
 
-	        AdminReserveService service = new AdminReserveService();
+        // 조회된 데이터를 request에 설정
+        request.setAttribute("sales", sales);
 
-	        int result = service.deleteReserve(reserveNo);
-
-	        String msg="", again="";
-			if(result>0) {
-				msg="삭제가 완료되었습니다..";
-				again="/reserve/reserveupdate.do";
-			}else {
-				msg="삭제에 실패했습니다..";
-				again="/reserve/reserveupdate.do";
-			}
-			
-			request.setAttribute("msg",msg);
-			request.setAttribute("again", again);
-			
-			request.getRequestDispatcher("/WEB-INF/views/common/adminmsg.jsp").forward(request,response);
-	    
-        
+        // JSP 페이지로 포워딩
+        request.getRequestDispatcher("/WEB-INF/views/sales/sales.jsp").forward(request, response);
     }
-		
-		
-		
-		
-
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

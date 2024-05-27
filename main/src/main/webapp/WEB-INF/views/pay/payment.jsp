@@ -13,6 +13,7 @@
     String roomRequest = request.getParameter("roomRequest");
     String checkInDate = request.getParameter("checkindate"); // 체크인 날짜
     String checkOutDate = request.getParameter("checkoutdate"); // 체크아웃 날짜
+    int totalPrice = Integer.parseInt(request.getParameter("price"));
 %>
 
 
@@ -47,7 +48,7 @@
 						type="text" id="request" name="request" readonly
 						value="<%=roomRequest %>"> <label for="price">결제
 						금액</label> <input type="text" id="price" name="price" readonly
-						value="<%=r.getRoomPrice() %>">
+						value="<%=totalPrice %>">
 				</div>
 				<!-- 데이터 전송용 -->
 				<div>
@@ -109,7 +110,7 @@ $(document).ready(function() {
             pay_method : 'card',
             merchant_uid : 'p_' + new Date().getTime(),
             name : '주문명: 결제테스트',
-            amount : '<%=r.getRoomPrice()%>',
+            amount : '<%=totalPrice %>',
             buyer_email : '<%=m1.getMemberId()%>',
             buyer_name : '<%=m1.getMemberName()%>',
             buyer_tel : '<%=m1.getMemberPhone()%>'
@@ -124,7 +125,7 @@ $(document).ready(function() {
                     data: JSON.stringify({
                         imp_uid: rsp.imp_uid,
                         merchant_uid: rsp.merchant_uid,
-                        payPrice: '<%=r.getRoomPrice()%>',
+                        payPrice: '<%=totalPrice%>',
                         paymentMethod: 'kakaopay',
                         status: 'paid',
                         location: '<%=r.getLocation()%>',
@@ -132,11 +133,10 @@ $(document).ready(function() {
                         roomNo: <%= r.getRoomNo() %>,
                         checkInDate: '<%=checkInDate %>', 
                         checkOutDate: '<%=checkOutDate %>',
-                       	bedType: '<%=bedType %>',
-                       	car: '<%=car %>'
+                        bedType: '<%=bedType %>',
+                        car: '<%=car %>'
                     }),
                     success: function(response) {
-                        // 결제 정보 저장에 성공하면 예약 번호를 포함한 응답을 받아서 리디렉션합니다.
                         const reserveNo = response.reserveNo;
                         window.location.href = '<%=request.getContextPath()%>/pay/paycompletePage?reserveNo=' + reserveNo;
                     },
@@ -144,6 +144,7 @@ $(document).ready(function() {
                         alert('결제 정보 저장에 실패하였습니다.');
                     }
                 });
+
             } else {
                 alert('결제를 취소하였습니다.');
             }

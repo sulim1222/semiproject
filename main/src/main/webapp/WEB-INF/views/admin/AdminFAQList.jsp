@@ -122,7 +122,7 @@
     $("#searchCategory").change(function(e) {
         const type = e.target.value;
         $(e.target).parent().find("div[id^='search-']").hide();
-        $("#search-" + type).show();
+        $("#search" + type).show();
     });
 
     const checkOnlyOne = (checkbox) => {
