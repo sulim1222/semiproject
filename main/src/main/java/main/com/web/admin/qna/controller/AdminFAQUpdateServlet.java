@@ -8,13 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.com.web.admin.qna.dao.AdminFAQService;
+import main.com.web.admin.qna.service.AdminFAQService;
 import main.com.web.qna.dto.FAQ;
 
-@WebServlet("/admin/faqUpdate")
+@WebServlet("/admin/updateFAQ")
 public class AdminFAQUpdateServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
@@ -24,23 +22,15 @@ public class AdminFAQUpdateServlet extends HttpServlet {
         String faqContent = request.getParameter("faqContent");
         String location = request.getParameter("location");
 
-        FAQ faq = FAQ.builder()
-                .faqAllNo(faqAllNo)
-                .faqCategory(faqCategory)
-                .faqTitle(faqTitle)
-                .faqContent(faqContent)
-                .faqDate(new java.sql.Date(System.currentTimeMillis()))
-                .location(location)
-                .build();
+        FAQ faq = new FAQ(faqAllNo, faqCategory, faqTitle, faqContent, new java.sql.Date(System.currentTimeMillis()), location);
 
         AdminFAQService service = new AdminFAQService();
         int result = service.updateFAQ(faq);
-
         if (result > 0) {
-            response.sendRedirect(request.getContextPath() + "/admin/faqList");
+            response.sendRedirect(request.getContextPath() + "/admin/FAQList");
         } else {
-            request.setAttribute("message", "FAQ 수정에 실패했습니다.");
-            request.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(request, response);
+            request.setAttribute("errorMessage", "FAQ 수정 실패");
+            request.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
         }
     }
 }

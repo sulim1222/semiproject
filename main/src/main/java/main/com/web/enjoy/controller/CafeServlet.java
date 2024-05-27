@@ -2,44 +2,31 @@ package main.com.web.enjoy.controller;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import main.com.web.admin.reserve.dto.Member;
-import main.com.web.admin.reserve.service.AdminReserveService;
 import main.com.web.enjoy.dto.Cafe;
 import main.com.web.enjoy.service.CafeService;
 
-/**
- * Servlet implementation class CafeServlet
- */
 @WebServlet("/enjoy/cafe")
 public class CafeServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+
     public CafeServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cPage = 0;
-        try {	//변
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int cPage = 1;
+        int numPerpage = 6;
+
+        try {
             cPage = Integer.parseInt(request.getParameter("cPage"));
         } catch (NumberFormatException e) {
             cPage = 1;
         }
-        int numPerpage = 0;
         try {
             numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
         } catch (NumberFormatException e) {
@@ -83,12 +70,8 @@ public class CafeServlet extends HttpServlet {
         request.setAttribute("cafes", cafes);
         request.getRequestDispatcher("/WEB-INF/views/enjoy/cafe.jsp").forward(request, response);
     }
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

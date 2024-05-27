@@ -8,7 +8,7 @@
 
     <main class="main">
         <h2>FAQ 신규 등록</h2>
-        <form action="<%=request.getContextPath()%>/admin/faqInsert" method="post">
+        <form action="<%=request.getContextPath()%>/admin/insertFAQ" method="post">
             <label for="faqCategory">카테고리:</label>
             <select id="faqCategory" name="faqCategory">
                 <option value="PAY">PAY</option>

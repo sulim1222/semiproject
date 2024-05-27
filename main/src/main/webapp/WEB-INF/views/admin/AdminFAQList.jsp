@@ -16,9 +16,9 @@
         <nav>
             <ul>
                 <li>Reservations</li>
-                <li><a href="<%=request.getContextPath()%>/qna/faqList?location=서울">Seoul</a></li>
-                <li><a href="<%=request.getContextPath()%>/qna/faqList?location=부산">Busan</a></li>
-                <li><a href="<%=request.getContextPath()%>/qna/faqList?location=제주">Jeju</a></li>
+                <li><a href="<%=request.getContextPath()%>/admin/FAQList?location=서울">Seoul</a></li>
+                <li><a href="<%=request.getContextPath()%>/admin/FAQList?location=부산">Busan</a></li>
+                <li><a href="<%=request.getContextPath()%>/admin/FAQList?location=제주">Jeju</a></li>
             </ul>
         </nav>
     </aside>
@@ -39,12 +39,12 @@
 
         <div class="container1">
             <select id="searchCategory" style="width: 100px; height: 25px;">
-                <option value="ALL" <%= "ALL".equals(searchCategory) ? "selected" : "" %>>ALL</option>
-                <option value="PAY" <%= "PAY".equals(searchCategory) ? "selected" : "" %>>PAY</option>
-                <option value="ETC" <%= "ETC".equals(searchCategory) ? "selected" : "" %>>ETC</option>
+               <option value="ALL" <%=searchCategory != null && searchCategory.equals("All") ? "selected" : ""%>>ALL</option>
+                <option value="PAY" <%=searchCategory != null && searchCategory.equals("PAY") ? "selected" : ""%>>PAY</option>
+                <option value="ETC" <%=searchCategory != null && searchCategory.equals("ETC") ? "selected" : ""%>>ETC</option>
             </select>
 
-            <div id="search-ALL" style="display:none;">
+            <div id="searchALL" style="display:none;">
                 <form action="<%=request.getContextPath()%>/admin/FAQList">
                     <input type="hidden" name="searchCategory" value="ALL">
                     <input type="text" name="searchKeyword" size="25" placeholder="단어를 입력하세요" value="<%= searchKeyword != null ? searchKeyword : "" %>">
@@ -68,8 +68,9 @@
                 </form>
             </div>
 
-            <button type="button" id="inputnewFAQ" onclick="location.href='<%=request.getContextPath()%>/admin/FAQInsert.jsp'">신규등록</button>
+            <button type="button" id="insertNewFAQ" onclick="location.href='<%=request.getContextPath()%>/admin/AdminFAQInsert.jsp'">신규등록</button>
         </div>
+        
 
         <div class="container2">
             <table class="FAQList">
@@ -95,7 +96,7 @@
                             <td><%= f.getFaqContent() %></td>
                             <td><%= f.getFaqDate() %></td>
                             <td>
-                                <button type="button" onclick="location.href='<%=request.getContextPath()%>/admin/FAQUpdate.jsp?faqAllNo=<%= f.getFaqAllNo() %>'">수정</button>
+                                <button type="button" onclick="location.href='<%=request.getContextPath()%>/admin/AdminFAQUpdate.jsp?faqAllNo=<%= f.getFaqAllNo() %>'">수정</button>
                                 <button type="button" onclick="deleteFAQ(<%= f.getFaqAllNo() %>)">삭제</button>
                             </td>
                         </tr>
@@ -135,7 +136,7 @@
 
     const deleteFAQ = (faqAllNo) => {
         if (confirm("정말 삭제하시겠습니까?")) {
-            location.href = "<%=request.getContextPath()%>/admin/FAQDelete?faqAllNo=" + faqAllNo;
+            location.href = "<%=request.getContextPath()%>/admin/deleteFAQ?faqAllNo=" + faqAllNo;
         }
     };
 </script>

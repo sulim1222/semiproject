@@ -2,14 +2,14 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="main.com.web.enjoy.dto.Cafe" %>    
+<%@ page import="main.com.web.member.dto.Member" %>
 
 <%@ include file="../common/header.jsp" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/cafe.css">
-
+<link rel="stylesheet" href="../css/cafe.css">
 
 <%
     List<Cafe> cafes = (List<Cafe>) request.getAttribute("cafes");
-   
+    Member loggedInUser = (Member) session.getAttribute("member"); // 사용자 정보 가져오기
 %>
 
 <section class="main-section">
@@ -25,7 +25,7 @@
         <div class="cafe-list">
             <% if (cafes != null && !cafes.isEmpty()) {
                 for (Cafe cafe : cafes) { %>
-                <div class="cafe" data-name="<%= cafe.getCafeName() %>" data-details="<%= cafe.getCafeAddress() %>">
+                <div class="cafe" data-id="<%= cafe.getCafeNo() %>" data-name="<%= cafe.getCafeName() %>" data-details="<%= cafe.getCafeAddress() %>">
                     <img src="<%= cafe.getCafeImg() %>" alt="<%= cafe.getCafeName() %>">
                     <h2><%= cafe.getCafeName() %></h2>
                     <p>주소: <%= cafe.getCafeAddress() %></p>
@@ -34,11 +34,15 @@
                 </div>
             <% }} else { %>
                 <p>카페 목록이 없습니다.</p>
-            <% } %>s
+            <% } %>
         </div>
     </div>
 </section>
-<!-- 팝업 HTML 추가 -->
+
+<!-- 숨겨진 필드에 사용자 정보 추가 -->
+<input type="hidden" id="loggedInUserId" value="<%= loggedInUser != null ? loggedInUser.getMemberNo() : "" %>">
+
+<!-- 팝업 -->
 <div id="popup" style="display:none;">
     <div class="popup-content">
         <span class="close">&times;</span>
@@ -52,8 +56,8 @@
             <span class="star" data-value="4">&#9734;</span>
             <span class="star" data-value="5">&#9734;</span>
         </div>
-        <textarea id="review" placeholder="Write your review"></textarea>
-        <button onclick="submitReview()">Submit</button>
+        <textarea id="review" placeholder="별점과 리뷰를 작성해주세요"></textarea>
+        <button onclick="submitReview()">저장</button>
         <div id="reviews"></div>
     </div>
 </div>

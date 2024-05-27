@@ -2,15 +2,16 @@ package main.com.web.admin.qna.controller;
 
 import java.io.IOException;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.com.web.admin.qna.dao.AdminFAQService;
+import main.com.web.admin.qna.service.AdminFAQService;
 
-@WebServlet("/admin/FAQDelete")
+@WebServlet("/admin/deleteFAQ")
 public class AdminFAQDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -21,7 +22,7 @@ public class AdminFAQDeleteServlet extends HttpServlet {
         int result = service.deleteFAQ(faqAllNo);
 
         if (result > 0) {
-            response.sendRedirect(request.getContextPath() + "/admin/faqList");
+            response.sendRedirect(request.getContextPath() + "/admin/FAQList");
         } else {
             request.setAttribute("message", "FAQ 삭제에 실패했습니다.");
             request.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(request, response);
