@@ -26,6 +26,58 @@ public class MyPageDao {
 			e.printStackTrace();
 		}
 	}
+	
+	//ReservationInfo 삭제
+	public int cancelReservationInfo(Connection conn, String reserveNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("deleteReservation"));
+			pstmt.setString(1, reserveNo);
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	//결제 삭제
+	public int cancelPayment(Connection conn, String reserveNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("deletePayment"));
+			pstmt.setString(1, reserveNo);
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public int cancelReservationDetail(Connection conn, String reserveNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("deleteReservationDetail"));
+			pstmt.setString(1, reserveNo);
+			result = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	
 	public int updateMember(Connection conn, String memberId, String newName, String newPassword, String newPhone) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -45,14 +97,14 @@ public class MyPageDao {
 		}
 		return result;
 	}
-	public List<Reserve> selectMyReservation(Connection conn, int loginMemberNo) {
+	public List<Reserve> selectMyReservation(Connection conn, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Reserve> reservations = new ArrayList<Reserve>();
 		
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectMyReservation"));
-			pstmt.setInt(1, loginMemberNo);
+			pstmt.setString(1, id);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -115,4 +167,5 @@ public class MyPageDao {
 				.reserveDate(rs.getDate("reservedate"))
 				.build();
 	}
+
 }

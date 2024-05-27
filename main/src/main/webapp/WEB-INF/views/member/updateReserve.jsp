@@ -3,6 +3,10 @@
 <%@ page import="main.com.web.admin.reserve.dto.Member" %>
 <% 
 	Member m=(Member) request.getAttribute("member");
+	Integer roomPeopleNo=(m!=null) ? m.getRoomPeopleNo() : null;
+	String roomType=(m!= null) ? m.getRoomType() : null;
+	String bedType=(m!=null) ? m.getBedType() : null;
+	String location=(m!=null) ? m.getLocation() : null;
 %>   
 <%@ include file="/WEB-INF/views/common/adminheader.jsp"%>
 
@@ -10,7 +14,7 @@
 
 	<h2>예약 정보 수정</h2>
 	<form action="<%=request.getContextPath()%>/reserve/updateendreserve.do" method="post">
-	<table>
+	<table>예약번호 : <input type="text" name="reserveNo" value="<%=m.getReserveNo()%>" style="border: none;" readonly>
 			<tr>
 				<th>아이디</th>
 				<td>
@@ -20,7 +24,7 @@
 				<th>
 					<input type="text" id="payPrice" name="payPrice" value="<%=m.getPayPrice() %>" readonly>
 				</th>
-				<th>예약수정날짜</th>
+				<th>예약날짜</th>
 				<th>
 					<input type="date" id="reserveDate" name="reserveDate" value="<%=m.getReserveDate() %>"  readonly>
 				</th>
@@ -34,44 +38,44 @@
 				<th>
 					<input type="text" placeholder="(-)제외하고 입력해주세요"name="memberPhone" value="<%=m.getMemberPhone() %>">
 				</th>
-				<th>고객번호</th>
+				<th>예약수정날짜</th>
 				<th>
-					<input type="text" name="memberNo" value="<%=m.getMemberNo() %>">
+					<input type="date" id="updateReserveDate" name="updateReserveDate" value="<%=m.getUpdateReserveDate()%>" readonly>
 				</th>
 			</tr>
 			<tr>
 				<th>인원수</th>
 			    <th>
 			        <select name="roomPeopleNo">
-			            <option value="1" <%=m.getRoomPeopleNo() == 1 ? "selected" : "" %>>1인</option>
-			            <option value="2" <%=m.getRoomPeopleNo() == 2 ? "selected" : "" %>>2인</option>
-			            <option value="3" <%=m.getRoomPeopleNo() == 3 ? "selected" : "" %>>3인</option>
-			            <option value="4" <%=m.getRoomPeopleNo() == 4 ? "selected" : "" %>>4인</option>
-			        </select>
+			        	<
+			            <option value="1" <%= (roomPeopleNo != null && roomPeopleNo == 1) ? "selected" : "" %>>1인</option>
+				        <option value="2" <%= (roomPeopleNo != null && roomPeopleNo == 2) ? "selected" : "" %>>2인</option>
+				        <option value="3" <%= (roomPeopleNo != null && roomPeopleNo == 3) ? "selected" : "" %>>3인</option>
+				        <option value="4" <%= (roomPeopleNo != null && roomPeopleNo == 4) ? "selected" : "" %>>4인</option> </select>
 			    </th>
 			    <th>객실타입</th>
 			    <th>
-			        <select name="roomType">
-			            <option value="standard" <%="standard".equals(m.getRoomType()) ? "selected" : "" %>>standard</option>
-			            <option value="deluxe" <%="deluxe".equals(m.getRoomType()) ? "selected" : "" %>>deluxe</option>
-			            <option value="suite" <%="suite".equals(m.getRoomType()) ? "selected" : "" %>>suite</option>
-			        </select>
-			    </th>
-			    <th>베드타입</th>
-			    <th>
-			        <select name="bedType">
-			            <option value="트윈" <%="twin".equals(m.getBedType()) ? "selected" : "" %>>트윈</option>
-			            <option value="더블" <%="double".equals(m.getBedType()) ? "selected" : "" %>>더블</option>
-			        </select>
-			    </th>
+				    <select name="roomType">
+				        <option value="standard" <%= "standard".equals(roomType) ? "selected" : "" %>>standard</option>
+				        <option value="deluxe" <%= "deluxe".equals(roomType) ? "selected" : "" %>>deluxe</option>
+				        <option value="suite" <%= "suite".equals(roomType) ? "selected" : "" %>>suite</option>
+				    </select>
+				</th>
+				<th>베드타입</th>
+				<th>
+				    <select name="bedType">
+				        <option value="트윈" <%= "트윈".equals(bedType) ? "selected" : "" %>>트윈</option>
+				        <option value="더블" <%= "더블".equals(bedType) ? "selected" : "" %>>더블</option>
+				    </select>
+				</th>
 			</tr>
 			<tr>
 				<th>지역</th>
 				<th>
 					<select name="location">
-						<option value="서울" <%="seoul".equals(m.getLocation()) ? "selected" : "" %>>서울</option>
-						<option value="부산" <%="busan".equals(m.getLocation()) ? "selected" : "" %>>부산</option>
-						<option value="제주" <%="jeju".equals(m.getLocation()) ? "selected" : "" %>>제주</option>
+						<option value="서울" <%="서울".equals(m.getLocation()) ? "selected" : "" %>>서울</option>
+						<option value="부산" <%="부산".equals(m.getLocation()) ? "selected" : "" %>>부산</option>
+						<option value="제주" <%="제주".equals(m.getLocation()) ? "selected" : "" %>>제주</option>
 					</select>
 				</th>
 				<th>입실날짜</th>
@@ -111,18 +115,7 @@
 		    checkOutDateInput.min = checkInDateInput.value;
 		});
 		    
-		    //객실타입에 따라 객실료 자동으로 설정 readonly
-	    const roomTypeSelect = document.querySelector('select[name="roomType"]');
-		const payPriceInput = document.querySelector('input[name="payPrice"]');
-		
-		window.addEventListener('load', function() {
-		    const firstRoomType = 'standard';
-		    const firstPrice = getPayPrice(firstRoomType);
-		    roomTypeSelect.value = firstRoomType;
-		    payPriceInput.value = firstPrice; 
-		});
-		
-		
+				
 		roomTypeSelect.addEventListener('change', function() {
 		    const roomType = roomTypeSelect.value;
 		    const price = getPayPrice(roomType);
@@ -140,6 +133,7 @@
 		}
 	
 	document.getElementById('reserveDate').valueAsDate = new Date();
+	document.getElementById('updateReserveDate').valueAsDate = new Date();
 	</script>
 
 	<style>
@@ -163,7 +157,7 @@
          text-align: center;
      }
      form {
-         padding: 2rem;
+         padding: 1rem;
      }
      table {
          width: 100%;

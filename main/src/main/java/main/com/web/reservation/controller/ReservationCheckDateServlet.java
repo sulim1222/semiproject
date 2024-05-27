@@ -59,14 +59,24 @@ public class ReservationCheckDateServlet extends HttpServlet {
         } else {
             currentPage = 1; // 페이지 파라미터가 없는 경우 기본값으로 1을 설정합니다.
         }
+        int totalData = 0;
         if (roomType == null) {
             roomType = "Standard";
         }
+        if(checkInDate == null || checkOutDate == null) { //날짜선택을안한경우
+        	roomList = new ReservationService().selectPagedRooms(roomType, currentPage, itemsPerPage);
+            totalData = new ReservationService().selectAllCountRoom(roomType); // totalData
+            
+        }else { //날짜를 선택한경우
+        	roomList  = new ReservationService().containerDate(checkInDate,checkOutDate,roomType,currentPage,itemsPerPage);
+        	totalData = new ReservationService().containerAllCount(roomType,checkInDate,checkOutDate);
+        }
+        
         // 페이징 처리
         System.out.println("Current Page: " + currentPage);
         System.out.println("Items Per Page: " + itemsPerPage);
-        roomList = new ReservationService().selectPagedRooms(roomType, currentPage, itemsPerPage);
-        int totalData = new ReservationService().selectAllCountRoom(roomType); // totalData
+        //날짜가 있는 roomList
+        
         System.out.println(totalData);
         System.out.println("Fetched roomList: " + roomList);
 

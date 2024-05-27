@@ -17,9 +17,9 @@ public class FAQ {
     private String faqCategory;
     private String faqTitle;
     private String faqContent;
-    private String faqWriter;
+//    private String faqWriter;
     private Date faqDate;
-    private String hotelNo;
+    private String location;
 	
     
     

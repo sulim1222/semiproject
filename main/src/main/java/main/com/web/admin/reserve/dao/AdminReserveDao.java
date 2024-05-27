@@ -178,6 +178,7 @@ public class AdminReserveDao {
 	        pstmt.setInt(10, m.getRoomPeopleNo());     // ROOMPEOPLENO
 	        pstmt.setString(11, m.getMemberAddress()); // MEMBERADDRESS
 	        pstmt.setString(12, m.getRequestMemo()); // REQUESTMEMO
+	        pstmt.setDate(13, m.getUpdateReserveDate()); //UPDATERESERVEDATE
 	        result = pstmt.executeUpdate();
 	    } catch(SQLException e) {
 	        e.printStackTrace();
@@ -215,18 +216,22 @@ public class AdminReserveDao {
 	    try {
 	        pstmt = conn.prepareStatement(sql.getProperty("updateReserve"));
 	              
-	        pstmt.setString(1, m.getLocation());    
-	        pstmt.setString(2, m.getMemberId());      
-	        pstmt.setString(3, m.getMemberName());    
-	        pstmt.setString(4, m.getRoomType());     
-	        pstmt.setString(5, m.getBedType());       
-	        pstmt.setDate(6, m.getCheckInDate());     
-	        pstmt.setDate(7, m.getCheckOutDate());    
-	        pstmt.setString(8, m.getMemberPhone());   
-	        pstmt.setInt(9, m.getPayPrice());       
-	        pstmt.setInt(10, m.getRoomPeopleNo());     
-	        pstmt.setString(11, m.getMemberAddress()); 
-	        pstmt.setString(12, m.getRequestMemo()); 
+	        pstmt.setString(1, m.getReserveNo());
+	        pstmt.setString(2, m.getLocation());    
+	        pstmt.setString(3, m.getMemberId());      
+	        pstmt.setString(4, m.getMemberName());    
+	        pstmt.setString(5, m.getRoomType());     
+	        pstmt.setString(6, m.getBedType());       
+	        pstmt.setDate(7, m.getCheckInDate());     
+	        pstmt.setDate(8, m.getCheckOutDate());    
+	        pstmt.setString(9, m.getMemberPhone());   
+	        pstmt.setInt(10, m.getPayPrice());       
+	        pstmt.setInt(11, m.getRoomPeopleNo());     
+	        pstmt.setString(12, m.getMemberAddress());
+	        pstmt.setDate(13, m.getReserveDate());
+	        pstmt.setDate(14, m.getUpdateReserveDate());
+	        pstmt.setString(15, m.getRequestMemo());
+	        pstmt.setString(16, m.getReserveNo());
 	        result = pstmt.executeUpdate();
 	    } catch(SQLException e) {
 	        e.printStackTrace();
@@ -251,11 +256,27 @@ public class AdminReserveDao {
 				.memberPhone(rs.getString("MEMBERPHONE"))
 				.payPrice(rs.getInt("PAYPRICE"))
 				.roomPeopleNo(rs.getInt("ROOMPEOPLENO"))
+				.updateReserveDate(rs.getDate("UPDATERESERVEDATE"))
 				.memberAddress(rs.getString("MEMBERADDRESS"))
 				.reserveDate(rs.getDate("RESERVEDATE"))
 				.build();
 	}
 	
+	public int deleteReserve(Connection conn, String reserveNo) {
+		PreparedStatement pstmt = null;
+        int result = 0;
+        try {
+            pstmt = conn.prepareStatement(sql.getProperty("deleteReserve"));
+            pstmt.setString(1, reserveNo);
+            result = pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+        }
+        return result;
+    
+	}
 	
 	
 	

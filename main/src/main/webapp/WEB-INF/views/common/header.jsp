@@ -33,17 +33,15 @@
                 <li><p><%=m.getMemberName()%>님 반갑습니다<p></li>
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
                 <li><a href="<%=request.getContextPath()%>/member/logout">LOGOUT</a></li>
-				<li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%}else{ %>
                 <li><p><%=member.getNickname()%>님 반갑습니다<p></li> <!-- kakao에 대한부분  -->
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
                 <li><a href="<%=request.getContextPath()%>/kakao/logout">LOGOUT</a></li>
-				<li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%} }%>
             </ul>
         </div>
         <div class="menu-section">
-            <div class="logo"><img src="../images/logoBlack.png" alt="호텔로고"></div>
+            <div class="logo"><img src="<%=request.getContextPath()%>/imges/hotellogo.png" alt="호텔로고"></div>
 
             <div class="menu">
                 <ul>
@@ -54,9 +52,9 @@
                         <a href="<%=request.getContextPath()%>/room/standardroom.do">ROOMS</a>
                         <div class="submenu">
                             <ul>
-                                <li>z</li>
-                                <li><a href="<%=request.getContextPath() %>/room/deluxeroom.do">Deluxe</a></li>
-                                <li><a href="<%=request.getContextPath() %>/room/suiteroom.do">Suite</a></li>
+                                <li><a href="<%=request.getContextPath() %>/room/standardroom.do?room=Standard&location=제주">Standard</a></li>
+                                <li><a href="<%=request.getContextPath()%>/room/standardroom.do?room=Deluxe&location=제주">Deluxe</a></li>
+                                <li> <a href="<%=request.getContextPath()%>/room/standardroom.do?room=Suite&location=제주">Suite</a></li>
                             </ul>
                         </div>
                     </li>
@@ -70,21 +68,21 @@
                         </div>
                     </li>
                     <li class="submenu-parent">
-                        <a href="#">ENJOY</a>
+                        <a href="<%=request.getContextPath()%>/enjoy/cafe"">ENJOY</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="#">Tour</a></li>
-                                <li><a href="#">Restaurant</a></li>
-                                <li><a href="#">Cafe</a></li>
+                                <li><a href="<%=request.getContextPath()%>/enjoy/Tour">Tour</a></li>
+                                <li><a href="<%=request.getContextPath()%>/enjoy/Restaurant">Restaurant</a></li>
+                                <li><a href="<%=request.getContextPath()%>/enjoy/cafe">Cafe</a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="submenu-parent">
-                        <a href="#">Q&A</a>
+                        <a href="<%=request.getContextPath()%>/qna/FAQList">Q&A</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Q&A</a></li>
+                                <li><a href="<%=request.getContextPath()%>/qna/FAQList">FAQ</a></li>
+                                <li><a href="<%=request.getContextPath()%>/qna/Inquirylist">Q&A</a></li>
                             </ul>
                         </div>
                     </li>

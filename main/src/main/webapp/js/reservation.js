@@ -1,16 +1,17 @@
 /**
  * 
  */
-    const date = new Date(); //현재 날짜
-    console.log(date); // 
-    date.toISOString().substring(0,10);
-    console.log(date.toISOString().substring(0,10));
-    console.log(typeof date.toISOString().substring(0,10));
-   const a = new Array();
-   const $showRoom = document.getElementById("showRoom");
-  const checkindate1 = document.getElementById("ck1");
-  const checkindate2 = document.getElementById("ck2");
-  btn.addEventListener("click",e=>{
+
+const date = new Date(); //현재 날짜
+console.log(date); // 
+date.toISOString().substring(0,10);
+console.log(date.toISOString().substring(0,10));
+console.log(typeof date.toISOString().substring(0,10));
+const a = new Array();
+const $showRoom = document.getElementById("showRoom");
+const checkindate1 = document.getElementById("ck1");
+const checkindate2 = document.getElementById("ck2");
+btn.addEventListener("click",e=>{
     a.pop();
     a.pop();
     checkindate1.innerText="체크인 날짜: ";
@@ -40,7 +41,9 @@
         checkindate2.innerText="체크아웃 날짜: "+a[1];
       }
     }else{
+
       alert("초기화 버튼을 눌러주세요");
+      
     }
 } 
     console.log(info.dateStr); // 시작날짜 
@@ -90,7 +93,7 @@ function fetchRooms(roomType, page) {
             roomList.forEach((room, i) => {
                 const $detail = document.createElement('div');
                 $detail.className = "detail";
-
+   
                 const $roomCard = document.createElement('div');
                 $roomCard.className = "room-card";
 
@@ -152,7 +155,7 @@ function fetchRooms(roomType, page) {
                 $bedType.className = "bed-type";
                 $bedType.innerHTML = `
                     <label for="bed-${i}">침대 타입:</label>
-                    <select id="bed-${i}" name="bed">
+                    <select id="bed-${i}" name="bedType">
                     <option value="twin">Twin</option>
                     <option value="double">Double</option>
                     </select>
@@ -161,10 +164,12 @@ function fetchRooms(roomType, page) {
                 const $peopleCount = document.createElement('div');
                 $peopleCount.className = "people-count";
                 $peopleCount.innerHTML = `
-                    <label for="people-${i}">인원:</label>
-                    <select id="people-${i}" name="people">
-                    <option value="2">2</option>
-                    <option value="4">4</option>
+                    <label for="people-${i}">인 원:</label>
+                    <select id="people-${i}" name="roomPeopleNo">
+                    <option value="1인">1인</option>
+                    <option value="2인">2인</option>
+                    <option value="3인">3인</option>
+                    <option value="4인">4인</option>
                     </select>
                 `;
                 // 요청사항 입력
@@ -179,11 +184,34 @@ function fetchRooms(roomType, page) {
                 $reserveButton.className = "reserve-button";
                 $reserveButton.textContent = "예약하기";
                 $reserveButton.addEventListener('click', (e) => {
-                // 예약 버튼 클릭 이벤트 처리
-                console.dir(e.target);
-    			console.log(roomList[i]); // 외부 범위의 roomList에 접근
-    			location.assign();
-    			alert('예약이 완료되었습니다.');
+            const target = e.target;
+            //console.dir(target);
+            //console.dir(e.target.previousElementSibling.lastElementChild);
+                //console.log(e.target.previousElementSibling.lastElementChild.value); //요청사항 받아옴
+                const request = e.target.previousElementSibling.lastElementChild.value;
+                //console.log("인원수");
+                //console.log(e.target.previousElementSibling.previousElementSibling.lastElementChild.value);//인원수 받아옴
+                const roomPeopleNo = e.target.previousElementSibling.previousElementSibling.lastElementChild.value;
+                 // 파싱된값 
+                //console.log("인원수"+(roomPeopleNo.substring(0,roomPeopleNo.length-1)));
+                //참대 타입 
+                console.log(e.target.previousElementSibling.previousElementSibling.previousElementSibling.lastElementChild.value);//침대 받아옴
+                 // 자차 유무
+                const bedType = e.target.previousElementSibling.previousElementSibling.previousElementSibling.lastElementChild.value; // 침대 타입
+            //console.log(e.target.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.lastElementChild.value); //자차부분                 
+                  const car = e.target.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.lastElementChild.value; //자차 값
+                  // 예약 버튼 클릭 이벤트 처리
+                //console.dir(e.target);
+             //console.log(roomList[i]); // 외부 범위의 roomList에 접근
+               const date1 = new Date(a[1]);
+               const date0 = new Date(a[0]);
+               console.log(date0);
+               console.log(date1);
+               let diff = Math.abs(date1.getTime() - date0.getTime());
+               diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+               console.log("날짜"+diff);
+               console.log("room가격"+room.price);
+             location.assign(`http://localhost:9090/main/pay/paymentPage?roomNo=${roomList[i].roomNo}&checkindate=${a[0]}&checkoutdate=${a[1]}&Mrequest=${request}&bedType=${bedType}&car=${car}&peopelNo=${roomPeopleNo.substring(0,roomPeopleNo.length-1)}&price=${diff*Number(room.roomPrice)}`);
                 });
                 // detail div에 요소 추가
                 $detail.appendChild($carOption);
@@ -198,21 +226,18 @@ function fetchRooms(roomType, page) {
             updatePageBar(page, totalData, roomType);
             console.log(`${a[0]}, ${a[1]} 값 전송 성공`);
         }});
-	}
-	function updatePageBar(curPage, totalData, roomType) {
+   }
+   function updatePageBar(curPage, totalData, roomType) {
     const itemsPerPage = 3;
     const totalPages = Math.ceil(totalData / itemsPerPage);
     const pageLimit = 5;
     let startPage = parseInt((curPage - 1) / pageLimit) * pageLimit + 1;
     let endPage = startPage + pageLimit - 1;
     endPage = totalPages < endPage ? totalPages : endPage;
-
     let pageUrl = "";
-
     if (curPage > 1) {
         pageUrl += `<a href='javascript:fetchRooms("${roomType}", ${curPage - 1})'>이전</a>&nbsp;&nbsp;`;
     }
-
     for (let i = startPage; i <= endPage; i++) {
         if (i === curPage) {
             pageUrl += `<strong>${i}</strong>&nbsp;&nbsp;`;
@@ -220,7 +245,6 @@ function fetchRooms(roomType, page) {
             pageUrl += `<a href='javascript:fetchRooms("${roomType}", ${i})'>${i}</a>&nbsp;&nbsp;`;
         }
     }
-
     if (endPage < totalPages) {
         pageUrl += `<a href='javascript:fetchRooms("${roomType}", ${endPage + 1})'>다음</a>&nbsp;&nbsp;`;
     }
