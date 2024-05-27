@@ -10,7 +10,7 @@
 //
 //import main.com.web.qna.dto.OneToOne;
 //
-//public class OneToOneDao {
+//public class InquiryDao {
 //	 private Properties sql = new Properties();
 //
 //	    public OneToOneDao() {
@@ -44,7 +44,7 @@
 //
 //	    public static OneToOne getOneToOne(ResultSet rs) throws SQLException {
 //	        return OneToOne.builder()
-//	            .onToOneInquiryId(rs.getInt("one_to_one_inquiry_id"))
+//	            .onToOneInq213.........+uiryId(rs.getInt("one_to_one_inquiry_id"))
 //	            .inquiryType(rs.getString("inquiry_type"))
 //	            .title(rs.getString("title"))
 //	            .content(rs.getString("content"))
@@ -53,3 +53,5 @@
 //	            .build();
 //	    }
 //	}
+
+

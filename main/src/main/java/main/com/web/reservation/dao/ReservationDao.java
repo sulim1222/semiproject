@@ -33,14 +33,14 @@ public class ReservationDao {
 	
 	
 	//결제 완료페이지에 출력할 Reserve(동훈)
-	public Reserve selectMyReserve(Connection conn, int reserveNo) {
+	public Reserve selectMyReserve(Connection conn, String reserveNo) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Reserve reserve = new Reserve();
 		
 		try {
-			pstmt = conn.prepareStatement(sql.getProperty("selectMytReserve"));
-			pstmt.setInt(1, reserveNo);
+			pstmt = conn.prepareStatement(sql.getProperty("selectMyReserve"));
+			pstmt.setString(1, reserveNo);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) reserve = getReserve(rs);

@@ -1,42 +1,126 @@
 package main.com.web.pay.model.service;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import static main.com.web.common.JDBCTemplate.close;
+import static main.com.web.common.JDBCTemplate.commit;
+import static main.com.web.common.JDBCTemplate.getConnection;
+import static main.com.web.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
-import static main.com.web.common.JDBCTemplate.*;
 
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
+import main.com.web.member.dto.Member;
 import main.com.web.pay.model.dao.PaymentDao;
+import main.com.web.pay.model.dto.Payment;
 import main.com.web.reservation.dao.ReservationDao;
 import main.com.web.reservation.dto.Reserve;
+import main.com.web.reservationdetail.dto.ReservationDetail;
+import main.com.web.room.dto.Room;
 
 public class PaymentService {
 
 	 private static final String IAMPORT_API_KEY = "4618247488373851"; //내 API Key
-	    private static final String IAMPORT_API_SECRET = "ou0o1JEwZY0nbMY8EzeUkr4mYpuR2qQhDYAaobi1gPEj70uP6jKTr5GqfF0NQyEt30Q2arW1heit3qE0"; //내 API Secret
-	    private PaymentDao paymentDao;
-	    private static ReservationDao reserveDao = new ReservationDao(); 
+	 private static final String IAMPORT_API_SECRET = "ou0o1JEwZY0nbMY8EzeUkr4mYpuR2qQhDYAaobi1gPEj70uP6jKTr5GqfF0NQyEt30Q2arW1heit3qE0"; //내 API Secret
+	 private static PaymentDao paymentDao;
+	 private static ReservationDao reserveDao;
+	 
+	 public PaymentService() {
+		 paymentDao = new PaymentDao();
+	 }
+	 
 
-	    public PaymentService() {
-	        this.paymentDao = new PaymentDao();
-	    }
 
-	    //결제 완료 페이지에 방금 결제한 예약정보
-	    public static Reserve selectMyReserve(int reserveNo) {
+	    public Reserve selectMyReserve(String reserveNo) {
 	    	Connection conn = getConnection();
-	    	Reserve result = reserveDao.selectMyReserve(conn, reserveNo);
+	    	Reserve result =  new ReservationDao().selectMyReserve(conn, reserveNo);
 	    	close(conn);
 			return result;
 		}
 	   
 	    
-	    
+	    public boolean savePaymentInfo(String impUid, String merchantUid, int payPrice, String paymentMethod, String status, String location, String reserveNo) {
+	        Connection conn = getConnection();
+	        boolean result = false;
+	        
+	        try {
+	            int insertResult = paymentDao.savePaymentInfo(conn, impUid, merchantUid, payPrice, paymentMethod, status, location, reserveNo);
+	            if (insertResult > 0) {
+	                commit(conn);
+	                result = true;
+	            } else {
+	                rollback(conn);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            rollback(conn);
+	        } finally {
+	            close(conn);
+	        }
+	        
+	        return result;
+	    }
+		public boolean insertReservationDetail(String reserveNo, Room r, String roomRequest, String bedType, String car, int roomPeopleNo) {
+			Connection conn = getConnection();
+			boolean result = false;
+			try {
+				int insertResult = paymentDao.insertReservationDetail(conn, reserveNo, r, roomRequest, bedType, car, roomPeopleNo);
+				if (insertResult > 0) {
+	                commit(conn);
+	                result = true;
+	            } else {
+	                rollback(conn);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            rollback(conn);
+	        } finally {
+	            close(conn);
+	        }
+	        return result;
+		}
+
+		public Payment selectPayment(String reserveNo) {
+			Connection conn = getConnection();
+			Payment payment = paymentDao.selectPayment(conn, reserveNo); 
+			close(conn);
+			return payment;
+		}
+
+
+		public Room selectRoom(int roomNo) {
+			Connection conn = getConnection();
+			Room room = paymentDao.selectRoom(conn, roomNo);
+			close(conn);
+			return room;
+		}
+		
+		public ReservationDetail selectMyReserveDetail(String reserveNo) {
+			Connection conn = getConnection();
+			ReservationDetail r = paymentDao.selectReserveDetail(conn, reserveNo);
+			close(conn);
+			return r;
+		}
+
+
+		 public String insertReservationInfo(Member m, Room r, String checkInDate, String checkOutDate, int roomPeopleNo, String roomRequest, String bedType) {
+		        Connection conn = getConnection();
+		        String reserveNo = null;
+		        int result = paymentDao.insertReservationInfo(conn, m, r, checkInDate, checkOutDate, roomPeopleNo, roomRequest, bedType);
+		        if (result > 0) {
+		            commit(conn);
+		            reserveNo = paymentDao.getLatestReserveNo(conn);  // 방금 저장된 예약번호 가져오기
+		        } else {
+		            rollback(conn);
+		        }
+		        close(conn);
+		        return reserveNo;
+		    }
+
+
+
+
+
+
+	    //결제 위변조 검증
+		
 //	    public boolean verifyAndSavePayment(String impUid, String merchantUid) throws Exception {
 //	    	Connection conn = getConnection();
 //	        if (verifyPayment(impUid)) {
@@ -109,26 +193,4 @@ public class PaymentService {
 //	        JsonObject jsonResponse = new Gson().fromJson(content.toString(), JsonObject.class);
 //	        return jsonResponse.get("response").getAsJsonObject().get("access_token").getAsString();
 //	    }
-	    
-	    public boolean savePaymentInfo(String impUid, String merchantUid, String memberId, int payPrice, String paymentMethod, String status, int hotelNo, int reserveNo) {
-	        Connection conn = getConnection();
-	        boolean result = false;
-	        
-	        try {
-	            int insertResult = paymentDao.savePaymentInfo(conn, impUid, merchantUid, memberId, payPrice, paymentMethod, status, hotelNo, reserveNo);
-	            if (insertResult > 0) {
-	                commit(conn);
-	                result = true;
-	            } else {
-	                rollback(conn);
-	            }
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            rollback(conn);
-	        } finally {
-	            close(conn);
-	        }
-	        
-	        return result;
-	    }
 	}

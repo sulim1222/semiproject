@@ -33,12 +33,10 @@
                 <li><p><%=m.getMemberName()%>님 반갑습니다<p></li>
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
                 <li><a href="<%=request.getContextPath()%>/member/logout">LOGOUT</a></li>
-				<li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%}else{ %>
                 <li><p><%=member.getNickname()%>님 반갑습니다<p></li> <!-- kakao에 대한부분  -->
                 <li><a href="<%=request.getContextPath()%>/mypage/myReservationPage">MYPAGE</a></li>
                 <li><a href="<%=request.getContextPath()%>/kakao/logout">LOGOUT</a></li>
-				<li><a href="<%=request.getContextPath()%>/pay/paymentPage">결제테스트</a></li>
                 <%} }%>
             </ul>
         </div>
@@ -70,21 +68,21 @@
                         </div>
                     </li>
                     <li class="submenu-parent">
-                        <a href="#">ENJOY</a>
+                        <a href="<%=request.getContextPath()%>/enjoy/cafe"">ENJOY</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="#">Tour</a></li>
-                                <li><a href="#">Restaurant</a></li>
-                                <li><a href="#">Cafe</a></li>
+                                <li><a href="<%=request.getContextPath()%>/enjoy/Tour">Tour</a></li>
+                                <li><a href="<%=request.getContextPath()%>/enjoy/Restaurant">Restaurant</a></li>
+                                <li><a href="<%=request.getContextPath()%>/enjoy/cafe">Cafe</a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="submenu-parent">
-                        <a href="#">Q&A</a>
+                        <a href="<%=request.getContextPath()%>/qna/FAQList">Q&A</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Q&A</a></li>
+                                <li><a href="<%=request.getContextPath()%>/qna/FAQList">FAQ</a></li>
+                                <li><a href="<%=request.getContextPath()%>/qna/Inquirylist">Q&A</a></li>
                             </ul>
                         </div>
                     </li>
