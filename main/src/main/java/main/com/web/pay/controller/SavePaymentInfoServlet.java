@@ -48,23 +48,11 @@ public class SavePaymentInfoServlet extends HttpServlet {
         String location = json.getString("location");
         String bedType = json.getString("bedType");
         int roomPeopleNo = json.getInt("roomPeopleNo");
-        int roomNo = (json.getInt("roomNo"));
+        int roomNo = json.getInt("roomNo");
         String roomRequest = json.optString("roomRequest", "");
         String car = json.optString("car", "");
-        
         String checkInDate = json.getString("checkInDate");
         String checkOutDate = json.getString("checkOutDate");
-        
-//        System.out.println("impUid: " + impUid);
-//        System.out.println("merchantUid: " + merchantUid);
-//        System.out.println("payPrice: " + payPrice);
-//        System.out.println("paymentMethod: " + paymentMethod);
-//        System.out.println("status: " + status);
-//        System.out.println("location: " + location);
-//        System.out.println("checkInDate: " + checkInDate); 
-//        System.out.println("checkOutDate: " + checkOutDate);
-//        System.out.println("roomPeopleNo: " + roomPeopleNo);
-//        System.out.println("roomNo: " + roomNo);
 
         // Room 객체 조회
         Room r = paymentService.selectRoom(roomNo);
@@ -73,18 +61,17 @@ public class SavePaymentInfoServlet extends HttpServlet {
         String reserveNo = paymentService.insertReservationInfo(m, r, checkInDate, checkOutDate, roomPeopleNo, roomRequest, bedType);
 
         // 결제 정보 저장
-        boolean result = paymentService.savePaymentInfo(impUid, merchantUid, payPrice, paymentMethod, status, location, reserveNo);
-        
-        // 방금 저장한 예약 가져오기
-        Reserve myReserve = paymentService.selectMyReserve(reserveNo);
-        
+        boolean paymentResult = paymentService.savePaymentInfo(impUid, merchantUid, payPrice, paymentMethod, status, location, reserveNo);
+
         // 예약 상세 저장 
-        boolean result2 = paymentService.insertReservationDetail(reserveNo, r, roomRequest, bedType, car, roomPeopleNo);
-        
-        
+        boolean reserveDetailResult = paymentService.insertReservationDetail(reserveNo, r, roomRequest, bedType, car, roomPeopleNo);
+
         // 결과에 따라 응답 처리 
-        if (result) {
-            response.sendRedirect(request.getContextPath() + "/pay/paycompletePage?reserveNo=" + reserveNo);
+        if (paymentResult && reserveDetailResult) {
+            // JSON 형태로 응답하기 위해 JSON 객체 생성
+            JSONObject jsonResponse = new JSONObject();
+            jsonResponse.put("reserveNo", reserveNo);
+            response.getWriter().write(jsonResponse.toString());
         } else {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "결제 정보 저장에 실패하였습니다.");
         }
