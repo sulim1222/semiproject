@@ -31,18 +31,22 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     }
-
+	
+	// 특정 카페 리뷰 표시 
     function displayReviews(cafeName) {
         if (reviewsContainer) {
-            reviewsContainer.innerHTML = '';
+            reviewsContainer.innerHTML = '';	//초기화 
+            //카페 리뷰 가져오기, 없으면 빈배열  
             const reviews = cafeReviews[cafeName] || [];
+            // 각 리뷰 반복 및 리뷰 항목 생성 & 컨테이너 추가
             reviews.forEach(review => {
                 const reviewEntry = createReviewEntry(review.name, review.rating, review.text);
                 reviewsContainer.appendChild(reviewEntry);
             });
         }
     }
-
+	
+	//리뷰 항목 설정 
     function createReviewEntry(name, rating, text) {
         const reviewEntry = document.createElement('div');
         reviewEntry.className = 'review-entry';
@@ -67,13 +71,23 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        const review = { 
-            cafeId: cafeId,
-            name: `임${cafeName.charAt(0)}ㅇ`, 
-            rating: selectedRating, 
-            text: reviewText 
-        };
+	     // 이름을 암호화하는 함수
+		function encryptName(name) {
+	    // 성을 제외한 이름의 첫 3글자를 추출하여 암호화
+	    const firstName = name.substring(1, 4);
+	    const encryptedName = firstName.replace(/[a-zA-Z가-힣]/g, '*'); // '*'로 대체
+	    return encryptedName;
+	}
+	
+		// 이름 암호화
+		const review = { 
+	    cafeId: cafeId,
+	    name: `${encryptName(cafeName)}ㅇ`, // 이름 암호화하여 사용
+	    rating: selectedRating, 
+	    text: reviewText 
+	};
 
+		//제출한 리뷰 처리(user->서버->결과에 따라 화면 메세지 표현)
         fetch('<%=request.getContextPath()%>/enjoy/submitReview', {
             method: 'POST',
             headers: {
@@ -81,15 +95,15 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify(review)
         })
-        .then(response => response.json())
+        .then(response => response.json())	//서버 응답 
         .then(data => {
             if (data.success) {
-                if (!cafeReviews[cafeName]) {
+                if (!cafeReviews[cafeName]) {	//카페 리뷰 배열 없을 경우
                     cafeReviews[cafeName] = [];
                 }
-                cafeReviews[cafeName].push(review);
+                cafeReviews[cafeName].push(review);	
 
-                displayReviews(cafeName);
+                displayReviews(cafeName);	
                 document.getElementById('review').value = ''; // 리뷰 입력 필드 초기화
                 alert('리뷰가 성공적으로 제출되었습니다.');
             } else {

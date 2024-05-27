@@ -16,7 +16,7 @@
 <body>
 	<header>
 		<div id="logo" >
-            <img src="./img/logo.png" alt="logo" width="150px" height="80px">
+            <img src="<%=request.getContextPath()%>/imges/admin/logo.png" alt="logo" width="150px" height="80px">
         </div>
         <div id="menu">
             <ul>
@@ -33,9 +33,7 @@
                     <a href="<%=request.getContextPath()%>/qna/qnaupdate.do">Q&A</a>
                 </li>
                 <li>
-                	<button class="btn1" onclick="location.assign('<%=request.getContextPath()%>/')">
-						<img src="./imges/homepage.jpg" >
-					</button>
+                    <a href="<%=request.getContextPath()%>/sales/salesupdate.do">Sales</a>
                 </li>
             </ul>
         </div>
@@ -49,15 +47,12 @@
 	    position: relative;
 	    padding: 10px 0;
 	    border: 1px solid #e0e0e0; /* 연한 회색 테두리 */
+	    align-items: center;
+	    width: 100%;
+	    justify-content: space-between;
+	    display: flex;
 	}
 	
-	header {
-	    display: flex;
-	    justify-content: space-between;
-	    align-items: center;
-	    padding: 10px 40px; /* 좌우 여백 조정 */
-	    width: 100%;
-	}
 	
 	#menu {
 	    margin-right: 40px; /* 오른쪽 여백 추가 */
@@ -87,8 +82,8 @@
 	}
 	
 	#logo {
-	    margin-left: 40px;
+	    margin-left: 4.5%;
 	}
-
+	
 </style>
 
