@@ -18,4 +18,13 @@ public class AdminSalesService {
 		close(conn);
 		return sales;
 	}
+
+	public List<Sales> addReservation(String month,int newRevenue){
+		Connection conn=getConnection();
+		List<Sales> sales=asd.addReservation(conn, month, newRevenue);
+		close(conn);
+		return sales;
+	}
+
 }
+
