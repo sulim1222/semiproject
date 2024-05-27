@@ -233,7 +233,7 @@ function addReservation(newRevenue) {
     .sales-graph-container {
         width: 75%;
         height: 600px;
-        padding-top: 100px;
+        padding-top: 70px;
     }
     
     .salesData {
