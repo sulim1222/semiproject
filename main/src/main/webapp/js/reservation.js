@@ -118,11 +118,11 @@ function fetchRooms(roomType, page) {
 
                 const $roomArea = document.createElement('p');
                 $roomArea.className = "room-area";
-                $roomArea.textContent = `Area: ${room.roomArea}`;
+                $roomArea.textContent = `면적: ${room.roomArea}`;
 
                 const $roomInfoText = document.createElement('p');
                 $roomInfoText.className = "room-info-text";
-                $roomInfoText.textContent = `Info: ${room.roomInfo}`;
+                $roomInfoText.textContent = `정보: ${room.roomInfo}`;
 
                 const $roomCategory = document.createElement('p');
                 $roomCategory.className = "room-category";
