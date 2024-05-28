@@ -1,41 +1,78 @@
 package main.com.web.qna.controller;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import main.com.web.qna.dto.FAQ;
+import main.com.web.qna.service.FAQService;
 
-/**
- * Servlet implementation class FAQViewServlet
- */
-@WebServlet("/qna/FAQList")
+@WebServlet("/qna/FAQAll")
 public class FAQListServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    private static final long serialVersionUID = 1L;
+
     public FAQListServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int cPage = 1;
+        try {
+            cPage = Integer.parseInt(request.getParameter("cPage"));
+        } catch (NumberFormatException e) {
+            cPage = 1;
+        }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+        int numPerpage = 10;
+        try {
+            numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
+        } catch (NumberFormatException e) {
+            numPerpage = 10;
+        }
 
+        FAQService service = new FAQService();
+        List<FAQ> faqs = service.selectFAQAll(cPage, numPerpage);
+        int totalData = service.selectFAQAllCount();
+
+        int totalPage = (int) Math.ceil((double) totalData / numPerpage);
+        int pageBarSize = 5;
+        int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
+        int pageEnd = pageNo + pageBarSize - 1;
+
+        StringBuffer pageBar = new StringBuffer();
+        if (pageNo == 1) {
+            pageBar.append("<span>[이전]</span>");
+        } else {
+            pageBar.append("<a href='" + request.getRequestURI()
+                    + "?cPage=" + (pageNo - 1) + "&numPerpage=" + numPerpage + "'>[이전]</a>");
+        }
+
+        while (!(pageNo > pageEnd || pageNo > totalPage)) {
+            if (pageNo == cPage) {
+                pageBar.append("<span>" + pageNo + "</span>");
+            } else {
+                pageBar.append("<a href='" + request.getRequestURI()
+                        + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "'>" + pageNo + "</a>");
+            }
+            pageNo++;
+        }
+
+        if (pageNo > totalPage) {
+            pageBar.append("<span>[다음]</span>");
+        } else {
+            pageBar.append("<a href='" + request.getRequestURI()
+                    + "?cPage=" + pageNo + "&numPerpage=" + numPerpage + "'>[다음]</a>");
+        }
+
+        request.setAttribute("pageBar", pageBar.toString());
+        request.setAttribute("faqs", faqs);
+        request.getRequestDispatcher("/WEB-INF/views/qna/faqAll.jsp").forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
 }

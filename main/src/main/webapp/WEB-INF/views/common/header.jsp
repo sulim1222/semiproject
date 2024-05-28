@@ -53,9 +53,9 @@
                         <a href="<%=request.getContextPath()%>/room/standardroom.do">ROOMS</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="<%=request.getContextPath() %>/room/standardroom.do">Standard</a></li>
-                                <li><a href="<%=request.getContextPath() %>/room/deluxeroom.do">Deluxe</a></li>
-                                <li><a href="<%=request.getContextPath() %>/room/suiteroom.do">Suite</a></li>
+                                <li><a href="<%=request.getContextPath() %>/room/standardroom.do?room=Standard&location=제주">Standard</a></li>
+                                <li><a href="<%=request.getContextPath()%>/room/standardroom.do?room=Deluxe&location=제주">Deluxe</a></li>
+                                <li> <a href="<%=request.getContextPath()%>/room/standardroom.do?room=Suite&location=제주">Suite</a></li>
                             </ul>
                         </div>
                     </li>
@@ -83,7 +83,7 @@
                         <div class="submenu">
                             <ul>
                                 <li><a href="<%=request.getContextPath()%>/qna/FAQList">FAQ</a></li>
-                                <li><a href="<%=request.getContextPath()%>/qna/Inquirylist">Q&A</a></li>
+                                <li><a href="<%=request.getContextPath()%>/qna/submitInquiry">Q&A</a></li>
                             </ul>
                         </div>
                     </li>
