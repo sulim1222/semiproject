@@ -46,16 +46,8 @@
         <% } else { %>
         <p>faq 목록이 없습니다.</p>
         <% } %>
-        
-        
-        
-         <div id="pageBar">
-    	<%=request.getAttribute("pageBar") %>
-   		 </div>
-         
     </section>
-    
-   
 
-<script src="<%=request.getContextPath()%>/js/faq.js"></script>
-<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+<script src="<%=request.getContextPath()%>/js/faq.js"></script> <!-- javascript 내용 -->
+
+<%@ include file="../common/footer.jsp"%>

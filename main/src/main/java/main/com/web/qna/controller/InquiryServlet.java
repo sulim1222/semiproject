@@ -3,6 +3,7 @@ package main.com.web.qna.controller;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,9 +22,8 @@ public class InquiryServlet extends HttpServlet {
         super();
     }
 
-    // GET 메소드 추가
+  
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // GET 요청을 inquiry.jsp로 리다이렉트
         request.getRequestDispatcher("/WEB-INF/views/qna/inquiry.jsp").forward(request, response);
     }
 
@@ -32,7 +32,6 @@ public class InquiryServlet extends HttpServlet {
 
         Member loggedInUser = (Member) request.getSession().getAttribute("member");
         if (loggedInUser == null) {
-            System.out.println("User not logged in, redirecting to login page.");
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
@@ -42,7 +41,7 @@ public class InquiryServlet extends HttpServlet {
         String content = request.getParameter("inquiry");
         int MemberNo = loggedInUser.getMemberNo();
 
-        // 현재 날짜와 시간을 구하여 설정
+  
         Date inquiryDate = new Date(System.currentTimeMillis());
         Time inquiryTime = new Time(System.currentTimeMillis());
 
@@ -55,13 +54,11 @@ public class InquiryServlet extends HttpServlet {
                 .MemberNo(MemberNo)
                 .build();
 
-        System.out.println("Submitting inquiry: " + inquiry);
-
         InquiryService service = new InquiryService();
         int result = service.saveInquiry(inquiry);
 
         if (result > 0) {
-            response.sendRedirect(request.getContextPath() + "/qna/success");
+            response.sendRedirect(request.getContextPath() + "/qna/FAQAll");
         } else {
             response.sendRedirect(request.getContextPath() + "/qna/failure");
         }
