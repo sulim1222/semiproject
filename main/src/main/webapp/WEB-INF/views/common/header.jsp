@@ -5,6 +5,7 @@
 	Member m = (Member)session.getAttribute("member");
 	Kakao member = (Kakao)session.getAttribute("kakaoMember"); // kakao 부분
 %>
+<% Object loginError=session.getAttribute("loginError"); %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -82,7 +83,7 @@
                         <div class="submenu">
                             <ul>
                                 <li><a href="<%=request.getContextPath()%>/qna/FAQList">FAQ</a></li>
-                                <li><a href="<%=request.getContextPath()%>/qna/Inquirylist">Q&A</a></li>
+                                <li><a href="<%=request.getContextPath()%>/qna/submitInquiry">Q&A</a></li>
                             </ul>
                         </div>
                     </li>

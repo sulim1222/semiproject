@@ -51,4 +51,30 @@ private Properties sql=new Properties();
 		return sales;
 	}
 	
+	 public List<Sales> addReservation(Connection conn, String month, int newRevenue) {
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+	        List<Sales> sales = new ArrayList<>();
+	        try {
+	            pstmt = conn.prepareStatement(sql.getProperty("addNewRevenue"));
+	            pstmt.setInt(1, newRevenue);
+	            pstmt.setString(2, month);
+	            pstmt.executeUpdate();
+	            while (rs.next()) {
+	                String months = rs.getString("month");
+	                int revenue = rs.getInt("revenue");
+	                Sales salesByMonth = new Sales(months, revenue);
+	                sales.add(salesByMonth);
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            close(rs);
+	            close(pstmt);
+	        }
+	        return sales;
+	 }
+
+	
+	
 }

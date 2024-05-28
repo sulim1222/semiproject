@@ -1,7 +1,3 @@
-/**
- * 
- */
-// 파일 입력 필드 관리
 let fileCount = 1;
 
 function addFileInput() {
@@ -59,3 +55,5 @@ function validateForm() {
         form.submit();
     }
 }
+
+

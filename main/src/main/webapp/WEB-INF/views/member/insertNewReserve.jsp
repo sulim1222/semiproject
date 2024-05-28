@@ -48,16 +48,16 @@
 				<th>객실타입</th>
 				<th>
 					<select name="roomType">
-							<option value="standard">standard</option>
-							<option value="deluxe">deluxe</option>
-							<option value="suite">suite</option>
+							<option value="Standard">Standard</option>
+							<option value="Deluxe">Deluxe</option>
+							<option value="Suite">Suite</option>
 					</select>
 				</th>
 				<th>베드타입</th>
 				<th>
 					<select name="bedType">
-						<option value="트윈">트윈</option>
-						<option value="더블">더블</option>
+						<option value="twin">twin</option>
+						<option value="double">double</option>
 					</select>
 				</th>	
 			</tr>
@@ -112,7 +112,7 @@
 	const payPriceInput = document.querySelector('input[name="payPrice"]');
 	
 	window.addEventListener('load', function() {
-	    const firstRoomType = 'standard';
+	    const firstRoomType = 'Standard';
 	    const firstPrice = getPayPrice(firstRoomType);
 	    roomTypeSelect.value = firstRoomType;
 	    payPriceInput.value = firstPrice; 
@@ -126,11 +126,11 @@
 	});
 	
 	function getPayPrice(roomType){
-	    if (roomType === 'standard') {
+	    if (roomType === 'Standard') {
 	        return '100000';
-	    } else if (roomType === 'deluxe') {
+	    } else if (roomType === 'Deluxe') {
 	        return '200000';
-	    } else if (roomType === 'suite') {
+	    } else if (roomType === 'Suite') {
 	        return '300000';
 	    }
 	}

@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/adminheader.jsp"%>
 <%@ page import="main.com.web.qna.dto.FAQ" %>
-
 <%
     FAQ faq = (FAQ) request.getAttribute("faq");
 %>
-
 <section class="sectionflex">
     <aside class="aside">
         <!-- 추가적인 네비게이션 내용 -->

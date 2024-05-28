@@ -27,7 +27,7 @@ public class AdminReserveDao {
 			e.printStackTrace();
 		}
 	}
-	
+	 
 	public List<Member> selectMemberAll(Connection conn,int cPage,int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -162,28 +162,42 @@ public class AdminReserveDao {
 	
 	public int insertNewMember(Connection conn, Member m) {
 	    PreparedStatement pstmt = null;
+	    PreparedStatement checkPstmt=null;
+	    ResultSet rs=null;
 	    int result = 0;
 	    try {
-	        pstmt = conn.prepareStatement(sql.getProperty("insertNewMember"));
-	              
-	        pstmt.setString(1, m.getLocation());       // LOCATION
-	        pstmt.setString(2, m.getMemberId());       // MEMBERID
-	        pstmt.setString(3, m.getMemberName());     // MEMBERNAME
-	        pstmt.setString(4, m.getRoomType());       // ROOMTYPE
-	        pstmt.setString(5, m.getBedType());        // BEDTYPE
-	        pstmt.setDate(6, m.getCheckInDate());      // CHECKINDATE
-	        pstmt.setDate(7, m.getCheckOutDate());     // CHECKOUTDATE
-	        pstmt.setString(8, m.getMemberPhone());    // MEMBERPHONE
-	        pstmt.setInt(9, m.getPayPrice());         // PAYPRICE
-	        pstmt.setInt(10, m.getRoomPeopleNo());     // ROOMPEOPLENO
-	        pstmt.setString(11, m.getMemberAddress()); // MEMBERADDRESS
-	        pstmt.setString(12, m.getRequestMemo()); // REQUESTMEMO
-	        pstmt.setDate(13, m.getUpdateReserveDate()); //UPDATERESERVEDATE
-	        result = pstmt.executeUpdate();
+	    	 checkPstmt = conn.prepareStatement(sql.getProperty("idDuplicateCheck"));
+	         checkPstmt.setString(1, m.getMemberId());
+	         rs = checkPstmt.executeQuery();
+	    	if(rs.next() && rs.getInt(1) == 0) {
+	    	
+		        pstmt = conn.prepareStatement(sql.getProperty("insertNewMember"));
+		              
+		        pstmt.setString(1, m.getLocation());       // LOCATION
+		        pstmt.setString(2, m.getMemberId());       // MEMBERID
+		        pstmt.setString(3, m.getMemberName());     // MEMBERNAME
+		        pstmt.setString(4, m.getRoomType());       // ROOMTYPE
+		        pstmt.setString(5, m.getBedType());        // BEDTYPE
+		        pstmt.setDate(6, m.getCheckInDate());      // CHECKINDATE
+		        pstmt.setDate(7, m.getCheckOutDate());     // CHECKOUTDATE
+		        pstmt.setString(8, m.getMemberPhone());    // MEMBERPHONE
+		        pstmt.setInt(9, m.getPayPrice());         // PAYPRICE
+		        pstmt.setInt(10, m.getRoomPeopleNo());     // ROOMPEOPLENO
+		        pstmt.setString(11, m.getMemberAddress()); // MEMBERADDRESS
+		        pstmt.setString(12, m.getRequestMemo()); // REQUESTMEMO
+		        pstmt.setDate(13, m.getUpdateReserveDate()); //UPDATERESERVEDATE
+		        result = pstmt.executeUpdate();
+	    	}
+	    	else {
+	    		 System.out.println("아이디 중복됌");
+	             result = -1;
+	    	}
 	    } catch(SQLException e) {
 	        e.printStackTrace();
 	    } finally {
 	        close(pstmt);
+	        close(rs);
+	        close(checkPstmt);
 	    }
 	    return result;
 	}
@@ -211,28 +225,28 @@ public class AdminReserveDao {
 	
 	
 	public int updateReserve(Connection conn, Member m) {
-	    PreparedStatement pstmt = null;
+		PreparedStatement pstmt = null;
 	    int result = 0;
 	    try {
-	        pstmt = conn.prepareStatement(sql.getProperty("updateReserve"));
-	              
-	        pstmt.setString(1, m.getReserveNo());
-	        pstmt.setString(2, m.getLocation());    
-	        pstmt.setString(3, m.getMemberId());      
-	        pstmt.setString(4, m.getMemberName());    
-	        pstmt.setString(5, m.getRoomType());     
-	        pstmt.setString(6, m.getBedType());       
-	        pstmt.setDate(7, m.getCheckInDate());     
-	        pstmt.setDate(8, m.getCheckOutDate());    
-	        pstmt.setString(9, m.getMemberPhone());   
-	        pstmt.setInt(10, m.getPayPrice());       
-	        pstmt.setInt(11, m.getRoomPeopleNo());     
-	        pstmt.setString(12, m.getMemberAddress());
-	        pstmt.setDate(13, m.getReserveDate());
-	        pstmt.setDate(14, m.getUpdateReserveDate());
-	        pstmt.setString(15, m.getRequestMemo());
-	        pstmt.setString(16, m.getReserveNo());
-	        result = pstmt.executeUpdate();
+		        pstmt = conn.prepareStatement(sql.getProperty("updateReserve"));
+		              
+		        pstmt.setString(1, m.getReserveNo());
+		        pstmt.setString(2, m.getLocation());       // LOCATION
+		        pstmt.setString(3, m.getMemberId());       // MEMBERID
+		        pstmt.setString(4, m.getMemberName());     // MEMBERNAME
+		        pstmt.setString(5, m.getRoomType());       // ROOMTYPE
+		        pstmt.setString(6, m.getBedType());        // BEDTYPE
+		        pstmt.setDate(7, m.getCheckInDate());      // CHECKINDATE
+		        pstmt.setDate(8, m.getCheckOutDate());     // CHECKOUTDATE
+		        pstmt.setString(9, m.getMemberPhone());    // MEMBERPHONE
+		        pstmt.setInt(10, m.getPayPrice());         // PAYPRICE
+		        pstmt.setInt(11, m.getRoomPeopleNo());     // ROOMPEOPLENO
+		        pstmt.setString(12, m.getMemberAddress()); // MEMBERADDRESS
+		        pstmt.setDate(13, m.getReserveDate());
+		        pstmt.setDate(14, m.getUpdateReserveDate()); //UPDATERESERVEDATE
+		        pstmt.setString(15, m.getRequestMemo()); // REQUESTMEMO
+		        pstmt.setString(16, m.getReserveNo());
+		        result = pstmt.executeUpdate();
 	    } catch(SQLException e) {
 	        e.printStackTrace();
 	    } finally {
@@ -240,6 +254,7 @@ public class AdminReserveDao {
 	    }
 	    return result;
 	}
+	    
 	
 	
 	

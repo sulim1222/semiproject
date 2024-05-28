@@ -1,6 +1,7 @@
-package main.com.web.admin.reserve.controller;
+package main.com.web.admin.sales.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.com.web.admin.reserve.dto.Member;
-import main.com.web.admin.reserve.service.AdminReserveService;
+import com.google.gson.Gson;
+
+import main.com.web.admin.reserve.dto.Sales;
+import main.com.web.admin.sales.service.AdminSalesService;
 
 /**
- * Servlet implementation class UpdateReserve
+ * Servlet implementation class AddRevenue
  */
-@WebServlet("/reserve/updatereserve.do")
-public class UpdateReserve extends HttpServlet {
+@WebServlet("/addRevenue")
+public class AddRevenue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateReserve() {
+    public AddRevenue() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,14 +33,21 @@ public class UpdateReserve extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String reserveNo =request.getParameter("reserveNo");
-	   
-		Member m = new AdminReserveService().selectByReserveNo(reserveNo);
-        if (m != null) {
-            request.setAttribute("member", m);
-            request.getRequestDispatcher("/WEB-INF/views/member/updateReserve.jsp").forward(request, response);
+		
+        int newRevenue=0;
+        try{
+        	newRevenue= Integer.parseInt(request.getParameter("revenue"));
+        }catch(NumberFormatException e) {
+        	newRevenue=1;
         }
-		System.out.println(m);
+        String month=request.getParameter("month");
+
+        AdminSalesService salesService = new AdminSalesService();
+        List<Sales> updatedSalesData = salesService.addReservation(month,newRevenue);
+
+        Gson gson = new Gson();
+        String jsonSalesData = gson.toJson(updatedSalesData);
+        response.getWriter().write(jsonSalesData);
 	}
 
 	/**
