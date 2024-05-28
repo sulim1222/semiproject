@@ -33,10 +33,10 @@ public class RoomDetailServlet extends HttpServlet {
 		//setAttribute("key",Object value); -> getAttribute("key");
 //		request.setAttribute("room", 
 //				new String[]{"1-ST.png","2-ST.png","3-ST.png","4-ST.png","5-ST.png"});
-		if(roomType.equals("Deluxe")) {
-			int count = 6;
-			List<RoomImages> imgs = new RoomService().getImgs(count); 
-		}
+//		if(roomType.equals("Deluxe")) {
+//			int count = 6;
+//			List<RoomImages> imgs = new RoomService().getImgs(count); 
+//		}
 		
 //		List<Room> rooms=rs.GetAllRoomsService();
 		Room room=new RoomService().getRoomDetailService(roomType,location);

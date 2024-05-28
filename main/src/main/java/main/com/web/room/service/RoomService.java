@@ -11,50 +11,31 @@ import main.com.web.room.dto.Room;
 import main.com.web.room.dto.RoomImages;
 
 public class RoomService {
-	
-	private RoomDao dao=new RoomDao();
-	
-	//몰라
-	public List<Room> GetAllRoomsService() {
-	      Connection conn=getConnection();
-	      List<Room> rooms=dao.getAllRooms(conn);
-	      close(conn);
-	      return rooms;
-	   }
-	
-	//몰라
-//	public Room getRoomDetailService(String roomType,String location){
-//		Connection conn=getConnection();
-//		Room room=dao.getRoomDetail(conn,roomType,location);
-//		close(conn);
-//		return room;
-//	}
-	
-	//해진작성
-//	public List<String> getRoomImagesService(int roomNo){
-//		Connection conn=getConnection();
-//		List<String> roomimages=dao.getRoomImages(conn, roomNo);
-//		close(conn);
-//		return roomimages;
-//	}
-	
-	//gpt가 디테일+이미지 합쳐서만듬
-	public Room getRoomDetailService(String roomType, String location) {
-        Connection conn = getConnection();
-        Room room = dao.getRoomDetail(conn, roomType, location);
-        if (room != null) {
-            List<String> roomImages = dao.getRoomImages(conn, room.getRoomNo());
-            room.setRoomImages(roomImages);
-        }
-        close(conn);
-        return room;
-    }
 
+	private RoomDao dao = new RoomDao();
+
+	// 몰라
+	public List<Room> GetAllRoomsService() {
+		Connection conn = getConnection();
+		List<Room> rooms = dao.getAllRooms(conn);
+		close(conn);
+		return rooms;
+	}
+
+	// 쌤이 다시 봐주심 사진넣을때!
+	public Room getRoomDetailService(String roomType, String location) {
+		Connection conn = getConnection();
+		Room room = dao.getRoomDetail(conn, roomType, location);
+		close(conn);
+		return room;
+	}
+
+	// 요한작성,,
 	public List<RoomImages> getImgs(int count) {
 		Connection conn = getConnection();
-		List<RoomImages> imges = dao.getImgs(conn,count);
+		List<RoomImages> imges = dao.getImgs(conn, count);
 		close(conn);
 		return imges;
-	}	
-	
+	}
+
 }

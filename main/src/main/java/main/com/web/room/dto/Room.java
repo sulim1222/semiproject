@@ -23,5 +23,5 @@ public class Room {
 	private String category;
 	private String hotelService;
 	private String roomUrl;
-	private List<String> roomImages; // 이미지 목록을 저장할 필드 추가?
+	private List<RoomImages> roomImages; // 이미지 목록을 저장할 필드 추가?
 }

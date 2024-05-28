@@ -5,12 +5,11 @@
 <%
 	Room room=(Room)request.getAttribute("room");
 
- // Room room;
- //room=(Room)request.getAttribute("room");
 %>
-<%@ page import="main.com.web.room.dto.Room" %>
+<%@ page import="main.com.web.room.dto.*" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script src="https://kit.fontawesome.com/2c827c8cca.js" crossorigin="anonymous"></script>
+
 <link rel="stylesheet" href="<%= request.getContextPath()%>/css/room.css"> 
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap"
@@ -27,10 +26,10 @@
         <div class="slideshow-container">
         
            <%
-              for(String image : room.getRoomImages()){
+              for(RoomImages image : room.getRoomImages()){
            %>
             <div class="slide fade">
-                <img src="<%=request.getContextPath()%>/images/rooms/<%=image %>" alt="각 룸이미지" width="100%" height="600px">
+                <img src="<%=request.getContextPath()%>/images/rooms/<%=image.getRoomAttachName() %>" alt="각 룸이미지" width="100%" height="600px">
             </div>
             <%} %>
             <div class="sharing"><h6>URL</h6>

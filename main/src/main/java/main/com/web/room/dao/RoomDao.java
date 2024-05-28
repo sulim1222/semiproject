@@ -78,6 +78,7 @@ public class RoomDao {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				room = getRoom(rs);
+				getRoomImages(rs,room);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -184,7 +185,18 @@ public class RoomDao {
 	        return roomImages;
 	    }
 
-
+	    private void getRoomImages(ResultSet rs, Room room) throws SQLException{
+	    	List<RoomImages> images=new ArrayList();
+	    	do {
+	    		images.add(
+	    				RoomImages.builder()
+			    		.roomAttachNo(rs.getInt("room_attach_no"))
+			    		.roomAttachName(rs.getString("room_attach_name"))
+			    		.roomRef(rs.getInt("room_ref"))
+			    		.build());
+	    	}while(rs.next());
+	    	room.setRoomImages(images);
+	    }
 
 		public List<RoomImages> getImgs(Connection conn, int count) {
 			List<RoomImages> images =null;
