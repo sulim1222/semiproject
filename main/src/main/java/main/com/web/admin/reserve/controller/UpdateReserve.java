@@ -32,9 +32,12 @@ public class UpdateReserve extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String reserveNo =request.getParameter("reserveNo");
 	   
-		Member m=new AdminReserveService().selectByReserveNo(reserveNo);
-		request.setAttribute("member",m);
-		request.getRequestDispatcher("/WEB-INF/views/member/updateReserve.jsp").forward(request,response);
+		Member m = new AdminReserveService().selectByReserveNo(reserveNo);
+        if (m != null) {
+            request.setAttribute("member", m);
+            request.getRequestDispatcher("/WEB-INF/views/member/updateReserve.jsp").forward(request, response);
+        }
+		System.out.println(m);
 	}
 
 	/**

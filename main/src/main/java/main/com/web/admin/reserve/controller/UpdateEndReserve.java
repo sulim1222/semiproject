@@ -57,6 +57,9 @@ public class UpdateEndReserve extends HttpServlet {
 		Date checkOutDate=Date.valueOf(request.getParameter("checkOutDate"));
 		Date updateReserveDate=Date.valueOf(request.getParameter("updateReserveDate"));
 		String memberAddress=request.getParameter("memberAddress");
+		if (memberAddress == null) {
+            memberAddress = "";
+        }
 		String requestMemo=request.getParameter("requestMemo");
 		
 		
@@ -86,7 +89,7 @@ public class UpdateEndReserve extends HttpServlet {
 			again="/reserve/reserveupdate.do";
 		}else {
 			msg="수정되지 않았습니다. 다시 실행해주세요";
-			again="/reserve/updatereserve.do";
+			again="/reserve/reserveupdate.do";
 		}
 		request.setAttribute("msg",msg);
 		request.setAttribute("again", again);
