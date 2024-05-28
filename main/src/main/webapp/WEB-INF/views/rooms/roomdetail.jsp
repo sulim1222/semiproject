@@ -4,13 +4,14 @@
 
 <%
 	Room room=(Room)request.getAttribute("room");
- // 
+
+ // Room room;
+ //room=(Room)request.getAttribute("room");
 %>
 <%@ page import="main.com.web.room.dto.Room" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script src="https://kit.fontawesome.com/2c827c8cca.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="<%= request.getContextPath()%>/css/room.css">
-
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/room.css"> 
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap"
     rel="stylesheet">
@@ -24,9 +25,12 @@
 <section class="main-section">
         <!-- 여기에 메인 컨텐츠 추가해주세용 -->
         <div class="slideshow-container">
-           <%for(String image:room.getRoomUrl().split(",")){ %>
+        
+           <%
+              for(String image : room.getRoomImages()){
+           %>
             <div class="slide fade">
-                <img src="<%=request.getContextPath() %>/images/rooms/<%=image %>" alt="각 룸이미지" width="100%" height="600px">
+                <img src="<%=request.getContextPath()%>/images/rooms/<%=image %>" alt="각 룸이미지" width="100%" height="600px">
             </div>
             <%} %>
             <div class="sharing"><h6>URL</h6>
@@ -34,15 +38,11 @@
                     <i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                 </button>
             </div>
+            
             <!-- Previous and next buttons -->
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
-
-        
-
-
-
         <div class="standard-detail">
             <div class="icon-container">
                 <i class="fa-solid fa-bed fa-4x" style="color: #c4c4c4;"></i>
