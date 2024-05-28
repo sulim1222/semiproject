@@ -95,3 +95,21 @@ h1 {
 .faq-table td {
     font-size: 14px;
 }
+
+#pageBar {
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+    gap: 8px; /* 각 페이지 번호 사이의 간격 설정 */
+}
+/* 페이지 바 내부 요소 스타일 설정 */
+#pageBar a, #pageBar strong {
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: rgb(126, 116, 116);
+}
+#pageBar strong {
+    background-color: rgb(126, 116, 116);
+    color: white;
+}

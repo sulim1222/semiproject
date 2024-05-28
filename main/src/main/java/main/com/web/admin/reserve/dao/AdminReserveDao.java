@@ -27,7 +27,7 @@ public class AdminReserveDao {
 			e.printStackTrace();
 		}
 	}
-	
+	 
 	public List<Member> selectMemberAll(Connection conn,int cPage,int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
