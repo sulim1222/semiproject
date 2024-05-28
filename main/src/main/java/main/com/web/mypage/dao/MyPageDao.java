@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Properties;
 
 import main.com.web.member.dao.MemberDao;
+import main.com.web.qna.dto.Inquiry;
 import main.com.web.reservation.dto.Reserve;
 import main.com.web.review.dto.Review;
 public class MyPageDao {
@@ -142,6 +143,40 @@ public class MyPageDao {
 		return reviews;
 	}
 	
+	public List<Inquiry> selectMyInquries(Connection conn, int loginMemberNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Inquiry> inquiries = new ArrayList<Inquiry>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectMyInquiries"));
+			pstmt.setInt(1, loginMemberNo);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				inquiries.add(MyPageDao.getInquiry(rs));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return inquiries;
+	}
+	
+	private static Inquiry getInquiry(ResultSet rs) throws SQLException {
+		return Inquiry.builder()
+				.onToOneInquiryId(rs.getInt("inquiryno"))
+				.inquiryType(rs.getString("inquirytype"))
+				.title(rs.getString("title"))
+				.content(rs.getString("content"))
+				.inquiryDate(rs.getDate("inquirydate"))
+				.MemberNo(rs.getInt("memberno"))
+				.answer(rs.getString("answer"))
+				.build();
+	}
+
 	private static Review getReview(ResultSet rs) throws SQLException{
 		return Review.builder()
 				.reviewNo(rs.getInt("reviewno"))
@@ -167,5 +202,7 @@ public class MyPageDao {
 				.reserveDate(rs.getDate("reservedate"))
 				.build();
 	}
+
+
 
 }

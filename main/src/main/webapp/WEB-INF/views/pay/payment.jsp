@@ -47,8 +47,8 @@
 						name="bed" readonly value="<%=bedType%>"> 
 					<label for="car">자차여부</label> <input type="text" id="car" 
 						name="car" readonly value="<%=car %>"> 
-					<label for="request">요청사항</label> <input type="text" id="request" 
-						name="request" readonlyvalue="<%=roomRequest %>"> 
+					<label for="request">요청사항</label> <input type="text" id="roomRequest" 
+						name="roomRequest" readonly value="<%=roomRequest %>"> 
 					<label for="price">결제금액</label> <input type="text" id="price" 
 						name="price" readonly value="<%=totalPrice %>">
 				</div>

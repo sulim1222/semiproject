@@ -4,6 +4,7 @@
 
 <%
     List<Reserve> reservations = (List<Reserve>) request.getAttribute("reservations");
+	int no = 1;
 %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -12,10 +13,11 @@
     <aside class="aside">
         <nav>
             <ul>
-                <li>MyPage</li>
-                <li><a href="<%= request.getContextPath() %>/mypage/myReservationPage">예약/결제 내역</a></li>
-                <li><a href="<%= request.getContextPath() %>/mypage/myReviewPage">별점/리뷰 관리</a></li>
-                <li><a href="<%= request.getContextPath() %>/mypage/myInfoPage">개인정보 수정</a></li>
+				<li>MyPage<hr></li>
+                <li><a href="<%=request.getContextPath() %>/mypage/myReservationPage">예약/결제 내역</a></li>
+                <li><a href="<%=request.getContextPath() %>/mypage/myReviewPage">별점/리뷰 관리</a></li>
+                <li><a href="<%=request.getContextPath() %>/mypage/myInquiryListPage">문의 내역</a></li>
+                <li><a href="<%=request.getContextPath() %>/mypage/myInfoPage">개인정보 수정</a></li>
             </ul>
         </nav>
     </aside>
@@ -34,6 +36,7 @@
             <table class="reservationInfo">
                 <thead>
                     <tr>
+                    	<th>No</th>
                         <th>예약번호</th>
                         <th>호텔명</th>
                         <th>객실타입</th>
@@ -46,11 +49,12 @@
                 <tbody>
                     <% if (reservations.isEmpty()) { %>
                     <tr>
-                        <td colspan="7">조회된 예약정보가 없습니다.</td>
+                        <td colspan="8">조회된 예약정보가 없습니다.</td>
                     </tr>
                     <% } else {
                         for (Reserve r : reservations) { %>
                     <tr>
+                    	<td><%= no %></td>
                         <td><%= r.getReserveNo() %></td>
                         <td><%= r.getLocation() %></td>
                         <td><%= r.getRoomType() %></td>
@@ -62,7 +66,8 @@
                                 onclick="openModal('<%= r.getReserveNo() %>');">취소</button>
                         </td>
                     </tr>
-                    <% }
+                    <% no++;
+                    	}
                     } %>
                 </tbody>
             </table>

@@ -8,9 +8,10 @@
     <aside class="aside">
         <nav>
             <ul>
-                <li>MyPage</li>
+				<li>MyPage<hr></li>
                 <li><a href="<%=request.getContextPath() %>/mypage/myReservationPage">예약/결제 내역</a></li>
                 <li><a href="<%=request.getContextPath() %>/mypage/myReviewPage">별점/리뷰 관리</a></li>
+                <li><a href="<%=request.getContextPath() %>/mypage/myInquiryListPage">문의 내역</a></li>
                 <li><a href="<%=request.getContextPath() %>/mypage/myInfoPage">개인정보 수정</a></li>
             </ul>
         </nav>
