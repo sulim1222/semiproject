@@ -161,6 +161,7 @@
      }
      table {
          width: 100%;
+         border-radius: 8px;
          border-collapse: collapse;
          margin-bottom: 30px;
          
