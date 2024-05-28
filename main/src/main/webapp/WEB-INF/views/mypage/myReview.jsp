@@ -3,7 +3,7 @@
 	<%@ page import="main.com.web.review.dto.*, java.util.List" %>
 	
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<link rel="stylesheet" href="../css/mypage.css">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/mypage.css">    
 <%
 	List<Review> reviews = (List<Review>)request.getAttribute("reviews");
 %>
@@ -45,8 +45,7 @@
 						<td colspan="4">조회된 리뷰가 없습니다.
 					</tr>
 					<% } else {
-						/* 영역 클릭하면 그 리뷰로 가기
-						*/
+						/* 영역 클릭하면 그 리뷰로 가기 추가*/
 						for(Review r : reviews) {%>
 					<tr>
 						<td><%=r.getReviewNo() %></td>

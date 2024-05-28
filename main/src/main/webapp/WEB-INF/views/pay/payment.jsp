@@ -11,6 +11,9 @@
     String car = request.getParameter("car");
     String bedType = request.getParameter("bedType");
     String roomRequest = request.getParameter("roomRequest");
+    if (roomRequest == null) {
+        roomRequest = "";
+    }
     String checkInDate = request.getParameter("checkindate"); // 체크인 날짜
     String checkOutDate = request.getParameter("checkoutdate"); // 체크아웃 날짜
     int totalPrice = Integer.parseInt(request.getParameter("price"));
@@ -23,32 +26,31 @@
 <!-- iamport.payment.js -->
 <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 
-<link rel="stylesheet" href="../css/pay.css">
-
+<link rel="stylesheet" href="<%=request.getContextPath() %>/css/pay.css">    
 <section>
 	<div class="container">
 		<h1>예약/결제하기</h1>
 		<form action="#" method="POST">
 			<div style="overflow: hidden;">
 				<div style="float: left; width: 30%;">
-					<label for="hotel">지역</label> <input type="text" id="hotel"
-						name="hotel" readonly value="<%=r.getLocation()%>"> <label
-						for="checkin">체크인</label> <input type="text" id="checkin"
-						name="checkin" readonly value="<%=checkInDate %>"> <label
-						for="checkout">체크아웃</label> <input type="text" id="checkout"
-						name="checkout" readonly value="<%=checkOutDate %>"> <label
-						for="room">객실 타입</label> <input type="text" id="room" name="room"
-						readonly value="<%=r.getRoomType() %>"> <label
-						for="amount">인원 수</label> <input type="text" id="amount"
-						name="amount" readonly value="<%=roomPeopleNo %>"> <label
-						for="bed">침대</label> <input type="text" id="bed" name="bed"
-						readonly value="<%=bedType%>"> <label for="car">자차
-						여부</label> <input type="text" id="car" name="car" readonly
-						value="<%=car %>"> <label for="request">요청사항</label> <input
-						type="text" id="request" name="request" readonly
-						value="<%=roomRequest %>"> <label for="price">결제
-						금액</label> <input type="text" id="price" name="price" readonly
-						value="<%=totalPrice %>">
+					<label for="hotel">지역</label> <input type="text" id="hotel" 
+						name="hotel" readonly value="<%=r.getLocation()%>"> 
+					<label for="checkin">체크인</label> <input type="text" id="checkin"
+						name="checkin" readonly value="<%=checkInDate %>"> 
+					<label for="checkout">체크아웃</label> <input type="text" id="checkout"
+						name="checkout" readonly value="<%=checkOutDate %>"> 
+					<label for="room">객실 타입</label> <input type="text" id="room" 
+						name="room" readonly value="<%=r.getRoomType() %>"> 
+					<label for="amount">인원 수</label> <input type="text" id="amount"
+						name="amount" readonly value="<%=roomPeopleNo %>"> 
+					<label for="bed">침대</label> <input type="text" id="bed" 
+						name="bed" readonly value="<%=bedType%>"> 
+					<label for="car">자차여부</label> <input type="text" id="car" 
+						name="car" readonly value="<%=car %>"> 
+					<label for="request">요청사항</label> <input type="text" id="request" 
+						name="request" readonlyvalue="<%=roomRequest %>"> 
+					<label for="price">결제금액</label> <input type="text" id="price" 
+						name="price" readonly value="<%=totalPrice %>">
 				</div>
 				<!-- 데이터 전송용 -->
 				<div>
@@ -88,6 +90,7 @@
 			</div>
 			<img src="<%=request.getContextPath()%>/images/kakaoPay.png"
 				alt="Pay Button" id="kakaoPayImg" width="150" height="100">
+			<button type="button" id="inicisPay">이니시스 결제하기</button>
 		</form>
 	</div>
 
@@ -98,18 +101,27 @@ $(document).ready(function() {
     $('#kakaoPayImg').click(function(event) {
         event.preventDefault(); 
         if ($('#agree').prop('checked')) {
-            requestPay();
+            requestPayKakao();
         } else {
             alert('개인정보 수집에 동의해야 결제가 가능합니다.');
         }
     });
 
-    function requestPay() {
+    $('#inicisPay').click(function(event) {
+        event.preventDefault();
+        if ($('#agree').prop('checked')) {
+            requestPayInicis();
+        } else {
+            alert('개인정보 수집에 동의해야 결제가 가능합니다.');
+        }
+    });
+
+    function requestPayKakao() {
         IMP.request_pay({
             pg : 'kakaopay',
             pay_method : 'card',
             merchant_uid : 'p_' + new Date().getTime(),
-            name : '주문명: 결제테스트',
+            name : 'METHOD Hotel',
             amount : '<%=totalPrice %>',
             buyer_email : '<%=m1.getMemberId()%>',
             buyer_name : '<%=m1.getMemberName()%>',
@@ -150,8 +162,54 @@ $(document).ready(function() {
             }
         });
     }
+
+    function requestPayInicis() {
+        IMP.request_pay({
+            pg : 'html5_inicis.INIpayTest',
+            pay_method : 'card',
+            merchant_uid : 'p_' + new Date().getTime(),
+            name : 'METHOD Hotel',
+            amount : '<%=totalPrice %>',
+            buyer_email : '<%=m1.getMemberId()%>',
+            buyer_name : '<%=m1.getMemberName()%>',
+            buyer_tel : '<%=m1.getMemberPhone()%>'
+        }, function(rsp) {
+            if (rsp.success) {
+                alert('결제가 완료되었습니다.');
+
+                $.ajax({
+                    url: '<%=request.getContextPath()%>/pay/savepayment',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        imp_uid: rsp.imp_uid,
+                        merchant_uid: rsp.merchant_uid,
+                        payPrice: '<%=totalPrice%>',
+                        paymentMethod: 'html5_inicis',
+                        status: 'paid',
+                        location: '<%=r.getLocation()%>',
+                        roomPeopleNo: <%= roomPeopleNo %>, 
+                        roomNo: <%= r.getRoomNo() %>,
+                        checkInDate: '<%=checkInDate %>', 
+                        checkOutDate: '<%=checkOutDate %>',
+                        bedType: '<%=bedType %>',
+                        car: '<%=car %>'
+                    }),
+                    success: function(response) {
+                        const reserveNo = response.reserveNo;
+                        window.location.href = '<%=request.getContextPath()%>/pay/paycompletePage?reserveNo=' + reserveNo;
+                    },
+                    error: function() {
+                        alert('결제 정보 저장에 실패하였습니다.');
+                    }
+                });
+
+            } else {
+                alert('개발중...');
+            }
+        });
+    }
 });
 </script>
 </section>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
-

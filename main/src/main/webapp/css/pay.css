@@ -75,7 +75,7 @@ input[type="text"], input[type="email"] {
 	display: block;
 	width: 10%;
 	padding: 10px;
-	background-color: #007bff;
+	background-color: rgb(126, 116, 116);
 	color: #fff;
 	border: none;
 	border-radius: 5px;
