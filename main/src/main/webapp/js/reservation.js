@@ -75,7 +75,7 @@ function fetchRooms(roomType, page) {
     $.ajax({
         type: "get",
         async: true,
-        url: 'http://localhost:9090/main/reservation/date',
+        url: '14.36.141.71:9994:10079/GDJ79_main_semi/reservation/date',
         dataType: "json",
         data: {
             checkindate: a[0],

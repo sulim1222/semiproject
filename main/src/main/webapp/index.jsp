@@ -25,7 +25,8 @@
      height: 1200px;
      }
      .texth2{
-     text-align: center;
+   	  margin-top : 200px;
+      text-align: center; 
      }
     </style>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
