@@ -1,5 +1,7 @@
 package main.com.web.room.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,5 +23,5 @@ public class Room {
 	private String category;
 	private String hotelService;
 	private String roomUrl;
-
+	private List<RoomImages> roomImages; // 이미지 목록을 저장할 필드 추가?
 }

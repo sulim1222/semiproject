@@ -7,7 +7,8 @@ import java.sql.Connection;
 import main.com.web.member.dao.MemberDao;
 import main.com.web.member.dto.Member;
 public class MemberService {
-
+	
+	
 	public int memberEnroll(Member member) {
 		Connection conn = getConnection();
 		int result = new MemberDao().memberEnroll(conn,member);
@@ -17,8 +18,8 @@ public class MemberService {
 
 	public Member memberLogin(String memberId, String memberPwd) {
 		Connection conn =getConnection();
-		Member m = new MemberDao().memberLogin(conn,memberId,memberPwd);
-		close(conn);
+		Member m = new MemberDao().memberLogin(conn, memberId, memberPwd);
+		 close(conn);
 		return m;
 	}
 	
