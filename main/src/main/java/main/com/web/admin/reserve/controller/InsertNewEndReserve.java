@@ -59,6 +59,9 @@ public class InsertNewEndReserve extends HttpServlet {
 		Date checkOutDate=Date.valueOf(request.getParameter("checkOutDate"));
 		Date updateReserveDate=Date.valueOf(request.getParameter("updateReserveDate"));
 		String memberAddress=request.getParameter("memberAddress");
+		if (memberAddress == null) {
+            memberAddress = "";
+        }
 		String requestMemo=request.getParameter("requestMemo");
 		
 		
@@ -85,6 +88,9 @@ public class InsertNewEndReserve extends HttpServlet {
 		if(result>0) {
 			msg="신규 등록 되었습니다.";
 			again="/reserve/reserveupdate.do";
+		}else if(result==-1){
+			msg="아이디가 중복됩니다. 다시 입력해주세요.";
+			again="/reserve/insertnewreserve.do";
 		}else {
 			msg="등록 실패하였습니다. 다시 입력해주세요";
 			again="/reserve/insertnewreserve.do";

@@ -47,25 +47,25 @@
 				<th>인원수</th>
 			    <th>
 			        <select name="roomPeopleNo">
-			        	<
 			            <option value="1" <%= (roomPeopleNo != null && roomPeopleNo == 1) ? "selected" : "" %>>1인</option>
 				        <option value="2" <%= (roomPeopleNo != null && roomPeopleNo == 2) ? "selected" : "" %>>2인</option>
 				        <option value="3" <%= (roomPeopleNo != null && roomPeopleNo == 3) ? "selected" : "" %>>3인</option>
-				        <option value="4" <%= (roomPeopleNo != null && roomPeopleNo == 4) ? "selected" : "" %>>4인</option> </select>
+				        <option value="4" <%= (roomPeopleNo != null && roomPeopleNo == 4) ? "selected" : "" %>>4인</option>
+				    </select>
 			    </th>
 			    <th>객실타입</th>
 			    <th>
 				    <select name="roomType">
-				        <option value="standard" <%= "standard".equals(roomType) ? "selected" : "" %>>standard</option>
-				        <option value="deluxe" <%= "deluxe".equals(roomType) ? "selected" : "" %>>deluxe</option>
-				        <option value="suite" <%= "suite".equals(roomType) ? "selected" : "" %>>suite</option>
+				        <option value="Standard" <%= "Standard".equals(roomType) ? "selected" : "" %>>Standard</option>
+				        <option value="Deluxe" <%= "Deluxe".equals(roomType) ? "selected" : "" %>>Deluxe</option>
+				        <option value="Suite" <%= "Suite".equals(roomType) ? "selected" : "" %>>Suite</option>
 				    </select>
 				</th>
 				<th>베드타입</th>
 				<th>
 				    <select name="bedType">
-				        <option value="트윈" <%= "트윈".equals(bedType) ? "selected" : "" %>>트윈</option>
-				        <option value="더블" <%= "더블".equals(bedType) ? "selected" : "" %>>더블</option>
+				        <option value="twin" <%= "twin".equals(bedType) ? "selected" : "" %>>twin</option>
+				        <option value="twin" <%= "double".equals(bedType) ? "selected" : "" %>>double</option>
 				    </select>
 				</th>
 			</tr>
@@ -90,7 +90,7 @@
 			<tr>
 				<th >주소</th>	
 				<td colspan="5">
-					<input type="text" placeholder="주소를 입력하세요" name="memberAddress" style="width: 95%;" value="<%=m.getMemberAddress()%>">	
+					<input type="text" name="memberAddress" style="width: 95%;" value="<%=m.getMemberAddress() != null ? m.getMemberAddress() : ""%>">	
 				</td>
 			</tr>
 			<tr>
@@ -123,11 +123,11 @@
 		});
 		
 		function getPayPrice(roomType){
-		    if (roomType === 'standard') {
+		    if (roomType === 'Standard') {
 		        return '100000';
-		    } else if (roomType === 'deluxe') {
+		    } else if (roomType === 'Deluxe') {
 		        return '200000';
-		    } else if (roomType === 'suite') {
+		    } else if (roomType === 'Suite') {
 		        return '300000';
 		    }
 		}
