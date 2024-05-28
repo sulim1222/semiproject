@@ -31,7 +31,6 @@
 
      .texth2{	
      text-align: center;
->>>>>>> branch 'dev' of https://github.com/JuniorSinior/synergy.git
      }
     </style>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

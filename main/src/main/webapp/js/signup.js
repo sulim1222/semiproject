@@ -63,7 +63,7 @@ $memberCheckNo.addEventListener("input",(e)=>{
 const duplicate =()=> $.ajax({
 	type : "post" , //ajax를  Post or Get 방식 선택 
 	async : false, // 비동기 통신의 선택(true,false)
-	url : '14.36.141.71:9994:10079/GDJ79_main_semi/member/logincheck',
+	url : 'http://14.36.141.71:9994:10079/GDJ79_main_semi/member/logincheck',
 	dataType :'json',
 	data : {
 		userId : $('#userId').val(),
@@ -90,7 +90,7 @@ const duplicate =()=> $.ajax({
 const sendMail =()=> $.ajax({
 	type : "post",
 	async : true,
-	url : '14.36.141.71:9994:10079/GDJ79_main_semi/member/sendEmail',
+	url : 'http://14.36.141.71:9994:10079/GDJ79_main_semi/member/sendEmail',
 	dataType : 'json',
 	data :{
 		userId : $('#userId').val(),
@@ -114,7 +114,7 @@ const sendMail =()=> $.ajax({
 const checkMailbtn =()=> $.ajax({
 		type : "post",
 		async : true,
-		url : "14.36.141.71:9994:10079/GDJ79_main_semi/member/mailck",
+		url : "http://14.36.141.71:9994:10079/GDJ79_main_semi/member/mailck",
 		dataType : 	"json",
 		data : {
 			checkMail : $("#checkMail").val(),
