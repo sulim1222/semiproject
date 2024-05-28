@@ -75,7 +75,7 @@ function fetchRooms(roomType, page) {
     $.ajax({
         type: "get",
         async: true,
-        url: 'http://localhost:9090/main/reservation/date',
+        url: 'http://14.36.141.71:10079/GDJ79_main_semi/reservation/date',
         dataType: "json",
         data: {
             checkindate: a[0],
@@ -211,7 +211,7 @@ function fetchRooms(roomType, page) {
                diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
                console.log("날짜"+diff);
                console.log("room가격"+room.price);
-             location.assign(`http://localhost:9090/main/pay/paymentPage?roomNo=${roomList[i].roomNo}&checkindate=${a[0]}&checkoutdate=${a[1]}&Mrequest=${request}&bedType=${bedType}&car=${car}&peopelNo=${roomPeopleNo.substring(0,roomPeopleNo.length-1)}&price=${diff*Number(room.roomPrice)}`);
+             	location.assign(`http://14.36.141.71:10079/GDJ79_main_semi/pay/paymentPage?roomNo=${roomList[i].roomNo}&checkindate=${a[0]}&checkoutdate=${a[1]}&Mrequest=${request}&bedType=${bedType}&car=${car}&peopelNo=${roomPeopleNo.substring(0,roomPeopleNo.length-1)}&price=${diff*Number(room.roomPrice)}`);
                 });
                 // detail div에 요소 추가
                 $detail.appendChild($carOption);

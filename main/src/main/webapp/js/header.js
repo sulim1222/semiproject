@@ -21,7 +21,7 @@
         const submenuLinks = parent.querySelectorAll('.submenu a');
         submenuLinks.forEach(link => {
             link.addEventListener('click', function (event) {
-                // 기본 이벤트(링크 이동) 방지
+                // 기본 이벤트(링크 이s동) 방지
                 event.preventDefault();
                 // 링크가 가리키는 페이지로 이동
                 window.location.href = this.getAttribute('href');
