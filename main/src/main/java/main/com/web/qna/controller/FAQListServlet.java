@@ -2,11 +2,13 @@ package main.com.web.qna.controller;
 
 import java.io.IOException;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import main.com.web.qna.dto.FAQ;
 import main.com.web.qna.service.FAQService;
 
@@ -19,14 +21,14 @@ public class FAQListServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int cPage = 1;
+        int cPage = 0;
         try {
             cPage = Integer.parseInt(request.getParameter("cPage"));
         } catch (NumberFormatException e) {
             cPage = 1;
         }
 
-        int numPerpage = 10;
+        int numPerpage = 0;
         try {
             numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
         } catch (NumberFormatException e) {
@@ -46,7 +48,7 @@ public class FAQListServlet extends HttpServlet {
         if (pageNo == 1) {
             pageBar.append("<span>[이전]</span>");
         } else {
-            pageBar.append("<a href='" + request.getRequestURI()
+            pageBar.append("<a href='" + request.getRequestURL()
                     + "?cPage=" + (pageNo - 1) + "&numPerpage=" + numPerpage + "'>[이전]</a>");
         }
 
