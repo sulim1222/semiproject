@@ -45,7 +45,7 @@
             <div class="menu">
                 <ul>
                     <li class="submenu-parent">
-                        <a href="jejumain.html">HOME</a>
+                        <a href="<%=request.getContextPath()%>/">HOME</a>
                     </li>
                     <li class="submenu-parent">
                         <a href="<%=request.getContextPath()%>/room/standardroom.do">ROOMS</a>
