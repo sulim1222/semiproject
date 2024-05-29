@@ -15,9 +15,16 @@ public class RoomService {
 	private RoomDao dao = new RoomDao();
 
 	// 몰라
-	public List<Room> GetAllRoomsService() {
+	public List<Room> getAllRoomsService() {
 		Connection conn = getConnection();
 		List<Room> rooms = dao.getAllRooms(conn);
+		close(conn);
+		return rooms;
+	}
+	
+	public List<Room> getAllRoomsServiceByLocation(String location){
+		Connection conn = getConnection();
+		List<Room> rooms = dao.getAllRooms(conn,location);
 		close(conn);
 		return rooms;
 	}
@@ -30,12 +37,12 @@ public class RoomService {
 		return room;
 	}
 
-	// 요한작성,,
-	public List<RoomImages> getImgs(int count) {
-		Connection conn = getConnection();
-		List<RoomImages> imges = dao.getImgs(conn, count);
-		close(conn);
-		return imges;
-	}
+	// 요한작성,, 우선잠시 잠금
+//	public List<RoomImages> getImgs(int count) {
+//		Connection conn = getConnection();
+//		List<RoomImages> imges = dao.getImgs(conn, count);
+//		close(conn);
+//		return imges;
+//	}
 
 }

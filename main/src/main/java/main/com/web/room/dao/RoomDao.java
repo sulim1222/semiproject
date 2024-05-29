@@ -39,7 +39,8 @@ public class RoomDao {
 				.roomNo(rs.getInt("ROOMNO")).roomPrice(rs.getInt("ROOMPRICE")).roomAmenity(rs.getString("ROOMAMENITY"))
 				.roomArea(rs.getFloat("ROOMAREA")).roomType(rs.getString("ROOMTYPE")).roomInfo(rs.getString("ROOMINFO"))
 				.location(rs.getString("LOCATION")).category(rs.getString("CATEGORY"))
-				.hotelService(rs.getString("HOTELSERVICE")).roomUrl(rs.getString("ROOMURL")).build(); // 빌더를 쓰고나서 값을
+				.hotelService(rs.getString("HOTELSERVICE")).roomUrl(rs.getString("ROOMURL"))
+				.roomImages(new ArrayList<>()).build(); // 빌더를 쓰고나서 값을
 		// 뱉어주기 위해 닫음
 	}
 
@@ -54,7 +55,7 @@ public class RoomDao {
 			pstmt = conn.prepareStatement(sql.getProperty("getAllRoom"));
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				rooms.add(getRoom(rs));
+				getRoomAndAttachment(rooms,rs);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,7 +65,25 @@ public class RoomDao {
 		}
 		return rooms;
 	}
-
+	public List<Room> getAllRooms(Connection conn,String location) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<Room> rooms = new ArrayList<>();
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("getAllRoomByLocation"));
+			pstmt.setString(1, location);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				getRoomAndAttachment(rooms,rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return rooms;
+	}
 	
 	// 특정조건(룸타입,지역)에 맞는 Room객체 반환
 	public Room getRoomDetail(Connection conn, String roomType, String location) {
@@ -89,7 +108,7 @@ public class RoomDao {
 		return room;
 	}
 
-	//룸타입에 따른 어메니티리스트 가져오기
+	//요고 안쓰는중! 룸타입에 따른 어메니티리스트 가져오기
 	private List<String> getRoomAmenity(String roomType) {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -164,27 +183,56 @@ public class RoomDao {
 //	    }
 	 
 	 
-	 	//gpt 작성
-	    public List<String> getRoomImages(Connection conn, int roomNo) {
-	        PreparedStatement pstmt = null;
-	        ResultSet rs = null;
-	        List<String> roomImages = new ArrayList<>();
-	        try {
-	            pstmt = conn.prepareStatement(sql.getProperty("getRoomImages"));
-	            pstmt.setInt(1, roomNo);
-	            rs = pstmt.executeQuery();
-	            while (rs.next()) {
-	                roomImages.add(rs.getString("ROOM_ATTACH_NAME"));
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } finally {
-	            close(rs);
-	            close(pstmt);
-	        }
-	        return roomImages;
+	 	//gpt 작성 우선닫아볼게
+//	    public List<String> getRoomImages(Connection conn, int roomNo) {
+//	        PreparedStatement pstmt = null;
+//	        ResultSet rs = null;
+//	        List<String> roomImages = new ArrayList<>();
+//	        try {
+//	            pstmt = conn.prepareStatement(sql.getProperty("getRoomImages"));
+//	            pstmt.setInt(1, roomNo);
+//	            rs = pstmt.executeQuery();
+//	            while (rs.next()) {
+//	                roomImages.add(rs.getString("ROOM_ATTACH_NAME"));
+//	            }
+//	        } catch (SQLException e) {
+//	            e.printStackTrace();
+//	        } finally {
+//	            close(rs);
+//	            close(pstmt);
+//	        }
+//	        return roomImages;
+//	    }
+	
+		private void getRoomAndAttachment(List<Room> rooms,ResultSet rs) throws SQLException{
+			int pk=rs.getInt("roomno");
+//			List<Board> boards=new ArrayList<>();
+			if(rooms.stream().anyMatch(r->r.getRoomNo()==pk)) {
+				rooms.stream().filter(r->r.getRoomNo()==pk)
+				.forEach(r->{
+					try {
+						if(rs.getString("room_attach_no")!=null) {
+							r.getRoomImages().add(getRoomImages(rs));
+						}
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}
+				});
+			}else {
+				Room b=getRoom(rs);
+				if(rs.getString("room_attach_no")!=null) {
+					b.getRoomImages().add(getRoomImages(rs));
+				}
+				rooms.add(b);
+			}
+		}
+	    private RoomImages getRoomImages(ResultSet rs) throws SQLException{
+	    	return RoomImages.builder()
+		    		.roomAttachNo(rs.getInt("room_attach_no"))
+		    		.roomAttachName(rs.getString("room_attach_name"))
+		    		.roomRef(rs.getInt("room_ref"))
+		    		.build();
 	    }
-
 	    private void getRoomImages(ResultSet rs, Room room) throws SQLException{
 	    	List<RoomImages> images=new ArrayList();
 	    	do {
@@ -198,13 +246,16 @@ public class RoomDao {
 	    	room.setRoomImages(images);
 	    }
 
-		public List<RoomImages> getImgs(Connection conn, int count) {
-			List<RoomImages> images =null;
-			
-			return images;
-		}
-	
 }
+	    
+	    //숨겨도 되나? 요한작성?
+//		public List<RoomImages> getImgs(Connection conn, int count) {
+//			List<RoomImages> images =null;
+//			
+//			return images;
+//		}
+	
+
 
 //    public RoomDao() {
 //    }

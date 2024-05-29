@@ -151,7 +151,7 @@
                  </div>
              </div>
              <div class="etc_img_container">
-                 <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
+                 <div class="etc_img"><img src="/images/grill.png" alt="더미1">
                  </div>
                  <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
                  </div>
