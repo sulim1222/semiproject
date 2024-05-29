@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import main.com.web.enjoy.dto.Cafe;
 import main.com.web.member.dto.Member;
 import main.com.web.mypage.service.MyPageService;
 import main.com.web.review.dto.Review;
@@ -38,7 +39,7 @@ public class MyReviewController extends HttpServlet {
 		Member loginMember = (Member) session.getAttribute("member");
 		
 		if(loginMember == null) {
-			response.sendRedirect(request.getContextPath() + "/loginPage"); // 로그인 페이지로 리디렉션
+			response.sendRedirect(request.getContextPath() + "/member/loginPage"); // 로그인 페이지로 리디렉션
 	        return;
 		}
 		
@@ -46,6 +47,11 @@ public class MyReviewController extends HttpServlet {
 		
 		List<Review> reviews = new MyPageService().selectMyReview(loginMemberNo);
 		request.setAttribute("reviews", reviews);	
+		
+		List<Cafe> cafes = new MyPageService().selectMyCafes(loginMemberNo);
+		request.setAttribute("cafes", cafes);
+		
+		
 		request.getRequestDispatcher("/WEB-INF/views/mypage/myReview.jsp").forward(request, response);
 	}
 

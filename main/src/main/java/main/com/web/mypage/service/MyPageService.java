@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import main.com.web.enjoy.dto.Cafe;
 import main.com.web.mypage.dao.MyPageDao;
 import main.com.web.qna.dto.Inquiry;
 import main.com.web.reservation.dto.Reserve;
@@ -59,6 +60,14 @@ public class MyPageService {
 		close(conn);
 		return inquiries;
 	}
+	
+	public List<Cafe> selectMyCafes(int loginMemberNo) {
+		Connection conn = getConnection();
+		List<Cafe> cafes = dao.selectMyCafes(conn, loginMemberNo);
+		if(cafes.isEmpty()) System.out.println("조회된 카페 없음");
+		close(conn);
+		return cafes;
+	}
 
 
 
@@ -89,6 +98,49 @@ public class MyPageService {
 	    }
 	    return isCancelled;
 	}
+
+	public boolean deleteInquiry(int inquiryNo) {
+		Connection conn = getConnection();
+		boolean isDeleted = false;
+		int result = dao.deleteInquiry(conn, inquiryNo);
+		if(result > 0) {
+			isDeleted = true;
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return isDeleted;
+	}
+
+
+	public Inquiry selectInquiryByNo(int inquiryNo) {
+		Connection conn = getConnection();
+		Inquiry i = dao.selectInquiryByNo(conn, inquiryNo);
+		close(conn);
+		return i;
+	}
+
+
+	public List<Reserve> searchByReserveNo(String keyword) {
+		Connection conn = getConnection();
+		List<Reserve> result = dao.searchByReserveNo(conn, keyword);
+		close(conn);
+		return result;
+	}
+
+
+	public List<Reserve> searchByLocation(String keyword) {
+		Connection conn = getConnection();
+		List<Reserve> result = dao.searchByLocation(conn, keyword);
+		close(conn);
+		return result;
+	}
+
+
+	
+
+
 
 
 

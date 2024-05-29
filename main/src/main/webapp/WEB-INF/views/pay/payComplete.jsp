@@ -10,8 +10,10 @@
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/payComplete.css">    
 <section class="reservation-complete">
-    <h2><%=r.getMemberName() %>님 감사합니다.<br>고객님의 예약이 완료되었습니다.</h2>
-
+    <div class="reservation-header">
+        <i class="fas fa-check-circle"></i>
+        <h2><%=r.getMemberName() %>님 감사합니다.<br>고객님의 예약이 완료되었습니다.</h2>
+    </div>
     <div class="reservation-container">
         <h2>예약번호</h2>
         <hr><br>
@@ -24,7 +26,7 @@
         <hr><br>
         <p class="info">객실 타입: <%=r.getRoomType() %></p>
         <p class="info">체크인: <%=r.getCheckInDate() %></p>
-        <p class="info">체크아웃: <%=r.getCheckOutDate() %></p>
+		<p class="info">체크아웃: <%=r.getCheckOutDate() %></p>
         <p class="info">투숙 인원: <%=r.getRoomPeopleNo() %></p><br>
         <h2>결제정보</h2>
         <hr><br>

@@ -21,4 +21,5 @@ public class Inquiry {
     private Time inquiryTime; 
     private int MemberNo;
     private String answer;
+    private String isAnswered;
 }

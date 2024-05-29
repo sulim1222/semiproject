@@ -6,20 +6,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import main.com.web.member.dto.Member;
 import main.com.web.mypage.service.MyPageService;
+import main.com.web.qna.dto.Inquiry;
 
 /**
- * Servlet implementation class CancelReservation
+ * Servlet implementation class DeleteInquiry
  */
-@WebServlet("/mypage/cancelreservation")
-public class CancelReservationServlet extends HttpServlet {
+@WebServlet("/mypage/deleteInquiry")
+public class DeleteInquiry extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CancelReservationServlet() {
+	public DeleteInquiry() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -30,24 +33,25 @@ public class CancelReservationServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String reserveNo = request.getParameter("reserveNo");
+		HttpSession session = request.getSession();
+		Member loginMember = (Member) session.getAttribute("member");
 
-		if (reserveNo == null || reserveNo.isEmpty()) {
-			response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid reserve number.");
+		if (loginMember == null) {
+			response.sendRedirect(request.getContextPath() + "/member/loginPage"); // 로그인 페이지로 리디렉션
 			return;
 		}
+		Inquiry i = (Inquiry) request.getAttribute("myInquiry");
+		int inquiryNo = i.getOnToOneInquiryId();
+		boolean isDeleted = new MyPageService().deleteInquiry(inquiryNo);
 
 		try {
-			boolean isCancelled = new MyPageService().cancelReservation(reserveNo);
-			if (isCancelled) {
+			if (isDeleted) {
 				response.setStatus(HttpServletResponse.SC_OK);
-				response.getWriter().write("예약이 정상적으로 취소되었습니다.");
-			} else {
-				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "예약 취소에 실패하였습니다.");
+				response.getWriter().write("문의내역이 정상적으로 삭제되었습니다.");
 			}
 		} catch (Exception e) {
 			response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-					"예약 취소에 실패하였습니다." );
+					"문의내역 삭제를 실패하였습니다." + e.getMessage());
 		}
 	}
 

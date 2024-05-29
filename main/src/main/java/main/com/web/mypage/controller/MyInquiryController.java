@@ -37,7 +37,7 @@ public class MyInquiryController extends HttpServlet {
 		Member loginMember = (Member) session.getAttribute("member");
 		
 		if(loginMember == null) {
-			response.sendRedirect(request.getContextPath() + "/loginPage"); // 로그인 페이지로 리디렉션
+			response.sendRedirect(request.getContextPath() + "/member/loginPage"); // 로그인 페이지로 리디렉션
 	        return;
 		}
 		int loginMemberNo = loginMember.getMemberNo();
