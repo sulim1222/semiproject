@@ -1,0 +1,87 @@
+.room-container{
+    display: flex;
+}
+
+
+.roomtable-container {
+    flex-direction: row;
+    border: 1px solid red;
+    width: 80%;
+    padding: 30px;
+    margin: 10px;
+
+
+}
+
+.room-table{
+    border: 1px solid coral;
+    width: 100%;
+
+}
+
+.room-table td{
+    border: 1px solid blue;
+    height: 300px;
+}
+
+
+.room-admin-standard{
+    display: flex;
+}
+
+.room-admin-standard, .room-admin-deluxe, .room-admin-suite{
+    border: 1px solid magenta;
+    height: 300px;
+    margin: 10px;
+}
+
+
+.standard-admin-container, .deluxe-admin-container, .suite-admin-container{
+    width: 33.3%;
+    border: 1px solid magenta;
+    padding: 1%;
+}
+
+
+.deluxe-admin-container{
+    display: flex;
+}
+
+.left-admin-section{
+    width: 60%;
+    /* padding-top: 250px;
+    padding-left: 20px; */
+}
+
+
+.right-admin-section{
+	display:flex;
+	justify-content:center;
+	width:10%;
+}
+.right-admin-section>button{
+	background-color:lightyellow;
+	font-size:18px;
+	font-weight:bolder;
+}
+
+.room-admin-container{
+    border: 1px solid magenta;
+    height: 50px;
+    display: flex;
+    margin: 10px;
+}
+
+.room-admin-title{
+    border: 1px solid magenta;
+    height: 50px;
+    width: 33.3%;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    
+    
+}
