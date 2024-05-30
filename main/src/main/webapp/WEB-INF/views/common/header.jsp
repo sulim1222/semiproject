@@ -77,10 +77,10 @@
                         </div>
                     </li>
                     <li class="submenu-parent">
-                        <a href="<%=request.getContextPath()%>/qna/FAQALL">Q&A</a>
+                        <a href="<%=request.getContextPath()%>/qna/FAQAll">Q&A</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="<%=request.getContextPath()%>/qna/FAQALL">FAQ</a></li>
+                                <li><a href="<%=request.getContextPath()%>/qna/FAQAll">FAQ</a></li>
                                 <li><a href="<%=request.getContextPath()%>/qna/submitInquiry">Q&A</a></li>
                             </ul>
                         </div>
