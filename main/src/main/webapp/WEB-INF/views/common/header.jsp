@@ -62,7 +62,7 @@
                         <div class="submenu">
                             <ul>
                                 <li><a href="<%=request.getContextPath()%>/revation">reservation</a></li>
-                                <li><a href="#">caution</a></li>
+                       
                             </ul>
                         </div>
                     </li>

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /* Reset CSS */
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,19 +11,8 @@ body {
     background-color: #ffffff;
 }
 
-.background {
-    background-color: #f0f0f2;
-    background-size: cover;
-    background-position: center;
-    height: 40vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: background-image 1s ease-in-out;
-}
 
-/* top(로그인 부분) */
+top(로그인 부분)
 .top-section {
     display: flex;
     justify-content: space-between;
@@ -106,7 +95,7 @@ body {
     text-decoration: none;
 }
 
-/* 서브메뉴 */
+서브메뉴
 .submenu {
     display: none;
     position: absolute;
@@ -142,10 +131,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* 중앙 정렬 */
+    justify-content: center; 중앙 정렬
 }
 
-/*footer*/
+footer
 .footer {
     background-color: #0E0D0D;
     color: white;
@@ -172,7 +161,7 @@ body {
     letter-spacing: 2px;
     margin-top: 10px;
 }
-
+ */
 
 /* 작성폼 */
 .inquiry-container {

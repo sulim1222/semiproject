@@ -213,9 +213,9 @@
 	$div.style.marginTop = "63px";
 	$div.style.display = "grid";
 	$div.style.placeItems = "center"; // 수평 및 수직 중앙 정렬
-	$div.style.fontSize = "45px";
+	$div.style.fontSize = "60px";
 	$div.style.fontWeight = "bolder";
-
+	$div.style.color="white";
 </script>
 	
    </section>

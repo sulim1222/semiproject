@@ -47,7 +47,7 @@
 
 				<div class="input-group">
                     <label for="phone">휴대전화</label>
-                    <input type="number" name="phone" id="phone" maxlength="3" placeholder="010">
+                  <input type="number" name="phone" id="phone" maxlength="3" value="010" min="0">
                     <span>-</span>
                     <input type="number" name="phone1" id="phone1" maxlength="4">
                     <span>-</span>
