@@ -4,13 +4,14 @@
 
 <%
 	Room room=(Room)request.getAttribute("room");
- // 
+//Room 테이블이자 객체를 쓰기위해 선언 근데 여기 키값은 왜 또 room인걸까,,?그냥 임의로 지정한값?아닌데 키는 중요한값이자나
+		
 %>
-<%@ page import="main.com.web.room.dto.Room" %>
+<%@ page import="main.com.web.room.dto.*" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <script src="https://kit.fontawesome.com/2c827c8cca.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="<%= request.getContextPath()%>/css/room.css">
 
+<link rel="stylesheet" href="<%= request.getContextPath()%>/css/room.css"> 
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Serif+KR&display=swap"
     rel="stylesheet">
@@ -24,9 +25,12 @@
 <section class="main-section">
         <!-- 여기에 메인 컨텐츠 추가해주세용 -->
         <div class="slideshow-container">
-           <%for(String image:room.getRoomUrl().split(",")){ %>
+        
+           <%
+              for(RoomImages image : room.getRoomImages()){
+           %>
             <div class="slide fade">
-                <img src="<%=request.getContextPath() %>/images/rooms/<%=image %>" alt="각 룸이미지" width="100%" height="600px">
+                <img src="<%=request.getContextPath()%>/images/rooms/<%=image.getRoomAttachName() %>" alt="각 룸이미지" width="100%" height="600px">
             </div>
             <%} %>
             <div class="sharing"><h6>URL</h6>
@@ -34,15 +38,11 @@
                     <i class="fa-regular fa-copy" style="color: #ffffff;"></i>
                 </button>
             </div>
+            
             <!-- Previous and next buttons -->
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
         </div>
-
-        
-
-
-
         <div class="standard-detail">
             <div class="icon-container">
                 <i class="fa-solid fa-bed fa-4x" style="color: #c4c4c4;"></i>
@@ -67,6 +67,7 @@
 		
 		
  <div class="content-container">
+ 	
      <div class="section_container">
            <div class="left_section">
         <div class="standard-info">
@@ -152,37 +153,37 @@
                  </div>
              </div>
              <div class="etc_img_container">
-                 <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
+                 <div class="etc_img"><img src="<%=request.getContextPath()%>/images/rooms/picnic.png" alt="더미1">
                  </div>
-                 <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
+                 <div class="etc_img"><img src="<%=request.getContextPath()%>/images/rooms/lounge.jpeg" alt="더미1">
                  </div>
-                 <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
+                 <div class="etc_img"><img src="<%=request.getContextPath()%>/images/rooms/cake.png" alt="더미1">
                  </div>
-                 <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
+                 <div class="etc_img"><img src="<%=request.getContextPath()%>/images/rooms/grill.png" alt="더미1">
                  </div>
-                 <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
+                 <div class="etc_img"><img src="<%=request.getContextPath()%>/images/rooms/pool.jpg" alt="더미1">
                  </div>
              </div>
              <div class="etc_info_container">
                  <div class="etc_info">
-                     <div><b>즐길거리 제목</b></div>
-                     <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
+                     <div><b>우리, 피크닉 할까요?</b></div>
+                     <div class="img_content">귀여운 토끼 친구들이 뛰어노는<br>메서드 잔디정원 위<br>매트를 펼쳐보아요.</div>
                  </div>
                  <div class="etc_info">
-                     <div><b>즐길거리 제목</b></div>
-                     <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
+                     <div><b>컴포터블 스페이스</b></div>
+                     <div class="img_content">아늑한 분위기의 라운지에서<br>훌륭한 조식과 티,<br>칵테일을 즐겨보세요.</div>
                  </div>
                  <div class="etc_info">
-                     <div><b>즐길거리 제목</b></div>
-                     <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
+                     <div><b>메서드 라운지</b></div>
+                     <div class="img_content">이상한 나라의 메서드♥<br>새콤달콤한 케이크와 함께라면<br>즐거운 일이 가득할거에요.</div>
                  </div>
                  <div class="etc_info">
-                     <div><b>즐길거리 제목</b></div>
-                     <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
+                     <div><b>Grill & Bar</b></div>
+                     <div class="img_content">여럿이 함께 즐길 수 있는<br>스페셜한 요리와<br>잊지못할 추억을 만들어보세요!</div>
                  </div>
                  <div class="etc_info">
-                     <div><b>즐길거리 제목</b></div>
-                     <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
+                     <div><b>국내 최고의 인피니티풀</b></div>
+                     <div class="img_content">푸른 바다를 향해<br>끊임없이 이어지는 듯한<br>광활한 오션을 만끽하세요.</div>
                  </div>
              </div>
              <div class="upbtn-container">

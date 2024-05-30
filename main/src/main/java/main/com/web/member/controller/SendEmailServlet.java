@@ -76,7 +76,7 @@ public class SendEmailServlet extends HttpServlet {
             Message mimeMessage = new MimeMessage(mailSession);
             mimeMessage.setFrom(new InternetAddress(MAIL_ID));
             mimeMessage.setRecipients(Message.RecipientType.TO, receiverList);
-            // 메일 제목
+            // 메일 제목-
             mimeMessage.setSubject("Method Hotel 인증코드"); 
             // 메일 본문
             String code1="";

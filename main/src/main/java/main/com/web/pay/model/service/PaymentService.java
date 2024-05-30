@@ -114,6 +114,14 @@ public class PaymentService {
 		        return reserveNo;
 		    }
 
+		public Member selectKakaoMember(String email) {
+			Connection conn = getConnection();
+			Member result = paymentDao.selectKakaoMember(conn, email);
+			close(conn);
+			return result;
+		}
+
+	
 
 
 

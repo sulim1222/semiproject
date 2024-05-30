@@ -210,8 +210,9 @@ function fetchRooms(roomType, page) {
                let diff = Math.abs(date1.getTime() - date0.getTime());
                diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
                console.log("날짜"+diff);
-               console.log("room가격"+room.price);
-             location.assign(`http://localhost:9090/main/pay/paymentPage?roomNo=${roomList[i].roomNo}&checkindate=${a[0]}&checkoutdate=${a[1]}&Mrequest=${request}&bedType=${bedType}&car=${car}&peopelNo=${roomPeopleNo.substring(0,roomPeopleNo.length-1)}&price=${diff*Number(room.roomPrice)}`);
+               console.log("room가격"+room.roomPrice);
+               console.log("요청사항" + request);
+             location.assign(`http://localhost:9090/main/pay/paymentPage?roomNo=${roomList[i].roomNo}&checkindate=${a[0]}&checkoutdate=${a[1]}&roomRequest=${request}&bedType=${bedType}&car=${car}&peopelNo=${roomPeopleNo.substring(0,roomPeopleNo.length-1)}&price=${diff*Number(room.roomPrice)}`);
                 });
                 // detail div에 요소 추가
                 $detail.appendChild($carOption);

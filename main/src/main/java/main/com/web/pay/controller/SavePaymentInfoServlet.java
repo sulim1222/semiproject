@@ -36,8 +36,11 @@ public class SavePaymentInfoServlet extends HttpServlet {
         JSONObject json = new JSONObject(sb.toString());
 
         // 세션에서 회원 정보 가져오기
+        Member m = new Member();
         HttpSession session = request.getSession();
-        Member m = (Member) session.getAttribute("member");
+        m = (Member) session.getAttribute("reserveMember");
+        System.out.println(m);
+        
 
         // JSON에서 필요한 데이터 추출
         String impUid = json.getString("imp_uid");
@@ -76,4 +79,5 @@ public class SavePaymentInfoServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "결제 정보 저장에 실패하였습니다.");
         }
     }
+
 }

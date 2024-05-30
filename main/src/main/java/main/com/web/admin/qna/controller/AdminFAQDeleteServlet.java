@@ -1,8 +1,6 @@
 package main.com.web.admin.qna.controller;
 
 import java.io.IOException;
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,17 +13,21 @@ import main.com.web.admin.qna.service.AdminFAQService;
 public class AdminFAQDeleteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+    private AdminFAQService service = new AdminFAQService();
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int faqAllNo = Integer.parseInt(request.getParameter("faqAllNo"));
 
-        AdminFAQService service = new AdminFAQService();
         int result = service.deleteFAQ(faqAllNo);
 
         if (result > 0) {
             response.sendRedirect(request.getContextPath() + "/admin/FAQList");
         } else {
-            request.setAttribute("message", "FAQ 삭제에 실패했습니다.");
-            request.getRequestDispatcher("/WEB-INF/views/common/error.jsp").forward(request, response);
+            response.sendRedirect(request.getHeader("Referer"));
         }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
     }
 }

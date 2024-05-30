@@ -20,4 +20,6 @@ public class Inquiry {
     private Date inquiryDate; 
     private Time inquiryTime; 
     private int MemberNo;
+    private String answer;
+    private String isAnswered;
 }

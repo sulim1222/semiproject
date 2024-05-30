@@ -2,8 +2,6 @@ package main.com.web.admin.qna.dao;
 
 import static main.com.web.admin.reserve.common.JDBCTemplate.close;
 
-
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
@@ -71,7 +69,7 @@ public class AdminFAQDao {
         return result;
     }
 
-    public List<FAQ> searchPAY(Connection conn, String faqCategory, String Title, String location, int cPage, int numPerPage) {
+    public List<FAQ> searchPAY(Connection conn, String faqCategory, String title, String location, int cPage, int numPerPage) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<FAQ> faqs = new ArrayList<>();
@@ -79,8 +77,8 @@ public class AdminFAQDao {
             String query = sql.getProperty("searchPAY");
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, faqCategory);
-            pstmt.setString(2, "%" + Title + "%");
-            pstmt.setString(3, "%" + Title + "%");
+            pstmt.setString(2, title);
+            pstmt.setString(3, title);
             pstmt.setString(4, location);
             pstmt.setInt(5, (cPage - 1) * numPerPage + 1);
             pstmt.setInt(6, cPage * numPerPage);
@@ -97,7 +95,7 @@ public class AdminFAQDao {
         return faqs;
     }
 
-    public int searchPAYCount(Connection conn, String faqCategory, String Title) {
+    public int searchPAYCount(Connection conn, String faqCategory, String title) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         int result = 0;
@@ -105,8 +103,8 @@ public class AdminFAQDao {
             String query = sql.getProperty("searchPAYCount");
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, faqCategory);
-            pstmt.setString(2, "%" + Title + "%");
-            pstmt.setString(3, "%" + Title + "%");
+            pstmt.setString(2, title);
+            pstmt.setString(3, title);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 result = rs.getInt(1);
@@ -120,7 +118,7 @@ public class AdminFAQDao {
         return result;
     }
 
-    public List<FAQ> searchETC(Connection conn, String faqCategory, String Title, String location, int cPage, int numPerPage) {
+    public List<FAQ> searchETC(Connection conn, String faqCategory, String title, String location, int cPage, int numPerPage) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<FAQ> faqs = new ArrayList<>();
@@ -128,8 +126,8 @@ public class AdminFAQDao {
             String query = sql.getProperty("searchETC");
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, faqCategory);
-            pstmt.setString(2, "%" + Title + "%");
-            pstmt.setString(3, "%" + Title + "%");
+            pstmt.setString(2, title);
+            pstmt.setString(3, title);
             pstmt.setString(4, location);
             pstmt.setInt(5, (cPage - 1) * numPerPage + 1);
             pstmt.setInt(6, cPage * numPerPage);
@@ -146,7 +144,7 @@ public class AdminFAQDao {
         return faqs;
     }
 
-    public int searchETCCount(Connection conn, String faqCategory, String Title) {
+    public int searchETCCount(Connection conn, String faqCategory, String title) {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         int result = 0;
@@ -154,8 +152,8 @@ public class AdminFAQDao {
             String query = sql.getProperty("searchETCCount");
             pstmt = conn.prepareStatement(query);
             pstmt.setString(1, faqCategory);
-            pstmt.setString(2, "%" + Title + "%");
-            pstmt.setString(3, "%" + Title + "%");
+            pstmt.setString(2, title);
+            pstmt.setString(3, title);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 result = rs.getInt(1);
@@ -199,7 +197,8 @@ public class AdminFAQDao {
             pstmt.setString(2, faq.getFaqTitle());
             pstmt.setString(3, faq.getFaqContent());
             pstmt.setDate(4, faq.getFaqDate());
-            pstmt.setInt(5, faq.getFaqAllNo());
+            pstmt.setString(5, faq.getLocation());
+            pstmt.setInt(6, faq.getFaqAllNo()); 
             result = pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -208,6 +207,7 @@ public class AdminFAQDao {
         }
         return result;
     }
+
 
     public int deleteFAQ(Connection conn, int faqAllNo) {
         PreparedStatement pstmt = null;
@@ -223,6 +223,27 @@ public class AdminFAQDao {
             close(pstmt);
         }
         return result;
+    }
+
+    public FAQ getFAQById(Connection conn, int faqAllNo) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        FAQ faq = null;
+        try {
+            String query = sql.getProperty("getFAQById");
+            pstmt = conn.prepareStatement(query);
+            pstmt.setInt(1, faqAllNo);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                faq = getFAQ(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return faq;
     }
 
     private static FAQ getFAQ(ResultSet rs) throws SQLException {

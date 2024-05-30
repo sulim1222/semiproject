@@ -24,7 +24,12 @@
      background-image:url('./imges/2.jpg');
      height: 1200px;
      }
+
      .texth2{
+   	  margin-top : 200px;
+      text-align: center; 
+
+     .texth2{	
      text-align: center;
      }
     </style>

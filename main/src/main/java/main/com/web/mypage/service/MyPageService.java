@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import main.com.web.enjoy.dto.Cafe;
 import main.com.web.mypage.dao.MyPageDao;
+import main.com.web.qna.dto.Inquiry;
 import main.com.web.reservation.dto.Reserve;
 import main.com.web.review.dto.Review;
 
@@ -34,9 +36,9 @@ public class MyPageService {
 	}
 
 
-	public List<Reserve> selectMyReservation(String id) {
+	public List<Reserve> selectMyReservation(String id, int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Reserve> reservations = dao.selectMyReservation(conn, id);
+		List<Reserve> reservations = dao.selectMyReservation(conn, cPage, numPerPage, id);
 		if(reservations.isEmpty()) System.out.println("조회된 예약 없음");
 		close(conn);
 		return reservations;
@@ -50,6 +52,23 @@ public class MyPageService {
 		close(conn);
 		return reviews;
 	}
+	
+	public List<Inquiry> selectMyInquiries(int loginMemberNo) {
+		Connection conn = getConnection();
+		List<Inquiry> inquiries = dao.selectMyInquries(conn, loginMemberNo);
+		if(inquiries.isEmpty()) System.out.println("조회된 문의 없음");
+		close(conn);
+		return inquiries;
+	}
+	
+	public List<Cafe> selectMyCafes(int loginMemberNo) {
+		Connection conn = getConnection();
+		List<Cafe> cafes = dao.selectMyCafes(conn, loginMemberNo);
+		if(cafes.isEmpty()) System.out.println("조회된 카페 없음");
+		close(conn);
+		return cafes;
+	}
+
 
 
 	public boolean cancelReservation(String reserveNo) {
@@ -57,11 +76,6 @@ public class MyPageService {
 	    boolean isCancelled = false;
 	    try {
 	        conn.setAutoCommit(false); // 자동 커밋 해제
-
-	        
-	        
-	        
-	        
 	        // 예약 정보 삭제
 	        int result1 = dao.cancelReservationInfo(conn, reserveNo);
 	        // 결제 정보 삭제
@@ -84,6 +98,59 @@ public class MyPageService {
 	    }
 	    return isCancelled;
 	}
+
+	public boolean deleteInquiry(int inquiryNo) {
+		Connection conn = getConnection();
+		boolean isDeleted = false;
+		int result = dao.deleteInquiry(conn, inquiryNo);
+		if(result > 0) {
+			isDeleted = true;
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		return isDeleted;
+	}
+
+
+	public Inquiry selectInquiryByNo(int inquiryNo) {
+		Connection conn = getConnection();
+		Inquiry i = dao.selectInquiryByNo(conn, inquiryNo);
+		close(conn);
+		return i;
+	}
+
+
+	public List<Reserve> searchByReserveNo(String keyword) {
+		Connection conn = getConnection();
+		List<Reserve> result = dao.searchByReserveNo(conn, keyword);
+		close(conn);
+		return result;
+	}
+
+
+	public List<Reserve> searchByLocation(String keyword) {
+		Connection conn = getConnection();
+		List<Reserve> result = dao.searchByLocation(conn, keyword);
+		close(conn);
+		return result;
+	}
+
+
+	public int selectReservationCount() {
+		Connection conn = getConnection();
+		int result = dao.selectReservationCount(conn);
+		close(conn);
+		return result;
+	}
+
+
+	
+
+
+
+
 
 
 
