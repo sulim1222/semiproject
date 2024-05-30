@@ -17,8 +17,8 @@
     <div class="main-content">
         <div class="sub-content">
             <ul>
-                <li><a href="#" onclick="alert('아직 개발 중입니다.'); return false;">Tour</a></li>
-                <li><a href="#" onclick="alert('아직 개발 중입니다.'); return false;">Food</a></li>
+                <li><a href="<%=request.getContextPath()%>/enjoy/tour">Tour</a></li>
+                <li><a href="<%=request.getContextPath()%>/enjoy/food">Food</a></li>
                 <li><a href="<%=request.getContextPath()%>/enjoy/cafe">Cafe</a></li>
             </ul>
         </div>

@@ -1,15 +1,15 @@
-<!-- cafe.jsp -->
+<!-- tour.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
-<%@ page import="main.com.web.enjoy.dto.Cafe" %>
+<%@ page import="main.com.web.enjoy.dto.Tour" %>
 <%@ page import="main.com.web.member.dto.Member" %>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/cafe.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/tour.css">
 
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 
 <%
-    List<Cafe> cafes = (List<Cafe>) request.getAttribute("cafes");
+    List<Tour> tours = (List<Tour>) request.getAttribute("tours");
     Member loggedInUser = (Member) session.getAttribute("member"); // 사용자 정보 가져오기
 %>
 
@@ -17,27 +17,27 @@
     <div class="main-content">
         <div class="sub-content">
             <ul>
-                <li><a href="#" onclick="alert('아직 개발 중입니다.'); return false;">Tour</a></li>
-                <li><a href="#" onclick="alert('아직 개발 중입니다.'); return false;">Food</a></li>
+                <li><a href="<%=request.getContextPath()%>/enjoy/tour">Tour</a></li>
+                <li><a href="<%=request.getContextPath()%>/enjoy/food">Food</a></li>
                 <li><a href="<%=request.getContextPath()%>/enjoy/cafe">Cafe</a></li>
             </ul>
         </div>
-        <!-- 카페 리스트 -->
-        <div class="cafe-list">
-            <% if (cafes != null && !cafes.isEmpty()) {
-                for (int i = 0; i < cafes.size(); i++) {
-                    Cafe cafe = cafes.get(i);
+        <!-- 관광지 리스트 -->
+        <div class="tour-list">
+            <% if (tours != null && !tours.isEmpty()) {
+                for (int i = 0; i < tours.size(); i++) {
+                    Tour tour = tours.get(i);
                     if (i % 2 == 0 && i != 0) { %>
-                        </div><div class="cafe-list">
+                        </div><div class="tour-list">
                     <% }
                     %>
-                    <div class="cafe" data-id="<%= cafe.getCafeNo() %>" data-name="<%= cafe.getCafeName() %>" 
-                         data-details="<%= cafe.getCafeAddress() %>" data-phone="<%= cafe.getCafePhone() %>" 
-                         data-time="<%= cafe.getCafeTime() %>">
-                        <img class="cafe-img" src="<%= cafe.getCafeImg() %>" alt="<%= cafe.getCafeName() %>">
-                        <h2><%= cafe.getCafeName() %></h2>
+                    <div class="tour" data-id="<%= tour.getTourNo() %>" data-name="<%= tour.getTourName() %>" 
+                         data-details="<%= tour.getTourAddress() %>" data-phone="<%= tour.getTourPhone() %>" 
+                         data-time="<%= tour.getTourTime() %>">
+                        <img class="tour-img" src="<%= tour.getTourImg() %>" alt="<%= tour.getTourName() %>">
+                        <h2><%= tour.getTourName() %></h2>
                         <div class="average-rating">
-                            <% int fullStars = (int) cafe.getAverageRating(); %>
+                            <% int fullStars = (int) tour.getAverageRating(); %>
                             <% for (int j = 0; j < fullStars; j++) { %>
                                 <span class="star">&#9733;</span>
                             <% } %>
@@ -45,12 +45,12 @@
                                 <span class="star">&#9734;</span>
                             <% } %>
                             <!-- 평균별 -->
-                            ( <%= String.format("%.1f", cafe.getAverageRating()) %>)
+                            ( <%= String.format("%.1f", tour.getAverageRating()) %>)
                         </div>
                     </div>
                 <% }
             } else { %>
-                <p>카페 목록이 없습니다.</p>
+                <p>관광지 목록이 없습니다.</p>
             <% } %> 
         </div>
         <div id="pageBar" class="page-bar">
@@ -77,7 +77,7 @@
             <div id="reviews"></div>
             <form id="reviewForm" action="<%=request.getContextPath()%>/enjoy/submitReview" method="post">
                 <input type="hidden" name="categoryId" id="categoryId">
-                <input type="hidden" name="category" value="CAFE">
+                <input type="hidden" name="category" value="TOUR">
                 <input type="hidden" name="memberId" value="<%= loggedInUser != null ? loggedInUser.getMemberNo() : "" %>">
                 <div class="popup-rating">
                     <span class="star" data-value="1">&#9734;</span>
@@ -94,5 +94,5 @@
     </div>
 </div>
 
-<script src="<%=request.getContextPath()%>/js/cafe.js"></script>
+<script src="<%=request.getContextPath()%>/js/tour.js"></script>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

@@ -64,15 +64,26 @@ public class CafeServlet extends HttpServlet {
                    .append("?cPage=").append(pageNo - 1).append("&numPerpage=").append(numPerpage).append("'>[이전]</a>");
         }
 
+//        while (!(pageNo > pageEnd || pageNo > totalPage)) {
+//            if (pageNo == cPage) {
+//                pageBar.append("<span>").append(pageNo).append("</span>");
+//            } else {
+//                pageBar.append("<a href='").append(request.getRequestURI())
+//                       .append("?cPage=").append(pageNo).append("&numPerpage=").append(numPerpage).append("'>").append(pageNo).append("</a>");
+//            }
+//            pageNo++;
+//        }
         while (!(pageNo > pageEnd || pageNo > totalPage)) {
             if (pageNo == cPage) {
-                pageBar.append("<span>").append(pageNo).append("</span>");
+                pageBar.append("<strong>").append(pageNo).append("</strong>");
             } else {
                 pageBar.append("<a href='").append(request.getRequestURI())
                        .append("?cPage=").append(pageNo).append("&numPerpage=").append(numPerpage).append("'>").append(pageNo).append("</a>");
             }
             pageNo++;
         }
+
+        
 
         if (pageNo > totalPage) {
             pageBar.append("<span>[다음]</span>");
