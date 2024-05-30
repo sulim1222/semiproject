@@ -29,46 +29,46 @@ public class AdminFAQService {
         return result;
     }
 
-    public List<FAQ> searchPAY(String faqCategory, String Title, String location, int cPage, int numPerPage) {
+    public List<FAQ> searchPAY(String faqCategory, String title, String location, int cPage, int numPerPage) {
         Connection conn = getConnection();
-        List<FAQ> result = dao.searchPAY(conn, faqCategory, Title, location, cPage, numPerPage);
+        List<FAQ> result = dao.searchPAY(conn, faqCategory, title, location, cPage, numPerPage);
         close(conn);
         return result;
     }
 
-    public int searchPAYCount(String type, String keyword) {
+    public int searchPAYCount(String faqCategory, String title) {
         Connection conn = getConnection();
-        int count = dao.searchPAYCount(conn, type, keyword);
+        int count = dao.searchPAYCount(conn, faqCategory, title);
         close(conn);
         return count;
     }
 
-    public List<FAQ> searchETC(String faqCategory, String Title, String location, int cPage, int numPerPage) {
+    public List<FAQ> searchETC(String faqCategory, String title, String location, int cPage, int numPerPage) {
         Connection conn = getConnection();
-        List<FAQ> result = dao.searchETC(conn, faqCategory, Title, location, cPage, numPerPage);
+        List<FAQ> result = dao.searchETC(conn, faqCategory, title, location, cPage, numPerPage);
         close(conn);
         return result;
     }
 
-    public int searchETCCount(String type, String keyword) {
+    public int searchETCCount(String faqCategory, String title) {
         Connection conn = getConnection();
-        int count = dao.searchETCCount(conn, type, keyword);
+        int count = dao.searchETCCount(conn, faqCategory, title);
         close(conn);
         return count;
     }
 
-    public int insertNewFAQ(FAQ f) {
+    public int insertNewFAQ(FAQ faq) {
         Connection conn = getConnection();
-        int result = dao.insertNewFAQ(conn, f);
+        int result = dao.insertNewFAQ(conn, faq);
         if (result > 0) commit(conn);
         else rollback(conn);
         close(conn);
         return result;
     }
 
-    public int updateFAQ(FAQ f) {
+    public int updateFAQ(FAQ faq) {
         Connection conn = getConnection();
-        int result = dao.updateFAQ(conn, f);
+        int result = dao.updateFAQ(conn, faq);
         if (result > 0) commit(conn);
         else rollback(conn);
         close(conn);
@@ -82,5 +82,12 @@ public class AdminFAQService {
         else rollback(conn);
         close(conn);
         return result;
+    }
+
+    public FAQ getFAQById(int faqAllNo) {
+        Connection conn = getConnection();
+        FAQ faq = dao.getFAQById(conn, faqAllNo);
+        close(conn);
+        return faq;
     }
 }
