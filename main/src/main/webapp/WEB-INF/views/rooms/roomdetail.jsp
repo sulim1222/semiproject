@@ -153,37 +153,37 @@
                  </div>
              </div>
              <div class="etc_img_container">
-                 <div class="etc_img"><img src="/images/grill.png" alt="더미1">
+                 <div class="etc_img"><img src="<%=request.getContextPath()%>/images/rooms/picnic.png" alt="더미1">
                  </div>
-                 <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
+                 <div class="etc_img"><img src="<%=request.getContextPath()%>/images/rooms/lounge.jpeg" alt="더미1">
                  </div>
-                 <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
+                 <div class="etc_img"><img src="<%=request.getContextPath()%>/images/rooms/cake.png" alt="더미1">
                  </div>
-                 <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
+                 <div class="etc_img"><img src="<%=request.getContextPath()%>/images/rooms/grill.png" alt="더미1">
                  </div>
-                 <div class="etc_img"><img src="/images/그릴앤바.png" alt="더미1">
+                 <div class="etc_img"><img src="<%=request.getContextPath()%>/images/rooms/pool.jpg" alt="더미1">
                  </div>
              </div>
              <div class="etc_info_container">
                  <div class="etc_info">
-                     <div><b>즐길거리 제목</b></div>
-                     <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
+                     <div><b>우리, 피크닉 할까요?</b></div>
+                     <div class="img_content">귀여운 토끼 친구들이 뛰어노는<br>메서드 잔디정원 위<br>매트를 펼쳐보아요.</div>
                  </div>
                  <div class="etc_info">
-                     <div><b>즐길거리 제목</b></div>
-                     <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
+                     <div><b>컴포터블 스페이스</b></div>
+                     <div class="img_content">아늑한 분위기의 라운지에서<br>훌륭한 조식과 티,<br>칵테일을 즐겨보세요.</div>
                  </div>
                  <div class="etc_info">
-                     <div><b>즐길거리 제목</b></div>
-                     <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
+                     <div><b>메서드 라운지</b></div>
+                     <div class="img_content">이상한 나라의 메서드♥<br>새콤달콤한 케이크와 함께라면<br>즐거운 일이 가득할거에요.</div>
                  </div>
                  <div class="etc_info">
-                     <div><b>즐길거리 제목</b></div>
-                     <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
+                     <div><b>Grill & Bar</b></div>
+                     <div class="img_content">여럿이 함께 즐길 수 있는<br>스페셜한 요리와<br>잊지못할 추억을 만들어보세요!</div>
                  </div>
                  <div class="etc_info">
                      <div><b>국내 최고의 인피니티풀</b></div>
-                     <div class="img_content">푸른 바다로 끊임없이<br>이어지는 듯한 풀<br>큰 규모를 자랑합니다.</div>
+                     <div class="img_content">푸른 바다를 향해<br>끊임없이 이어지는 듯한<br>광활한 오션을 만끽하세요.</div>
                  </div>
              </div>
              <div class="upbtn-container">

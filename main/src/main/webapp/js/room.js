@@ -59,10 +59,6 @@ showSlides(slideIndex); // 초기 슬라이드 표시
         ;
 
 
-const button = document.querySelector("#room_reservation_btn");
-button.addEventListener("click", function() {
-    window.location.href = "main/revation";
-});
 
 
 function goUp(){
@@ -73,19 +69,16 @@ function goUp(){
     });
 }
 
+ // 버튼 요소를 가져옵니다.
+    var reservationBtn = document.getElementById("room_reservation_btn");
+
+    // 버튼을 클릭했을 때 이벤트 처리기를 추가합니다.
+    reservationBtn.addEventListener("click", function() {
+        // 페이지를 이동할 URL을 지정합니다.
+        var destinationURL = "http://localhost:9090/main/revation";
+
+        // 현재 창에서 지정된 URL로 이동합니다.
+        window.location.href = destinationURL;
+    });
 
 
-// window.addEventListener('scroll', function() {
-//     var scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-//     var title = document.querySelector('.main-title');
-    
-//     if (scrollPosition > 300) { // 원하는 위치(예: 300px)로 설정
-//         title.style.position = 'fixed';
-//         title.style.top = '10px'; // 원하는 고정 위치로 설정
-//         title.style.left = '50%'; // 가운데 정렬을 위해 50%로 설정
-//         title.style.transform = 'translateX(-50%)'; // 가운데 정렬을 위해 사용
-//         title.style.zIndex = '999'; // 다른 요소 위에 표시되도록 설정
-//     } else {
-//         title.style.position = 'static'; // 일정 스크롤 위치 이하에 있을 때는 원래 위치로 돌아감
-//     }
-// });
