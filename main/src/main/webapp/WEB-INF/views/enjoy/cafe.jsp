@@ -1,5 +1,4 @@
 <!-- cafe.jsp -->
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="main.com.web.enjoy.dto.Cafe" %>
@@ -35,7 +34,7 @@
                     <div class="cafe" data-id="<%= cafe.getCafeNo() %>" data-name="<%= cafe.getCafeName() %>" 
                          data-details="<%= cafe.getCafeAddress() %>" data-phone="<%= cafe.getCafePhone() %>" 
                          data-time="<%= cafe.getCafeTime() %>">
-                        <img style="width:200px; height:200px;" src="<%= cafe.getCafeImg() %>" alt="<%= cafe.getCafeName() %>">
+                        <img class="cafe-img" src="<%= cafe.getCafeImg() %>" alt="<%= cafe.getCafeName() %>">
                         <h2><%= cafe.getCafeName() %></h2>
                         <div class="average-rating">
                             <% int fullStars = (int) cafe.getAverageRating(); %>
@@ -53,10 +52,10 @@
             } else { %>
                 <p>카페 목록이 없습니다.</p>
             <% } %> 
-        </div> 
-    </div>
-    <div id="pageBar" class="page-bar">
-        <%=request.getAttribute("pageBar") %>
+        </div>
+        <div id="pageBar" class="page-bar">
+            <%=request.getAttribute("pageBar") %>
+        </div>
     </div>
 </section>
 
@@ -67,27 +66,31 @@
 <div id="popup" class="popup" style="display:none;">
     <div class="popup-content"> 
         <span class="close">&times;</span>
-        <img id="popup-image" class="popup-image" src="" alt="Popup Image">
-        <h2 id="popup-title"></h2>
-        <p id="popup-details"></p>
-        <p id="popup-phone"></p>
-        <p id="popup-time"></p>
-        <form id="reviewForm" action="<%=request.getContextPath()%>/enjoy/submitReview" method="post">
-            <input type="hidden" name="categoryId" id="categoryId">
-            <input type="hidden" name="category" value="CAFE">
-            <input type="hidden" name="memberId" value="<%= loggedInUser != null ? loggedInUser.getMemberNo() : "" %>">
-            <div class="popup-rating">
-                <span class="star" data-value="1">&#9734;</span>
-                <span class="star" data-value="2">&#9734;</span>
-                <span class="star" data-value="3">&#9734;</span>
-                <span class="star" data-value="4">&#9734;</span>
-                <span class="star" data-value="5">&#9734;</span>
-            </div>
-            <textarea id="review" name="text" placeholder="별점과 리뷰를 작성해주세요"></textarea>
-            <input type="hidden" id="rating" name="rating" value="0">
-            <button type="submit">저장</button>
-        </form>
-        <div id="reviews"></div>
+        <div class="popup-left">
+            <img id="popup-image" class="popup-image" src="" alt="Popup Image">
+        </div>
+        <div class="popup-right">
+            <h2 id="popup-title"></h2>
+            <p id="popup-details"></p>
+            <p id="popup-phone"></p>
+            <p id="popup-time"></p>
+            <div id="reviews"></div>
+            <form id="reviewForm" action="<%=request.getContextPath()%>/enjoy/submitReview" method="post">
+                <input type="hidden" name="categoryId" id="categoryId">
+                <input type="hidden" name="category" value="CAFE">
+                <input type="hidden" name="memberId" value="<%= loggedInUser != null ? loggedInUser.getMemberNo() : "" %>">
+                <div class="popup-rating">
+                    <span class="star" data-value="1">&#9734;</span>
+                    <span class="star" data-value="2">&#9734;</span>
+                    <span class="star" data-value="3">&#9734;</span>
+                    <span class="star" data-value="4">&#9734;</span>
+                    <span class="star" data-value="5">&#9734;</span>
+                </div>
+                <textarea id="review" name="text" placeholder="별점과 리뷰를 작성해주세요"></textarea>
+                <input type="hidden" id="rating" name="rating" value="0">
+                <button type="submit">저장</button>
+            </form>
+        </div>
     </div>
 </div>
 
