@@ -48,7 +48,7 @@
                         <a href="<%=request.getContextPath()%>/">HOME</a>
                     </li>
                     <li class="submenu-parent">
-                        <a href="<%=request.getContextPath()%>/room/standardroom.do">ROOMS</a>
+                        <a href="<%=request.getContextPath()%>/room/standardroom.do?room=Standard&location=제주">ROOMS</a>
                         <div class="submenu">
                             <ul>
                                 <li><a href="<%=request.getContextPath() %>/room/standardroom.do?room=Standard&location=제주">Standard</a></li>
