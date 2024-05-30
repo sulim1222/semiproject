@@ -1,12 +1,12 @@
 package main.com.web.enjoy.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import main.com.web.review.dto.Review;
 
 @Data
 @AllArgsConstructor
@@ -25,5 +25,7 @@ public class Cafe {
 	private String category;
 	private String cafeContent;
 	//
+	private double averageRating; 
+	 private List<Review> reviews;
 
 }

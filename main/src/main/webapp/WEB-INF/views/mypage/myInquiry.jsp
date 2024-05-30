@@ -52,10 +52,10 @@
 						<td><a href="<%= request.getContextPath() %>/mypage/myInquiryDetail?inquiry=<%= i.getOnToOneInquiryId() %>"><%= i.getTitle() %></a></td>
 						<td><%= i.getInquiryDate() %></td>
 						<td>
-							<% if ("Y".equals(i.getIsAnswered())) { %>
-							<b>답변완료</b> 
-							<% } else { %> 
-							답변준비중 
+							<% if (i.getAnswer() != null) { %>
+							<span class="answer-completed">답변완료</span>
+							<% } else { %>
+							<span class="answer-pending">답변준비중</span>
 							<% } %>
 						</td>
 					</tr>

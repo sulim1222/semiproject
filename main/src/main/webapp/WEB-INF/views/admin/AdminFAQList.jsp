@@ -15,62 +15,67 @@
     <aside class="aside">
         <nav>
             <ul>
-                <li>Reservations</li>
-                <li><a href="<%=request.getContextPath()%>/admin/FAQList?location=서울">Seoul</a></li>
-                <li><a href="<%=request.getContextPath()%>/admin/FAQList?location=부산">Busan</a></li>
-                <li><a href="<%=request.getContextPath()%>/admin/FAQList?location=제주">Jeju</a></li>
+                <li>Q&A</li>
+                <li><a href="<%=request.getContextPath()%>/admin/FAQList">FAQ</a></li>
+                <li><a href="#" onclick="alert('아직 개발 중입니다.'); return false;">Q&A</a></li>
             </ul>
         </nav>
     </aside>
 
     <main class="main">
-        <span id="title">
-        <% if ("서울".equals(location)) { %>
-            Seoul FAQ List
-        <% } else if ("부산".equals(location)) { %>
-            Busan FAQ List
-        <% } else if ("제주".equals(location)) { %>
-            Jeju FAQ List
-        <% } else { %>
-            FAQ List
-        <% } %>
-        </span>
+        <div id="titleContainer">
+            <div id="title">
+                <% if ("서울".equals(location)) { %>
+                    Seoul FAQ List
+                <% } else if ("부산".equals(location)) { %>
+                    Busan FAQ List
+                <% } else if ("제주".equals(location)) { %>
+                    Jeju FAQ List
+                <% } else { %>
+                    FAQ List
+                <% } %>
+            </div>
+            <div id="btn5">
+                <button class="btn5" onclick="location.assign('<%=request.getContextPath()%>/')">
+                    <img src="<%=request.getContextPath()%>/imges/admin/homepage.jpg" >
+                </button>
+            </div>
+        </div>
         <div class="separator"></div>
 
         <div class="container1">
-            <select id="searchCategory" style="width: 100px; height: 25px;">
-               <option value="ALL" <%=searchCategory != null && searchCategory.equals("All") ? "selected" : ""%>>ALL</option>
+            <select id="searchCategory">
+                <option value="ALL" <%=searchCategory != null && searchCategory.equals("ALL") ? "selected" : ""%>>ALL</option>
                 <option value="PAY" <%=searchCategory != null && searchCategory.equals("PAY") ? "selected" : ""%>>PAY</option>
                 <option value="ETC" <%=searchCategory != null && searchCategory.equals("ETC") ? "selected" : ""%>>ETC</option>
             </select>
 
-            <div id="searchALL" style="display:none;">
-                <form action="<%=request.getContextPath()%>/admin/FAQList">
+            <div id="search-ALL" style="display:none;">
+                <form id="searchForm" action="<%=request.getContextPath()%>/admin/FAQList">
                     <input type="hidden" name="searchCategory" value="ALL">
-                    <input type="text" name="searchKeyword" size="25" placeholder="단어를 입력하세요" value="<%= searchKeyword != null ? searchKeyword : "" %>">
-                    <button type="submit">검색</button>
+                    <input type="text" name="searchKeyword" placeholder="단어를 입력하세요" value="<%= searchKeyword != null ? searchKeyword : "" %>">
+                    <button type="submit" class="btn2">검색</button>
                 </form>
             </div>
 
             <div id="search-PAY" style="display:none;">
-                <form action="<%=request.getContextPath()%>/admin/FAQList">
+                <form id="searchForm" action="<%=request.getContextPath()%>/admin/FAQList">
                     <input type="hidden" name="searchCategory" value="PAY">
-                    <input type="text" name="searchKeyword" size="25" placeholder="단어를 입력하세요" value="<%= searchKeyword != null ? searchKeyword : "" %>">
-                    <button type="submit">검색</button>
+                    <input type="text" name="searchKeyword" placeholder="단어를 입력하세요" value="<%= searchKeyword != null ? searchKeyword : "" %>">
+                    <button type="submit" class="btn2">검색</button>
                 </form>
             </div>
 
             <div id="search-ETC" style="display:none;">
-                <form action="<%=request.getContextPath()%>/admin/FAQList">
+                <form id="searchForm" action="<%=request.getContextPath()%>/admin/FAQList">
                     <input type="hidden" name="searchCategory" value="ETC">
-                    <input type="text" name="searchKeyword" size="25" placeholder="단어를 입력하세요" value="<%= searchKeyword != null ? searchKeyword : "" %>">
-                    <button type="submit">검색</button>
+                    <input type="text" name="searchKeyword" placeholder="단어를 입력하세요" value="<%= searchKeyword != null ? searchKeyword : "" %>">
+                    <button type="submit" class="btn2">검색</button>
                 </form>
             </div>
 
-            <button type="button" id="insertNewFAQ" onclick="location.href='<%=request.getContextPath()%>/admin/AdminFAQInsert.jsp'">신규등록</button>
+            <button type="button" class="btn1" id="insertNewFAQ" onclick="location.assign('<%=request.getContextPath()%>/admin/insertFAQ')">신규등록</button>
         </div>
-        
 
         <div class="container2">
             <table class="FAQList">
@@ -96,8 +101,11 @@
                             <td><%= f.getFaqContent() %></td>
                             <td><%= f.getFaqDate() %></td>
                             <td>
-                                <button type="button" onclick="location.href='<%=request.getContextPath()%>/admin/AdminFAQUpdate.jsp?faqAllNo=<%= f.getFaqAllNo() %>'">수정</button>
-                                <button type="button" onclick="deleteFAQ(<%= f.getFaqAllNo() %>)">삭제</button>
+                                <input type="button" class="btn" value="수정" onclick="location.assign('<%=request.getContextPath()%>/admin/updateFAQ?faqAllNo=<%= f.getFaqAllNo() %>')">
+                                <form action="<%=request.getContextPath()%>/admin/deleteFAQ" method="post" style="display:inline;">
+                                    <input type="hidden" name="faqAllNo" value="<%= f.getFaqAllNo() %>">
+                                    <input type="submit" class="btn" value="삭제" onclick="return confirm('정말 삭제하시겠습니까?')">
+                                </form>
                             </td>
                         </tr>
                     <% }} else { %>
@@ -122,7 +130,7 @@
     $("#searchCategory").change(function(e) {
         const type = e.target.value;
         $(e.target).parent().find("div[id^='search-']").hide();
-        $("#search" + type).show();
+        $("#search-" + type).show();
     });
 
     const checkOnlyOne = (checkbox) => {
@@ -143,7 +151,6 @@
 
 <style>
     #pageBar {
-        border: 1px solid black;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -163,104 +170,175 @@
     .aside {
         margin-top: 10px;
         width: 15%;
-        background-color: lightgray;
-        padding: 10px;
-        justify-content: center;
-        height: 700px;
-        border: 1px solid black;
+        background-color: #f7f7f7;
+        padding: 20px;
+        height: 800px;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        overflow-y: auto;
     }
 
     .aside ul {
         list-style-type: none;
         padding: 0;
         text-align: center;
-        margin-top: 50px;
+        margin-top: 30px;
     }
 
     .aside ul li:nth-child(1) {
-        border-bottom: 2px solid black;
-        padding-bottom: 30px;
+        margin-bottom: 40px;
+        font-size: 30px;
+        transition: all 0.3s ease-in-out;
+        font-weight: bold;
     }
 
     .aside ul li {
-        margin-bottom: 30px;
-        font-weight: bold;
-        font-size: 20px;
-        letter-spacing: 0.1em;
+        margin-bottom: 20px;
+        font-size: 22px;
+        transition: all 0.3s ease-in-out;
     }
 
     .aside ul li a {
-        letter-spacing: 0.1em;
         text-decoration: none;
-        color: black;
+        color: #333;
         display: block;
-        line-height: 1.5;
+        padding: 10px 0;
+        border-radius: 5px;
     }
 
     .aside ul li a:hover {
-        transition: 1s;
-        transform: scale(1.2);
+        background-color: #e0e0e0;
+        color: #222;
     }
 
     .main {
         width: 80%;
         margin-left: 3%;
         margin-top: 10px;
-        display: flex;
-        justify-content: space-between;
+        display: block;
         padding: 10px;
         border: 1px solid black;
-        background-color: lightgray;
-        display: block;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     #title {
-        font-size: 30px;
-        letter-spacing: 0.05em;
-        font-weight: bolder;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
     }
 
     .separator {
-        border-bottom: 2px solid black;
+        height: 1px;
+        background-color: #ccc;
+        margin-bottom: 20px;
     }
 
     .container1 {
         display: flex;
         align-items: center;
-        padding-top: 10px;
+        padding-top: 20px;
     }
 
-    .searchInput {
-        width: 200px;
-        padding: 5px;
+    .container1 select,
+    .container1 input[type="text"],
+    .container1 .btn2 {
+        margin-right: 10px;
+    }
+
+    .container1 select,
+    .container1 input[type="text"] {
+        width: 100px;
+        height: 25px;
     }
 
     .container2 {
         margin-bottom: 30px;
+        margin-top: 40px;
     }
 
     .FAQList {
         width: 100%;
         border-collapse: collapse;
+        border: 1px solid #ddd;
     }
 
     .FAQList th,
     .FAQList td {
-        border: 1px solid black;
-        padding: 10px;
+        padding: 13px;
         text-align: center;
     }
 
-    #inputnewFAQ {
+    .FAQList th {
+        background-color: #f2f2f2;
+        color: #333;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .FAQList td {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .FAQList tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    .FAQList tbody tr:hover {
+        background-color: #f2f2f2;
+    }
+
+    .btn {
+        padding: 3px 5px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn1 {
         margin-left: auto;
+        width: 100px;
+        height: 34px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
     }
 
-    div[id^='search-'] {
-        display: none;
+    .btn2 {
+        width: 60px;
+        height: 30px;
+        background-color: black;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer.
     }
 
-    .container1 input {
-        height: 20px;
+    .btn5 {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .btn5 img {
+        display: block;
+        width: 30px;
+        height: 30px;
+        object-fit: cover.
+    }
+
+    #titleContainer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center.
     }
 </style>
 

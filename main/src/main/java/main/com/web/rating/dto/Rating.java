@@ -1,9 +1,10 @@
-package main.com.web.enjoy.dto;
+package main.com.web.rating.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Data
 @AllArgsConstructor
@@ -13,6 +14,9 @@ import lombok.NoArgsConstructor;
 public class Rating {
 	private int ratingNo;
 	private int ratingScore;
-	private int MemberNo;
+	private int memberNo;
 	private String category;
+	private int entityId;
+	
+
 }

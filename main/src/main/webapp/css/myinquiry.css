@@ -134,3 +134,20 @@ tr:nth-child(odd) {
 tr:nth-child(even) {
     background-color: #fff;
 }
+
+.answer-completed {
+    color: white;
+    background-color: blue;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.answer-pending {
+    color: black;
+    background-color: lightgray;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+

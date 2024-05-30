@@ -10,7 +10,7 @@ import main.com.web.enjoy.dao.CafeDao;
 import main.com.web.enjoy.dto.Cafe;
 
 public class CafeService {
-	private CafeDao dao = new CafeDao();
+    private CafeDao dao = new CafeDao();
 
     public List<Cafe> selectAllCafes(int cPage, int numPerpage) {
         Connection conn = getConnection();
@@ -26,5 +26,3 @@ public class CafeService {
         return result;
     }
 }
-
-

@@ -54,7 +54,7 @@ Member loginMember = (Member) session.getAttribute("member");
 						<th>답변</th>
 						<td>
 							<%
-							if (i.getAnswer() != null && i.getIsAnswered().equals("Y")) {
+							if (i.getAnswer() != null) {
 							%> <%=i.getAnswer()%>
 							<%
 							} else {

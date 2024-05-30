@@ -1,7 +1,6 @@
 package main.com.web.admin.qna.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +12,17 @@ import main.com.web.qna.dto.FAQ;
 
 @WebServlet("/admin/updateFAQ")
 public class AdminFAQUpdateServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    private AdminFAQService service = new AdminFAQService();
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int faqAllNo = Integer.parseInt(request.getParameter("faqAllNo"));
+        FAQ faq = service.getFAQById(faqAllNo);
+        request.setAttribute("faq", faq);
+        request.getRequestDispatcher("/WEB-INF/views/admin/AdminFAQUpdate.jsp").forward(request, response);
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
@@ -24,13 +34,11 @@ public class AdminFAQUpdateServlet extends HttpServlet {
 
         FAQ faq = new FAQ(faqAllNo, faqCategory, faqTitle, faqContent, new java.sql.Date(System.currentTimeMillis()), location);
 
-        AdminFAQService service = new AdminFAQService();
         int result = service.updateFAQ(faq);
         if (result > 0) {
             response.sendRedirect(request.getContextPath() + "/admin/FAQList");
         } else {
-            request.setAttribute("errorMessage", "FAQ 수정 실패");
-            request.getRequestDispatcher("/WEB-INF/views/error.jsp").forward(request, response);
+            response.sendRedirect(request.getHeader("Referer"));
         }
     }
 }
