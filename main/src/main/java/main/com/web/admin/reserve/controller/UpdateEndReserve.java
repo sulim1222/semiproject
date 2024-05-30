@@ -86,7 +86,10 @@ public class UpdateEndReserve extends HttpServlet {
 		String msg="", again="";
 		if(result>0) {
 			msg="수정이 완료 되었습니다.";
-			again="/reserve/reserveupdate.do";
+			again="/reserve/updatereserve.do?reserveNo=" +reserveNo;
+		}else if(result==0){
+			msg="수정된 내용이 없습니다.";
+			again="/reserve/updatereserve.do?reserveNo=" +reserveNo;
 		}else {
 			msg="수정되지 않았습니다. 다시 실행해주세요";
 			again="/reserve/reserveupdate.do";

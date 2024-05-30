@@ -15,4 +15,5 @@ public class Sales {
 
 	private String month;
 	private int revenue;
+	private String location;
 }

@@ -1,7 +1,6 @@
 package main.com.web.admin.sales.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -18,7 +17,7 @@ import main.com.web.admin.sales.service.AdminSalesService;
 /**
  * Servlet implementation class SalesByMonth
  */
-@WebServlet("/sales/salesupdate.do")
+@WebServlet("/sales/salesbymonth.do")
 public class SalesByMonth extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -37,11 +36,12 @@ public class SalesByMonth extends HttpServlet {
 		
 		
         List<Sales> sales = new AdminSalesService().salesByMonth();
-
-        // 조회된 데이터를 request에 설정
+        
+        String json = new Gson().toJson(sales);
+        
+        request.setAttribute("type", "month");
         request.setAttribute("sales", sales);
-
-        // JSP 페이지로 포워딩
+        response.getWriter().write(json);
         request.getRequestDispatcher("/WEB-INF/views/sales/sales.jsp").forward(request, response);
     }
 	
