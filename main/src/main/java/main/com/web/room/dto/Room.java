@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Room {
 
+	//DB ROOM테이블(+ROOM ATTACH)을 자바 Room객체로 저장하기 위해 만든 틀?
+	
 	private int roomNo;
 	private int roomPrice;
 	private String roomAmenity;

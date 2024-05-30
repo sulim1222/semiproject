@@ -4,7 +4,8 @@
 
 <%
 	Room room=(Room)request.getAttribute("room");
-
+//Room 테이블이자 객체를 쓰기위해 선언 근데 여기 키값은 왜 또 room인걸까,,?그냥 임의로 지정한값?아닌데 키는 중요한값이자나
+		
 %>
 <%@ page import="main.com.web.room.dto.*" %>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -66,6 +67,7 @@
 		
 		
  <div class="content-container">
+ 	
      <div class="section_container">
            <div class="left_section">
         <div class="standard-info">
@@ -180,8 +182,8 @@
                      <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
                  </div>
                  <div class="etc_info">
-                     <div><b>즐길거리 제목</b></div>
-                     <div class="img_content">내용 1라인<br>2라인<br>3라인</div>
+                     <div><b>국내 최고의 인피니티풀</b></div>
+                     <div class="img_content">푸른 바다로 끊임없이<br>이어지는 듯한 풀<br>큰 규모를 자랑합니다.</div>
                  </div>
              </div>
              <div class="upbtn-container">
