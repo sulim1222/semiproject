@@ -32,14 +32,14 @@
 	<main class="main">
 		<span id="title">예약/결제 내역</span>
 		<div class="separator"></div>
-		<div class="container1">
+		<!-- <div class="container1">
 			<select style="width: 100px; height: 28px;">
 				<option value="reserveNo">예약번호</option>
 				<option value="memberName">호텔명</option>
 			</select> <input type="text" placeholder="Search..." class="searchInput"
 				id="searchInput">
 			<button type="button" class="search" onclick="searchReservation()">검색</button>
-		</div>
+		</div> -->
 		<div class="container2">
 			<table class="reservationInfo">
 				<thead>
@@ -79,6 +79,10 @@
                     } %>
 				</tbody>
 			</table>
+
+<%-- 			<div id="pageBar">
+				<%=request.getAttribute("pageBar")%>
+			</div> --%>
 			<!-- 맨 위로 버튼 -->
 			<!--             <div class="btn_gotop" style="display:none">
 				<a href="javascript:void(0);">TOP</a>

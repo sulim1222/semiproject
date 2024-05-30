@@ -70,7 +70,7 @@
         var phone1 = document.forms["myForm"]["phone1"].value;
         var phone2 = document.forms["myForm"]["phone2"].value;
 
-        if (name == "" || password == "" || passwordCheck == "" || phone == "" || phone1 == "" || phone2 == "") {
+        if (name == "" || password == "" || passwordCheck == "" || phone1 == "" || phone2 == "") {
             alert("모든 입력 필드를 작성해주세요.");
             if (name == "") {
                 document.forms["myForm"]["name"].focus();

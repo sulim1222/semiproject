@@ -114,7 +114,7 @@ public class MyPageDao {
 		return result;
 	}
 
-	public List<Reserve> selectMyReservation(Connection conn, String id) {
+	public List<Reserve> selectMyReservation(Connection conn, int cPage, int numPerPage, String id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		List<Reserve> reservations = new ArrayList<Reserve>();
@@ -122,6 +122,8 @@ public class MyPageDao {
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectMyReservation"));
 			pstmt.setString(1, id);
+//			pstmt.setInt(2, (cPage - 1) * numPerPage + 1);
+//			pstmt.setInt(3, cPage * numPerPage);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -290,6 +292,25 @@ public class MyPageDao {
 			while (rs.next()) {
 				result.add(MyPageDao.getReservation(rs));
 			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int selectReservationCount(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql.getProperty("selectReservationCount"));
+			rs = pstmt.executeQuery();
+			rs.next(); 
+			result = rs.getInt(1);
+			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

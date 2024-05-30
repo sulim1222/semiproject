@@ -109,7 +109,7 @@
 
 .input-group input[type="number"] {
     flex: 1;
-    max-width: 60px; 
+    max-width: 55px; 
     padding: 8px; 
     border: 1px solid #ccc;
     border-radius: 5px;

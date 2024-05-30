@@ -36,9 +36,9 @@ public class MyPageService {
 	}
 
 
-	public List<Reserve> selectMyReservation(String id) {
+	public List<Reserve> selectMyReservation(String id, int cPage, int numPerPage) {
 		Connection conn = getConnection();
-		List<Reserve> reservations = dao.selectMyReservation(conn, id);
+		List<Reserve> reservations = dao.selectMyReservation(conn, cPage, numPerPage, id);
 		if(reservations.isEmpty()) System.out.println("조회된 예약 없음");
 		close(conn);
 		return reservations;
@@ -133,6 +133,14 @@ public class MyPageService {
 	public List<Reserve> searchByLocation(String keyword) {
 		Connection conn = getConnection();
 		List<Reserve> result = dao.searchByLocation(conn, keyword);
+		close(conn);
+		return result;
+	}
+
+
+	public int selectReservationCount() {
+		Connection conn = getConnection();
+		int result = dao.selectReservationCount(conn);
 		close(conn);
 		return result;
 	}
