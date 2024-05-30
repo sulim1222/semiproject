@@ -70,8 +70,8 @@
                         <a href="<%=request.getContextPath()%>/enjoy/cafe"">ENJOY</a>
                         <div class="submenu">
                             <ul>
-                                <li><a href="<%=request.getContextPath()%>/enjoy/Tour">Tour</a></li>
-                                <li><a href="<%=request.getContextPath()%>/enjoy/Restaurant">Restaurant</a></li>
+                                <li><a href="<%=request.getContextPath()%>/enjoy/tour">Tour</a></li>
+                                <li><a href="<%=request.getContextPath()%>/enjoy/food">Restaurant</a></li>
                                 <li><a href="<%=request.getContextPath()%>/enjoy/cafe">Cafe</a></li>
                             </ul>
                         </div>
