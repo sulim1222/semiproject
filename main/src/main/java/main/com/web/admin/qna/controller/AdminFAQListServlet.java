@@ -1,7 +1,6 @@
 package main.com.web.admin.qna.controller;
 
 import java.io.IOException;
-
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,18 +20,19 @@ public class AdminFAQListServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int cPage = 0;
+        int cPage = 1;
+        int numPerpage = 10;
+
         try {
             cPage = Integer.parseInt(request.getParameter("cPage"));
         } catch (NumberFormatException e) {
-            cPage = 1;
+            // Use default value
         }
 
-        int numPerpage = 0;
         try {
             numPerpage = Integer.parseInt(request.getParameter("numPerpage"));
         } catch (NumberFormatException e) {
-            numPerpage = 10;
+            // Use default value
         }
 
         String searchCategory = request.getParameter("searchCategory");
@@ -59,20 +59,20 @@ public class AdminFAQListServlet extends HttpServlet {
         int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
         int pageEnd = pageNo + pageBarSize - 1;
         
-        StringBuffer pageBar = new StringBuffer();
+        StringBuilder pageBar = new StringBuilder();
         if (pageNo == 1) {
             pageBar.append("<span>[이전]</span>");
         } else {
-            pageBar.append("<a href='" + request.getRequestURI()
-                    + "?cPage=" + (pageNo - 1) + "'>[이전]</a>");
+            pageBar.append("<a href='").append(request.getRequestURI())
+                   .append("?cPage=").append(pageNo - 1).append("'>[이전]</a>");
         }
 
         while (!(pageNo > pageEnd || pageNo > totalPage)) {
             if (pageNo == cPage) {
-                pageBar.append("<span>" + pageNo + "</span>");
+                pageBar.append("<span>").append(pageNo).append("</span>");
             } else {
-                pageBar.append("<a href='" + request.getRequestURI()
-                        + "?cPage=" + (pageNo) + "'>" + pageNo + "</a>");
+                pageBar.append("<a href='").append(request.getRequestURI())
+                       .append("?cPage=").append(pageNo).append("'>").append(pageNo).append("</a>");
             }
             pageNo++;
         }
@@ -80,8 +80,8 @@ public class AdminFAQListServlet extends HttpServlet {
         if (pageNo > totalPage) {
             pageBar.append("<span>[다음]</span>");
         } else {
-            pageBar.append("<a href='" + request.getRequestURI()
-                    + "?cPage=" + (pageNo) + "'>[다음]</a>");
+            pageBar.append("<a href='").append(request.getRequestURI())
+                   .append("?cPage=").append(pageNo).append("'>[다음]</a>");
         }
 
         request.setAttribute("pageBar", pageBar.toString());

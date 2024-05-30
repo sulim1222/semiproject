@@ -15,6 +15,8 @@ public class Review {
 	private String reviewContent;
 	private int memberNo;
 	private String category;
-	private int entityId;;
+	//
+	private int entityId; 
+	private int ratingScore;
 
 }

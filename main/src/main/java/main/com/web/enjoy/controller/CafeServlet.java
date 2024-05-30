@@ -9,14 +9,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import main.com.web.enjoy.dto.Cafe;
 import main.com.web.enjoy.service.CafeService;
+import main.com.web.rating.dto.Rating;
+import main.com.web.rating.service.RatingService;
+import main.com.web.review.dto.Review;
+import main.com.web.review.service.ReviewService;
 
 @WebServlet("/enjoy/cafe")
 public class CafeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-
-    public CafeServlet() {
-        super();
-    }
+    private CafeService cafeService = new CafeService();
+    private RatingService ratingService = new RatingService();
+    private ReviewService reviewService = new ReviewService();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int cPage = 1;
@@ -33,8 +36,19 @@ public class CafeServlet extends HttpServlet {
             numPerpage = 6;
         }
 
-        CafeService cafeService = new CafeService();
         List<Cafe> cafes = cafeService.selectAllCafes(cPage, numPerpage);
+        List<Rating> ratings = ratingService.getAllRatings();
+
+        // 평균 별점 계산
+        for (Cafe cafe : cafes) {
+            double averageRating = ratings.stream()
+                .filter(r -> r.getEntityId() == cafe.getCafeNo() && "CAFE".equals(r.getCategory()))
+                .mapToInt(Rating::getRatingScore)
+                .average()
+                .orElse(0.0);
+            cafe.setAverageRating(averageRating);
+        }
+
         int totalData = cafeService.selectCafeAllCount();
         int totalPage = (int) Math.ceil((double) totalData / numPerpage);
         int pageBarSize = 5;
