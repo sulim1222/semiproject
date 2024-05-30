@@ -61,6 +61,9 @@
                 <input type="hidden" id="checkOutDate" name="checkOutDate" value="<%=checkOutDate%>">
             </div>
           
+          	<div class="roomImgContainer">
+          		ㅇ
+          	</div>
             <div class="agreement-container">
                 <p>▶ 개인정보 수집 동의서 ◀</p>
                 <p>Method Hotel은 귀하의 소중한 개인정보를 수집, 활용하고자 [개인정보보호법]에 따라 본인의 동의를 얻고 있습니다.</p>

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import main.com.web.common.exception.MyPageError;
-import main.com.web.member.dto.Kakao;
 import main.com.web.member.dto.Member;
 import main.com.web.mypage.service.MyPageService;
 import main.com.web.reservation.dto.Reserve;
@@ -39,9 +38,9 @@ public class MyReservationController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("member");
-		Kakao kakaoMember = (Kakao)session.getAttribute("kakaoMember");
+		
 
-		if (loginMember == null || kakaoMember == null) {
+		if (loginMember == null) {
 			response.sendRedirect(request.getContextPath() + "/member/loginPage"); // 로그인 페이지로 리디렉션
 			return;
 		}
