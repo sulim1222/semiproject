@@ -1,53 +1,70 @@
-/* payComplete.css */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+}
 
 .reservation-complete {
-  text-align: center;
-  margin-top: 50px;
+    text-align: center;
+    padding: 50px 0;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+    max-width: 800px;
+}
+
+.reservation-header {
+    margin-bottom: 20px;
+}
+
+.reservation-header i {
+    font-size: 50px;
+    color: #4CAF50;
+    margin-bottom: 10px;
 }
 
 .reservation-container {
-  margin: 0 auto;
-  max-width: 600px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: row;
+    border: 2px solid #ccc;
+    padding: 20px;
+    margin: 30px auto;
+    background-color: #f9f9f9;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  margin-bottom: 15px;
-  font-size: 24px;
-  color: #333;
+.reservation-container h2 {
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: normal;
 }
 
-.info {
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #666;
+.reservation-container .info {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.reservation-container hr {
+    margin: 10px auto; 
+    width: 50%; 
+    border-color: #ddd;
 }
 
 .main-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 20px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 16px;
-  transition: background-color 0.3s;
+    background-color: rgb(126, 116, 116);
+    color: white;
+    padding: 14px 20px;
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
 .main-button:hover {
-  background-color: #45a049;
-}
-
-/* Responsive */
-@media screen and (max-width: 600px) {
-  .reservation-container {
-    width: 90%;
-  }
+    background-color: #45a049;
 }

@@ -10,22 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import main.com.web.enjoy.dto.Cafe;
 import main.com.web.member.dto.Member;
 import main.com.web.mypage.service.MyPageService;
-import main.com.web.review.dto.Review;
+import main.com.web.qna.dto.Inquiry;
 
 /**
- * Servlet implementation class MyReviewController
+ * Servlet implementation class MyInquiryController
  */
-@WebServlet("/mypage/myReviewPage")
-public class MyReviewController extends HttpServlet {
+@WebServlet("/mypage/myInquiryListPage")
+public class MyInquiryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyReviewController() {
+    public MyInquiryController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +33,6 @@ public class MyReviewController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("마이페이지(별점/리뷰 관리) 이동");
 		HttpSession session = request.getSession();
 		Member loginMember = (Member) session.getAttribute("member");
 		
@@ -42,17 +40,13 @@ public class MyReviewController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/member/loginPage"); // 로그인 페이지로 리디렉션
 	        return;
 		}
-		
 		int loginMemberNo = loginMember.getMemberNo();
 		
-		List<Review> reviews = new MyPageService().selectMyReview(loginMemberNo);
-		request.setAttribute("reviews", reviews);	
+		List<Inquiry> inquiries = new MyPageService().selectMyInquiries(loginMemberNo);
+		request.setAttribute("inquiries", inquiries);
 		
-		List<Cafe> cafes = new MyPageService().selectMyCafes(loginMemberNo);
-		request.setAttribute("cafes", cafes);
-		
-		
-		request.getRequestDispatcher("/WEB-INF/views/mypage/myReview.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/mypage/myInquiry.jsp").forward(request, response);
+
 	}
 
 	/**

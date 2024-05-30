@@ -45,6 +45,9 @@ public class MyInfoServlet extends HttpServlet {
 		String phone = request.getParameter("phone");
 		String phone1 = request.getParameter("phone1");
 		String phone2 = request.getParameter("phone2");
+		if(phone == null) {
+			phone = "010";
+		}
 		String newPhone = phone + "-" + phone1 + "-" + phone2;
 
 		int result = new MyPageService().updateMember(memberId, newName, newPassword, newPhone);

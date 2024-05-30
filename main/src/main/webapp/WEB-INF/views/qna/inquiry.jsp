@@ -35,19 +35,16 @@
                     </tr>
                     <tr>
                         <th>제목</th>
-                        <td><input type="text" name="title" required></td>
+                        <td><input type="text" name="title" ></td>
                     </tr>
                     <tr>
-                        <th>휴대폰</th>
-                        <td><input type="tel" name="phone" required></td>
-                    </tr>
-                    <tr>
-                        <th>이메일</th>
-                        <td><input type="email" name="email" required></td>
-                    </tr>
+
                     <tr>
                         <th>문의사항</th>
-                        <td><textarea name="inquiry" rows="6" required></textarea></td>
+                        <td><textarea name="inquiry" rows="6" ></textarea></td>
+                    </tr>
+                    <tr>
+                    	<th>답변</th>
                     </tr>
                     <tr>
                         <th>첨부파일</th>

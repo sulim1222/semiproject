@@ -28,6 +28,7 @@ public class MyInfoController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("마이페이지(개인정보 수정) 이동");
 		request.getRequestDispatcher("/WEB-INF/views/mypage/myInfo.jsp").forward(request, response);
+		
 	}
 
 	/**

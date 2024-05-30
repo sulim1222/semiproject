@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+/* 전체 섹션 */
+.sectionflex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px 0;
+}
+
+.aside {
+    width: 20%;
+    background-color: #f9f7f7;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.aside ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.aside ul li {
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0.1em;
+}
+
+.aside ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    line-height: 1.5;
+}
+
+.aside ul li a:hover {
+    color: #555;
+}
+
+.aside nav ul li hr {
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid black; 
+}
+
+.main {
+    width: 70%;
+    padding: 20px;
+    background-color: #f9f7f7;
+    border-radius: 10px;
+}
+
+#title {
+    font-size: 24px;
+    letter-spacing: 0.05em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.separator {
+    height: 2px;
+    background-color: #666;
+    margin: 20px 0;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding-top: 25px;
+}
+
+.custom-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+	background-color: rgb(126, 116, 116);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.custom-button:hover {
+    background-color: darkgreen;
+}
+
+.inquiry-table button:hover {
+    background-color: #333;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 90%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+/* 비어있는 메시지 스타일 */
+.empty-message {
+    font-style: italic;
+    color: #888;
+}
+
+/* 마지막 열 스타일 */
+tr:last-child {
+    border-bottom: none;
+}
+
+/* 홀수 행 배경색 */
+tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* 짝수 행 배경색 */
+tr:nth-child(even) {
+    background-color: #fff;
+}

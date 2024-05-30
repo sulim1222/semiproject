@@ -20,6 +20,7 @@ public class Cafe {
 	private String cafePhone;
 	private String cafeTime;
 	private String cafeImg;
+	private String cafeLatLong;
 	private String location;
 	private String category;
 	private String cafeContent;
