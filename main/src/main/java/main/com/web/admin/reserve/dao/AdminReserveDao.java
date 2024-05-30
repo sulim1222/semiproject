@@ -273,6 +273,7 @@ public class AdminReserveDao {
 				.roomPeopleNo(rs.getInt("ROOMPEOPLENO"))
 				.updateReserveDate(rs.getDate("UPDATERESERVEDATE"))
 				.memberAddress(rs.getString("MEMBERADDRESS"))
+				.requestMemo(rs.getString("requestMemo"))
 				.reserveDate(rs.getDate("RESERVEDATE"))
 				.build();
 	}

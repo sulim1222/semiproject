@@ -8,8 +8,8 @@
 }
 
 .cafe-img {
-    width: 200px;
-    height: 200px;
+    width: 450px;
+    height: 300px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -22,19 +22,33 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    position: relative;
 }
 
-.main-section {
-    position: relative;
+.cafe-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.cafe {
+    width: 48%;
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .sub-content {
     display: flex;
     justify-content: center; 
-    position: absolute;
-    top: 0;
     width: 100%;
+    margin-top:20px;
     margin-bottom: 20px;
+    position: absolute;
+    top: -40px;
 }
 
 .sub-content ul {
@@ -53,7 +67,8 @@
 }
 
 .sub-content ul li a {
-    font-size: 20px; 
+    font-size: 24px; /* 글씨 크기 증가 */
+    font-weight: bold;
 }
 
 .popup {
@@ -69,21 +84,36 @@
     z-index: 1050;
 }
 
-.popup-image {
-    width: 100px;
-    height: 100px;
-}
-
 .popup-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    width: 80%; 
-    max-width: 600px; 
+    width: 80%;
+    max-width: 900px;
+    display: flex;
+    align-items: start;
+    position: relative;
+}
+
+.popup-left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-right {
+    flex: 2;
+    padding-left: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    position: relative;
+    align-items: flex-start;
+}
+
+.popup-image {
+    width: 400px;
+    height: 350px;
+    border-radius: 10px;
 }
 
 .popup-rating {
@@ -91,9 +121,21 @@
 }
 
 .popup-rating .star {
-    font-size: 18px;
+    font-size: 24px;
     color: #FFD700;
 }
+
+#popup-title {
+    font-size: 45px; 
+    margin-bottom: 20px; 
+}
+
+#popup-details, #popup-phone, #popup-time {
+ 	font-size: 20px;
+ 	margin-bottom: 8px; 
+}
+
+
 
 #average-rating span {
     color: #FFD700; /* 별 색상을 노란색으로 설정 */
@@ -130,9 +172,14 @@ button:hover {
     color: black;
 }
 
+.review{
+	width:400px;	
+	height:100px
+}
 .review-list {
     width: 100%;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .review-entry {
@@ -160,8 +207,20 @@ button:hover {
     color: #FFD700;
 }
 
-.page-bar {
-    width: 100%;
-    text-align: center;
+#pageBar {
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+    gap: 8px; /* 각 페이지 번호 사이의 간격 설정 */
     margin-top: 20px;
+}
+#pageBar a, #pageBar strong {
+    padding: 8px 12px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: rgb(126, 116, 116);
+}
+#pageBar strong {
+    background-color: rgb(126, 116, 116);
+    color: white;
 }

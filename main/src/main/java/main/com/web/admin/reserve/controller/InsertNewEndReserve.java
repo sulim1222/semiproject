@@ -87,7 +87,7 @@ public class InsertNewEndReserve extends HttpServlet {
 		String msg="", again="";
 		if(result>0) {
 			msg="신규 등록 되었습니다.";
-			again="/reserve/reserveupdate.do";
+			again="/reserve/insertnewreserve.do";
 		}else if(result==-1){
 			msg="아이디가 중복됩니다. 다시 입력해주세요.";
 			again="/reserve/insertnewreserve.do";
@@ -100,6 +100,7 @@ public class InsertNewEndReserve extends HttpServlet {
 	request.setAttribute("again", again);
 	
 	request.getRequestDispatcher("/WEB-INF/views/common/adminmsg.jsp").forward(request,response);
+	
 	
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -9,18 +9,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import main.com.web.enjoy.dto.Cafe;
-import main.com.web.enjoy.service.CafeService;
+import main.com.web.enjoy.dto.Food;
+import main.com.web.enjoy.service.FoodService;
 import main.com.web.rating.dto.Rating;
 import main.com.web.rating.service.RatingService;
-import main.com.web.review.service.ReviewService;
 
-@WebServlet("/enjoy/cafe")
-public class CafeServlet extends HttpServlet {
+@WebServlet("/enjoy/food")
+public class FoodServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private CafeService cafeService = new CafeService();
+    private FoodService foodService = new FoodService();
     private RatingService ratingService = new RatingService();
-    private ReviewService reviewService = new ReviewService();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int cPage = 1;
@@ -37,20 +35,20 @@ public class CafeServlet extends HttpServlet {
             numPerpage = 6;
         }
 
-        List<Cafe> cafes = cafeService.selectAllCafes(cPage, numPerpage);
+        List<Food> foods = foodService.selectAllFoods(cPage, numPerpage);
         List<Rating> ratings = ratingService.getAllRatings();
 
         // 평균 별점 계산
-        for (Cafe cafe : cafes) {
+        for (Food food : foods) {
             double averageRating = ratings.stream()
-                .filter(r -> r.getEntityId() == cafe.getCafeNo() && "CAFE".equals(r.getCategory()))
+                .filter(r -> r.getEntityId() == food.getFoodNo() && "FOOD".equals(r.getCategory()))
                 .mapToInt(Rating::getRatingScore)
                 .average()
                 .orElse(0.0);
-            cafe.setAverageRating(averageRating);
+            food.setAverageRating(averageRating);
         }
 
-        int totalData = cafeService.selectCafeAllCount();
+        int totalData = foodService.selectFoodAllCount();
         int totalPage = (int) Math.ceil((double) totalData / numPerpage);
         int pageBarSize = 5;
         int pageNo = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
@@ -82,8 +80,8 @@ public class CafeServlet extends HttpServlet {
         }
 
         request.setAttribute("pageBar", pageBar.toString());
-        request.setAttribute("cafes", cafes);
-        request.getRequestDispatcher("/WEB-INF/views/enjoy/cafe.jsp").forward(request, response);
+        request.setAttribute("foods", foods);
+        request.getRequestDispatcher("/WEB-INF/views/enjoy/food.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

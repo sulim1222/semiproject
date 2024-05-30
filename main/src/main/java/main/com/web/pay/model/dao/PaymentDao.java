@@ -213,4 +213,36 @@ public class PaymentDao {
 				.build();
 	}
 
+	public Member selectKakaoMember(Connection conn, String email) {
+		PreparedStatement pstmt = null;
+    	ResultSet rs = null;
+    	Member m = null;
+    	try {
+    		pstmt = conn.prepareStatement(sql.getProperty("selectKakaoMember"));
+    		pstmt.setString(1, email);
+    		rs = pstmt.executeQuery();
+    		if(rs.next()) m = getMember(rs);
+    	}catch(SQLException e) {
+    		e.printStackTrace();
+    	}finally {
+    		close(rs);
+    		close(pstmt);
+    	}
+		return m;
+	}
+
+	private Member getMember(ResultSet rs) throws SQLException{
+		return Member.builder()
+				.memberCheckNo(rs.getString("membercheckno"))
+				.memberEnrollDate(rs.getDate("memberenrolldate"))
+				.memberId(rs.getString("memberid"))
+				.memberName(rs.getString("membername"))
+				.memberNo(rs.getInt("memberno"))
+				.memberPhone(rs.getString("memberphone"))
+				.memberPwd(rs.getString("memberpwd"))
+				.build();
+	}
+
+	
+
 }

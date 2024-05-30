@@ -31,6 +31,8 @@ public class PayCompleteController extends HttpServlet {
 			Payment payment = paymentService.selectPayment(reserveNo);
 			ReservationDetail myReserveDetail = paymentService.selectMyReserveDetail(reserveNo);
 			
+			System.out.println(myReserve.getCheckInDate());
+			System.out.println(myReserve.getCheckOutDate());
 			
 			request.setAttribute("myReserve", myReserve);
 			request.setAttribute("payment", payment);
@@ -40,7 +42,7 @@ public class PayCompleteController extends HttpServlet {
 			System.out.println(myReserveDetail);
 			request.getRequestDispatcher("/WEB-INF/views/pay/payComplete.jsp").forward(request, response);
 		} else {
-			response.sendRedirect(request.getContextPath() + "/errorPage");
+			response.sendRedirect(request.getContextPath());
 		}
 	}
 

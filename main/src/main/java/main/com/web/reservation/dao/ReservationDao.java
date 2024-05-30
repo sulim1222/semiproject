@@ -37,7 +37,7 @@ public class ReservationDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Reserve reserve = new Reserve();
-		
+		System.out.println(reserveNo);
 		try {
 			pstmt = conn.prepareStatement(sql.getProperty("selectMyReserve"));
 			pstmt.setString(1, reserveNo);
@@ -63,7 +63,7 @@ public class ReservationDao {
 				.roomType(rs.getString("roomtype"))
 				.bedType(rs.getString("bedtype"))
 				.checkInDate(rs.getDate("checkindate"))
-				.checkOutDate(rs.getDate("checkindate"))
+				.checkOutDate(rs.getDate("checkoutdate"))
 				.memberPhone(rs.getString("memberphone"))
 				.payPrice(rs.getInt("payprice"))
 				.roomPeopleNo(rs.getInt("roompeopleno"))

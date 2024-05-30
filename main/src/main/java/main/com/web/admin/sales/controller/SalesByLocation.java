@@ -15,16 +15,16 @@ import main.com.web.admin.reserve.dto.Sales;
 import main.com.web.admin.sales.service.AdminSalesService;
 
 /**
- * Servlet implementation class AddRevenue
+ * Servlet implementation class SalesByLocation
  */
-@WebServlet("/addRevenue")
-public class AddRevenue extends HttpServlet {
+@WebServlet("/sales/salesbylocation.do")
+public class SalesByLocation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddRevenue() {
+    public SalesByLocation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,22 +33,19 @@ public class AddRevenue extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-        int newRevenue=0;
-        try{
-        	newRevenue= Integer.parseInt(request.getParameter("revenue"));
-        }catch(NumberFormatException e) {
-        	newRevenue=1;
-        }
-        String month=request.getParameter("month");
+			
+	
+        List<Sales> sales = new AdminSalesService().salesByLocation();
 
-        AdminSalesService salesService = new AdminSalesService();
-        List<Sales> updatedSalesData = salesService.addReservation(month,newRevenue);
-
-        Gson gson = new Gson();
-        String jsonSalesData = gson.toJson(updatedSalesData);
-        response.getWriter().write(jsonSalesData);
-	}
+        String json = new Gson().toJson(sales);
+        
+        request.setAttribute("type", "location");
+        request.setAttribute("sales", sales);
+        response.getWriter().write(json);
+        request.getRequestDispatcher("/WEB-INF/views/sales/sales.jsp").forward(request, response);
+    }
+	    
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

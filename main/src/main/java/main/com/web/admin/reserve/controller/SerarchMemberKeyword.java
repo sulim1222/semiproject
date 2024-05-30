@@ -43,15 +43,11 @@ public class SerarchMemberKeyword extends HttpServlet {
 		}catch(NumberFormatException e) {}
 				
 		
-		String type=request.getParameter("searchType");
-		String keyword=request.getParameter("searchKeyword");
-		String location=request.getParameter("location");
+		String type = request.getParameter("searchType");
+		String keyword = request.getParameter("searchKeyword");
+		String location = request.getParameter("location"); 
 		
 		
-		List<Member> searchMembers=new AdminReserveService()
-				.searchMember(type,keyword,location,cPage,numPerpage);
-		
-		request.setAttribute("members", searchMembers);
 		
 		StringBuffer pageBar=new StringBuffer();
 		
@@ -100,10 +96,13 @@ public class SerarchMemberKeyword extends HttpServlet {
 							+"'>[다음]</a>");
 		}
 		
-		request.setAttribute("pageBar",pageBar);
 		
-		request.getRequestDispatcher("/WEB-INF/views/member/reserveList.jsp")
-		.forward(request,response);
+		
+		
+		request.setAttribute("pageBar",pageBar);
+		request.setAttribute("location", location);
+		
+		request.getRequestDispatcher("/WEB-INF/views/member/reserveList.jsp").forward(request,response);
 	
 	
 	}
