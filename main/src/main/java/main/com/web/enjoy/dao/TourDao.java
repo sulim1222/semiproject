@@ -77,6 +77,7 @@ public class TourDao {
 	                .tourPhone(rs.getString("tourPhone"))
 	                .tourTime(rs.getString("tourTime"))
 	                .tourImg(rs.getString("tourImg"))
+	                .tourLatLong(rs.getString("tourLatLong")) // 추가된 열
 	                .location(rs.getString("location"))
 	                .category(rs.getString("category"))
 	                .build();

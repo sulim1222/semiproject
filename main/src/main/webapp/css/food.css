@@ -7,7 +7,7 @@
     box-sizing: border-box;
 }
 
-.cafe-img {
+.food-img {
     width: 450px;
     height: 300px;
     margin-top: 10px;
@@ -25,14 +25,14 @@
     position: relative;
 }
 
-.cafe-list {
+.food-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.cafe {
+.food {
     width: 48%;
     background-color: white;
     padding: 10px;
@@ -59,7 +59,7 @@
 }
 
 .sub-content ul li {
-    margin-right: 20px;
+    margin-right: 10px; /* 서브메뉴 간격을 줄이기 위해 10px로 설정 */
 }
 
 .sub-content ul li:last-child {
@@ -135,8 +135,6 @@
  	margin-bottom: 8px; 
 }
 
-
-
 #average-rating span {
     color: #FFD700; /* 별 색상을 노란색으로 설정 */
 }
@@ -172,10 +170,11 @@ button:hover {
     color: black;
 }
 
-.review{
-	width:400px;	
-	height:100px
+.review {
+	width: 400px;	
+	height: 100px;
 }
+
 .review-list {
     width: 100%;
     margin-top: 20px;
@@ -207,24 +206,6 @@ button:hover {
     color: #FFD700;
 }
 
-/* #pageBar {
-    display: flex;
-    justify-content: center; 가운데 정렬
-    gap: 8px; 각 페이지 번호 사이의 간격 설정
-    margin-top: 20px;
-}
-#pageBar a, #pageBar strong {
-    padding: 8px 12px;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    color: rgb(126, 116, 116);
-}
-#pageBar strong {
-    background-color: rgb(126, 116, 116);
-    color: white;
-} */
-
 #pageBar {
     display: flex;
     justify-content: center; /* 가운데 정렬 */
@@ -252,4 +233,3 @@ button:hover {
     background-color: rgb(126, 116, 116);
     color: white;
 }
-

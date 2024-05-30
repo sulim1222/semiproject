@@ -27,6 +27,7 @@
         <div class="slideshow-container">
         
            <%
+          	
               for(RoomImages image : room.getRoomImages()){
            %>
             <div class="slide fade">
@@ -72,7 +73,14 @@
            <div class="left_section">
         <div class="standard-info">
             <div class="standard-title">객실 안내<br></div>
-            <div><%=room.getRoomInfo() %></div>
+            <div><% 
+			    String roomInfo = room.getRoomInfo();
+			    String[] roomParts = roomInfo.split(",");
+			    for(String b : roomParts) {
+			        out.println(b + "<br>"); // 각 부분을 HTML의 <br> 태그로 구분해서 출력
+			    }
+			    %>
+            </div>
         </div>
 
         <div class="standard-facilty">
@@ -195,13 +203,24 @@
 
      </div>
 
+<script>
+	const a = document.getElementsByClassName("background")[0];
+	console.dir(a);
+	const $div = document.createElement("div");
+	$div.innerText="<%=room.getRoomType()%>"; //내용
+	console.log($div);
+	a.appendChild($div);
+	$div.style.marginTop = "63px";
+	$div.style.display = "grid";
+	$div.style.placeItems = "center"; // 수평 및 수직 중앙 정렬
+	$div.style.fontSize = "45px";
+	$div.style.fontWeight = "bolder";
 
-
-
-   
-
+</script>
 	
    </section>
+   
+
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script src="<%= request.getContextPath()%>/js/room.js"></script>

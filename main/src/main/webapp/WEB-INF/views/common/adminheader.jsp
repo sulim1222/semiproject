@@ -10,6 +10,7 @@
 <%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/style.css"/> --%>
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
 <title>관리자페이지</title>
 </head>
 
@@ -34,7 +35,7 @@
                     <a href="<%=request.getContextPath()%>/admin/FAQList">Q&A</a>
                 </li>
                 <li>
-                    <a href="<%=request.getContextPath()%>/sales/salesupdate.do">Sales</a>
+                    <a href="<%=request.getContextPath()%>/sales/salesbymonth.do">Sales</a>
                 </li>
             </ul>
         </div>

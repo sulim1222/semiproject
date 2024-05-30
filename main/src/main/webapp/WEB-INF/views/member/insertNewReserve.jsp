@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/views/common/adminheader.jsp" %>
 
 <section id="new-container">
 
@@ -137,6 +136,7 @@
 	
 	document.getElementById('reserveDate').valueAsDate = new Date();
 	document.getElementById('updateReserveDate').valueAsDate = new Date();
+	
 </script>
 
 
@@ -147,7 +147,7 @@
          padding: 0;
      }
      #new-container {
-         width: 60%;
+         width: 95%;
          margin: 2rem auto;
          background-color: white;
          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -212,4 +212,3 @@
          background-color: lightblue;
      }
 </style>
-<%@ include file="/WEB-INF/views/common/adminfooter.jsp"%>

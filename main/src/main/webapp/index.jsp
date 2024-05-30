@@ -1,6 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ include file="/WEB-INF/views/common/header.jsp" %>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+ 
+ 	<style>
+    .background{
+     background-image:url('./imges/2.jpg');
+     height: 1200px;
+     }
+
+     .texth2{
+   	  margin-top : 300px;
+      text-align: center; 
+      color: white;
+	  font-family: Libre Baskerville;
+	  font-size: 20px;
+   	  letter-spacing: 3px;
+     }
+     .texth1{
+     /* 	font-family: "Libre Baskerville", serif;
+    	font-size: 80px; 
+    	font-weight: bold; 
+    	color: white; 
+    	letter-spacing: 5px; 
+    	margin: 0;  */
+     }
+    </style>
+ 
+ 
      <div id="mainText">
                   
                 </div>
@@ -19,18 +46,5 @@
    	 $(".main-content").hide(); 
     </script>
     <script src = "<%=request.getContextPath()%>/js/extendIndex.js"></script>
-    <style>
-    .background{
-     background-image:url('./imges/2.jpg');
-     height: 1200px;
-     }
-
-     .texth2{
-   	  margin-top : 200px;
-      text-align: center; 
-
-     .texth2{	
-     text-align: center;
-     }
-    </style>
+    
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
