@@ -6,6 +6,7 @@
     Reserve r = (Reserve)request.getAttribute("myReserve");
     ReservationDetail rd = (ReservationDetail)request.getAttribute("myReserveDetail");
     Payment p = (Payment)request.getAttribute("payment");
+    
 %>
 
 <link rel="stylesheet" href="<%=request.getContextPath() %>/css/payComplete.css">    

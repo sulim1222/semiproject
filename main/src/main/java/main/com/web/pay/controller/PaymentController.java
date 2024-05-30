@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import main.com.web.member.dto.Kakao;
 import main.com.web.member.dto.Member;
 
 import main.com.web.pay.model.service.PaymentService;
@@ -36,9 +37,18 @@ public class PaymentController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Member member = (Member) session.getAttribute("member");
+		String email = "";
+		Member member2 = (Member) session.getAttribute("member");
+		Kakao member1 = (Kakao) session.getAttribute("kakaoMember");
+		if(member2 !=null) {
+			email = member2.getMemberId();
+		}else if(member1 !=null) {
+			email = member1.getAccount_email();
+		}
+		Member member = paymentService.selectKakaoMember(email);		
 		if (member != null) {
-			System.out.println("결제페이지 이동");
+			request.setAttribute("member1", member);
+			
 			String checkInDate = request.getParameter("checkindate"); // 체크인 날짜
 			String checkOutDate = request.getParameter("checkoutdate"); // 체크아웃 날짜
 			System.out.println("체크인날짜:" + checkInDate);
