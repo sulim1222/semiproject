@@ -28,10 +28,10 @@
                     <a href="<%=request.getContextPath()%>/rooms/roomsupdate.do">Rooms</a>
                 </li>
                 <li>
-                    <a href="<%=request.getContextPath()%>/enjoy/enjoyupdate.do">Enjoy</a>
+                    <a href="#" onclick="alert('아직 개발 중입니다.'); return false;">Enjoy</a>
                 </li>
                 <li>
-                    <a href="<%=request.getContextPath()%>/qna/qnaupdate.do">Q&A</a>
+                    <a href="<%=request.getContextPath()%>/admin/FAQList">Q&A</a>
                 </li>
                 <li>
                     <a href="<%=request.getContextPath()%>/sales/salesupdate.do">Sales</a>
