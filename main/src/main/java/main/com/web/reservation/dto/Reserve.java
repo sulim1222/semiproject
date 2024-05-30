@@ -27,5 +27,6 @@ public class Reserve {
 	private String bedType;
 	private Date reserveDate;
 	private String requestMemo;
+	private Date updateReserveDate;
 		
 }

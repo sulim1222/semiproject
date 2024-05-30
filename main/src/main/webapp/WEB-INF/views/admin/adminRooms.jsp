@@ -5,7 +5,6 @@
 <%
 	String location=(String)request.getAttribute("location");
 	List<Room> rooms=(List<Room>)request.getAttribute("rooms");
-	out.print(rooms.size());
 %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/room_admin.css">
     <style>
@@ -137,6 +136,10 @@
         #logo {
             margin-left: 4.5%;
         }
+        
+        
+        
+        
     </style>
     <%-- <aside class="aside">
         <nav>
@@ -196,8 +199,8 @@
                       		<%}%>
                         	</div>
                         <%} %>
-                            <button type="button" onclick="addInputFile(event)">추가</button>
-                            <button type="button" onclick="delInputFile(event)">삭제</button>
+                            <button id="admin-btn" type="button" onclick="addInputFile(event)">추가</button>
+                            <button id="admin-btn" type="button" onclick="delInputFile(event)">삭제</button>
                             <div id="imageUpload-container">
                             </div>
                    
@@ -207,31 +210,33 @@
                         <h4><b>시설/어메니티 변경</b></h4>
                         
                         <input type="checkbox" name=roomAmenity value="SMART TV">SMART TV<br>
-                        <input type="checkbox" name="roomAmenity" value="라디오">라디오<br>
+                        <input type="checkbox" name="roomAmenity" value="WIFI">WIFI<br>
                         <input type="checkbox" name="roomAmenity" value="커피포트">커피포트<br>
-                        <input type="checkbox" name="roomAmenity" value="커피포트">샤워욕조<br>
-                        <input type="checkbox" name="roomAmenity" value="커피포트">아기침대<br>
-                        <input type="checkbox" name="roomAmenity" value="커피포트">등등등<br>
-                        <input type="checkbox" name="roomAmenity" value="커피포트">등등등<br>
-                        <input type="checkbox" name="roomAmenity" value="커피포트">등등등<br>
-                        <input type="checkbox" name="roomAmenity" value="커피포트">등등등<br>
+                        <input type="checkbox" name="roomAmenity" value="미니바">미니바<br>
+                        <input type="checkbox" name="roomAmenity" value="샤워욕조">샤워욕조<br>
+                        <input type="checkbox" name="roomAmenity" value="최첨단 금고">최첨단 금고<br>
+                        <input type="checkbox" name="roomAmenity" value="스위스 TEA세트">스위스 TEA세트<br>
+                        <input type="checkbox" name="roomAmenity" value="미니건조대">미니건조대<br>
+                        <input type="checkbox" name="roomAmenity" value="로라스타 다리미">로라스타 다리미<br>
+                        <input type="checkbox" name="roomAmenity" value="아기침대">아기침대<br>
                         
                     </div>
                     </div>
                     <div class="suite-admin-container">
                         <h4><b>서비스 변경</b></h4>
-                        <input type="checkbox" name="hotelService" value="tv">tv<br>
-                        <input type="checkbox" name="hotelService" value="라디오">라디오<br>
-                        <input type="checkbox" name="hotelService" value="커피포트">커피포트<br>
-                        <input type="checkbox" name="hotelService" value="커피포트">샤워욕조<br>
-                        <input type="checkbox" name="hotelService" value="커피포트">아기침대<br>
-                        <input type="checkbox" name="hotelService" value="커피포트">등등등<br>
-                        <input type="checkbox" name="hotelService" value="커피포트">등등등<br>
-                        <input type="checkbox" name="hotelService" value="커피포트">등등등<br>
-                        <input type="checkbox" name="hotelService" value="커피포트">등등등<br>
+                        <input type="checkbox" name="hotelService" value="과일바구니">과일바구니<br>
+                        <input type="checkbox" name="hotelService" value="케이크">케이크<br>
+                        <input type="checkbox" name="hotelService" value="최고급 와인">최고급 와인<br>
+                        <input type="checkbox" name="hotelService" value="샤워욕조">샤워욕조<br>
+                        <input type="checkbox" name="hotelService" value="유아용품">유아용품<br>
+                        <input type="checkbox" name="hotelService" value="다이슨세트">다이슨세트<br>
+                        <input type="checkbox" name="hotelService" value="노트북(대여)">노트북(대여)<br>
+                        <input type="checkbox" name="hotelService" value="세탁서비스">세탁서비스<br>
+                        <input type="checkbox" name="hotelService" value="주차서비스">주차서비스<br>
+                        <input type="checkbox" name="hotelService" value="사진촬영">사진촬영<br>	
                     </div>
                     <div class="right-admin-section">
-                        <button>수정하기</button>
+                        <button>수정</button>
                     </div>
                 </div>
                 </form>
@@ -240,6 +245,8 @@
             </div>
         </div>
     </section>
+    
+    
 	<script>
 		const addDelFunc=(()=>{
 			let count=0;

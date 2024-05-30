@@ -4,15 +4,12 @@
 
 <%@ include file="/WEB-INF/views/common/adminheader.jsp"%>
 <%
-    String searchType=request.getParameter("searchType");
-    String searchKeyword=request.getParameter("searchKeyword");
-    List<Member> members=(List<Member>)request.getAttribute("members");
-    String location=(String)request.getAttribute("location");
-    Member mem=(Member) request.getAttribute("member");
-   
+    String searchType = request.getParameter("searchType");
+    String searchKeyword = request.getParameter("searchKeyword");
+    List<Member> members = (List<Member>)request.getAttribute("members");
+    String location = (String)request.getAttribute("location");
+    Member mem = (Member) request.getAttribute("member");
 %>
-
-
 
 <section class="sectionflex">
     <aside class="aside">
@@ -31,17 +28,17 @@
 	    	<div id="title">
 	        <% if ("서울".equals(location)) { %>
 	        	Seoul Reservation List
-	    	<% }else if("부산".equals(location)) { %>
+	    	<% } else if ("부산".equals(location)) { %>
 	    		Busan Reservation List
-	    	<% }else if("제주".equals(location)) { %>
+	    	<% } else if ("제주".equals(location)) { %>
 	    		Jeju Reservation List
-	    	<% } else{ %>
+	    	<% } else { %>
 	    		Reservation
 	    	<% } %>
 	    	</div>
 	    	<div id="btn5">
 	    		<button class="btn5" onclick="location.assign('<%=request.getContextPath()%>/')">
-					<img src="<%=request.getContextPath()%>/imges/admin/homepage.jpg" >
+					<img src="<%=request.getContextPath()%>/imges/admin/homepage.jpg">
 				</button>
 	    	</div>
     	</div>
@@ -58,26 +55,26 @@
             <div id="search-reserveNo">
                 <form id="searchForm" action="<%=request.getContextPath()%>/admin/searchMember">
                     <input type="hidden" name="searchType" value="reserveNo">
-                    <input type="text" name="searchKeyword"  placeholder="예약번호를 입력하세요">
-                    <button type="submit" class="btn2" >검색</button>
+                    <input type="text" name="searchKeyword" placeholder="예약번호를 입력하세요">
+                    <button type="submit" class="btn2">검색</button>
                 </form>
             </div>
             <div id="search-memberName">
                 <form id="searchForm" action="<%=request.getContextPath()%>/admin/searchMember">
                     <input type="hidden" name="searchType" value="memberName">
-                    <input type="text" name="searchKeyword"  placeholder="이름을 입력하세요">
-                    <button type="submit" class="btn2" >검색</button>
+                    <input type="text" name="searchKeyword" placeholder="이름을 입력하세요">
+                    <button type="submit" class="btn2">검색</button>
                 </form>
             </div>
             <div id="search-roomType">
                 <form id="searchForm" action="<%=request.getContextPath()%>/admin/searchMember">
                     <input type="hidden" name="searchType" value="roomType">
-                    <input type="text" name="searchKeyword"  placeholder="객실 타입을 입력하세요">
-                    <button type="submit" class="btn2" >검색</button>
+                    <input type="text" name="searchKeyword" placeholder="객실 타입을 입력하세요">
+                    <button type="submit" class="btn2">검색</button>
                 </form>
             </div>
-
-            <button type="button" class="btn1" value="신규등록" id="inputnewreserve" onclick="location.assign('<%=request.getContextPath()%>/reserve/insertnewreserve.do')">신규등록</button>
+				
+            <button type="button" class="btn1" value="신규등록" id="inputnewreserve" onclick="openNewReserveWindow()">신규등록</button>
         </div>
         
         <div class="container2">
@@ -114,7 +111,7 @@
 						    <td><%=m.getMemberPhone() %></td>
 						    <td><%=m.getReserveDate() %></td>
 						    <td>
-						        <input type="button" class="btn" value="수정" onclick="location.assign('<%=request.getContextPath()%>/reserve/updatereserve.do?reserveNo=<%=m.getReserveNo()%>')">
+						        <input type="button" class="btn" value="수정" onclick="openUpdateWindow('<%=m.getReserveNo()%>')">
 						        <form action="<%=request.getContextPath()%>/reserve/deleteReserve.do" method="post" style="display:inline;">
                                     <input type="hidden" name="reserveNo" value="<%=m.getReserveNo()%>">
                                     <input type="submit" class="btn" value="삭제" onclick="return confirm('정말 삭제하시겠습니까?')">
@@ -122,7 +119,7 @@
 						    </td>
 						</tr>
 						<% } %>
-						<% }else{ %>
+						<% } else { %>
 	                    <tr>
 	                        <td colspan="12">조회 내용이 없어요.</td>
 	                    </tr>
@@ -138,10 +135,10 @@
 
 <script>
 	
-	
+
     $(() => {
         $("#searchType").change();
-    })
+    });
     $("#searchType").change(e => {
         const type = e.target.value;
         $(e.target).parent().find("div[id^='search-']").hide();
@@ -156,45 +153,26 @@
             }
         });
     };
+
+    function openNewReserveWindow() {
+        const url = '<%=request.getContextPath()%>/reserve/insertnewreserve.do';
+        window.open(url, 'newReserveWindow', 'width=1020,height=680');
+    }
     
-    <%-- document.addEventListener("dateDelete", function() {
-        const deleteButton = document.querySelectorAll("#deleteReserve");
-
-        deleteButton.forEach(button => {
-            button.addEventListener("click", function() {
-                const reserveNo = this.getAttribute("reserveNoData");
-
-                if (confirm("정말 삭제하시겠습니까?")) {
-                    fetch('<%= request.getContextPath() %>/reserve/deleteReserve.do', {
-                        method: "POST",
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert("삭제되었습니다.");
-                            location.reload();
-                        } else {
-                            alert("삭제에 실패했습니다.");
-                        }
-                    })
-                }
-            });
-        });
-    }); --%>
+    function openUpdateWindow(reserveNo) {
+        const url = '<%=request.getContextPath()%>/reserve/updatereserve.do?reserveNo=' + reserveNo;
+        window.open(url, 'updateReserveWindow', 'width=1020,height=680');
+    }
     
     
     
 </script>
 
-    <%-- const deleteReserve = (reserveNo) => {
-        if (confirm("정말 삭제하시겠습니까?")) {
-            location.assign(`<%=request.getContextPath()%>/reserve/deletereserve.do?reserveNo=${reserveNo}`);
-        }
-    }; --%>
+
 <style>
 	#btn5 {
-    margin-left: auto;
-}
+	    margin-left: auto;
+	}
 	
 	#pageBar{
 		display: flex;

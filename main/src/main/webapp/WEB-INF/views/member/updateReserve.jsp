@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="main.com.web.admin.reserve.dto.Member" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+
 <% 
 	Member m=(Member) request.getAttribute("member");
 	Integer roomPeopleNo=(m!=null) ? m.getRoomPeopleNo() : null;
 	String roomType=(m!= null) ? m.getRoomType() : null;
 	String bedType=(m!=null) ? m.getBedType() : null;
 	String location=(m!=null) ? m.getLocation() : null;
+	Date currentDate = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    String sysDate = sdf.format(currentDate);
 %>   
-<%@ include file="/WEB-INF/views/common/adminheader.jsp"%>
 
 <section id="update-container">
 
@@ -40,7 +45,7 @@
 				</th>
 				<th>예약수정날짜</th>
 				<th>
-					<input type="date" id="updateReserveDate" name="updateReserveDate" value="<%=m.getUpdateReserveDate()%>" readonly>
+					<input type="date" id="updateReserveDate" name="updateReserveDate" value="<%=sysDate%>" readonly>
 				</th>
 			</tr>
 			<tr>
@@ -95,7 +100,7 @@
 			</tr>
 			<tr>
 				<td>메모사항</td>
-				<td colspan="5"><textarea name="requstMemo" cols="128" rows="10" placeholder="고객요청사항을 적으세요" style="resize:none;" value="<%=m.getRequestMemo()%>"></textarea></td>
+				<td colspan="5"><textarea name="requestMemo" cols="128" rows="10" placeholder="고객요청사항을 적으세요" style="resize:none;"><%=m.getRequestMemo() !=null ? m.getRequestMemo() : ""%></textarea></td>
 			</tr>
 		</table>
 			
@@ -105,15 +110,17 @@
 </section>	
 
 	<script>
-	   //입실날짜부터 선택해서 퇴실날짜 선택가능하게
-	    const checkInDateInput = document.querySelector('input[name="checkInDate"]');
-		const checkOutDateInput = document.querySelector('input[name="checkOutDate"]');
-		
-		checkInDateInput.min = new Date().toISOString().split('T')[0];
-		
-		checkInDateInput.addEventListener('change', function() {
-		    checkOutDateInput.min = checkInDateInput.value;
-		});
+	const checkInDateInput = document.querySelector('input[name="checkInDate"]');
+	const checkOutDateInput = document.querySelector('input[name="checkOutDate"]');
+	
+	checkInDateInput.min = checkInDateInput.value;
+
+	checkOutDateInput.min = checkInDateInput.value;
+
+	checkInDateInput.addEventListener('change', function() {
+	    checkOutDateInput.min = checkInDateInput.value;
+	});
+
 		    
 				
 		roomTypeSelect.addEventListener('change', function() {
@@ -143,7 +150,7 @@
          padding: 0;
      }
      #update-container {
-         width: 60%;
+         width: 95%;
          margin: 2rem auto;
          background-color: white;
          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -213,5 +220,3 @@
 
 
 
-
-<%@ include file="/WEB-INF/views/common/adminfooter.jsp"%>

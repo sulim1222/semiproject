@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Properties;
 
 import main.com.web.admin.reserve.dao.AdminReserveDao;
+import main.com.web.admin.reserve.dto.Member;
 import main.com.web.admin.reserve.dto.Sales;
 
 public class AdminSalesDao {
@@ -35,13 +36,12 @@ private Properties sql=new Properties();
 		List<Sales> sales=new ArrayList<>();
 		try {
 			pstmt=conn.prepareStatement(sql.getProperty("salesByMonth"));
+			
 			rs=pstmt.executeQuery();
-			 while (rs.next()) {
-                String month = rs.getString("month");
-                int revenue = rs.getInt("revenue");
-                Sales salesByMonth = new Sales(month, revenue);
-                sales.add(salesByMonth);
-	            }
+			
+			while (rs.next()) {
+				sales.add(AdminSalesDao.getSalesByMonth(rs));
+            }
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -50,31 +50,45 @@ private Properties sql=new Properties();
 		}
 		return sales;
 	}
+	 
+	public List<Sales> salesByLocation(Connection conn) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Sales> sales = new ArrayList<>();
+        try {
+            pstmt = conn.prepareStatement(sql.getProperty("salesByLocation"));
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                sales.add(AdminSalesDao.getSalesByLocation(rs));
+            }
+        
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rs);
+            close(pstmt);
+        }
+        return sales;
+    }
 	
-	 public List<Sales> addReservation(Connection conn, String month, int newRevenue) {
-	        PreparedStatement pstmt = null;
-	        ResultSet rs = null;
-	        List<Sales> sales = new ArrayList<>();
-	        try {
-	            pstmt = conn.prepareStatement(sql.getProperty("addNewRevenue"));
-	            pstmt.setInt(1, newRevenue);
-	            pstmt.setString(2, month);
-	            pstmt.executeUpdate();
-	            while (rs.next()) {
-	                String months = rs.getString("month");
-	                int revenue = rs.getInt("revenue");
-	                Sales salesByMonth = new Sales(months, revenue);
-	                sales.add(salesByMonth);
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } finally {
-	            close(rs);
-	            close(pstmt);
-	        }
-	        return sales;
-	 }
-
+	
+	
+	
+	
+	public static Sales getSalesByMonth(ResultSet rs) throws SQLException{
+		return Sales.builder()
+				.month(rs.getString("month"))
+				.revenue(rs.getInt("revenue"))
+				.build();
+	}
+	public static Sales getSalesByLocation(ResultSet rs) throws SQLException{
+		return Sales.builder()
+				.location(rs.getString("location"))
+				.revenue(rs.getInt("revenue"))
+				.build();
+	}
+	
+	
 	
 	
 }
