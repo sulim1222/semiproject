@@ -85,12 +85,24 @@ function fetchRooms(roomType, page) {
             itemsPerPage: 3 // 페이지 당 아이템 수 설정
         },
         success: function (response) {
-            const roomList = response.roomList;
-            const totalData = response.totalData;
+            const roomList = response.roomList; // 배열
+            const totalData = response.totalData; // 페이지바
             while ($showRoom.firstChild) {
                 $showRoom.firstChild.remove();
             }
             roomList.forEach((room, i) => {
+           		const roomT = room.roomPrice;
+           		let getroomImg = "";
+           		if(roomT ==100000){
+					getroomImg = "-ST.jpg";
+				}else if(roomT==200000){
+					getroomImg = "-DL.jpg";
+				}else{
+					getroomImg = "-SW.jpg";
+				}
+				console.log(room.roomPrice)
+				console.log(i);
+           		
                 const $detail = document.createElement('div');
                 $detail.className = "detail";
    
@@ -99,7 +111,7 @@ function fetchRooms(roomType, page) {
 
                 const $roomImg = document.createElement('img');
                 $roomImg.className = "room-img";
-                $roomImg.src = `./imges/room/${room.roomUrl}`;
+                $roomImg.src = `./images/rooms/${(i+1)%5+getroomImg}`;
 
                 const $roomInfo = document.createElement('div');
                 $roomInfo.className = "room-info";
@@ -118,11 +130,11 @@ function fetchRooms(roomType, page) {
 
                 const $roomArea = document.createElement('p');
                 $roomArea.className = "room-area";
-                $roomArea.textContent = `Area: ${room.roomArea}`;
+                $roomArea.textContent = `면적: ${room.roomArea}`;
 
-                const $roomInfoText = document.createElement('p');
+                const $roomInfoText = document.createElement('div');
                 $roomInfoText.className = "room-info-text";
-                $roomInfoText.textContent = `Info: ${room.roomInfo}`;
+                $roomInfoText.textContent = `${room.roomInfo}`;
 
                 const $roomCategory = document.createElement('p');
                 $roomCategory.className = "room-category";
