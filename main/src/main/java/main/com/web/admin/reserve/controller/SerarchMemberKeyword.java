@@ -98,10 +98,10 @@ public class SerarchMemberKeyword extends HttpServlet {
 		
 		
 		
-		
+		List<Member> members=new AdminReserveService().searchMember(type,keyword,location,cPage,numPerpage);
 		request.setAttribute("pageBar",pageBar);
 		request.setAttribute("location", location);
-		
+		request.setAttribute("members", members);
 		request.getRequestDispatcher("/WEB-INF/views/member/reserveList.jsp").forward(request,response);
 	
 	
