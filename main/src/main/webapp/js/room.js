@@ -75,7 +75,7 @@ var reservationBtn = document.getElementById("room_reservation_btn");
 // 버튼을 클릭했을 때 이벤트 처리기를 추가합니다.
 reservationBtn.addEventListener("click", function() {
 	// 페이지를 이동할 URL을 지정합니다.
-	var destinationURL = "http://14.36.141.71:10079/GDJ79_main_semi/main/revation";
+	var destinationURL = "http://14.36.141.71:10079/GDJ79_main_semi/revation";
 
 	// 현재 창에서 지정된 URL로 이동합니다.
 	window.location.href = destinationURL;

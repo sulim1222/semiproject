@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reservation.css">
+
 <script src="<%=request.getContextPath()%>/js/jquery-3.7.1.min.js"></script>
 <section class="main-section">
     <div class="main-content">
@@ -34,4 +35,9 @@
         <script src="<%=request.getContextPath()%>/js/reservation.js"></script>
     </div>
 </section>
+<style>
+
+
+
+</style>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

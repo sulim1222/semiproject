@@ -106,7 +106,7 @@ const sendMail =()=> $.ajax({
 				sessionStorage.clear();
 			},1800)
 			console.log(sessionStorage.getItem("mailcode"));
-			alert(response.code);
+			
 		}
 	}
 });

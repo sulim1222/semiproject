@@ -29,7 +29,7 @@
 			</div>
 		</form>
 		<div id="kakaoLogin">
-		<a href="https://kauth.kakao.com/oauth/authorize?client_id=a567f7c380e11df07ed70d544e8f86d8&redirect_uri=http://localhost:9090/main/kakaologin&response_type=code"><img height="38px" src="<%=request.getContextPath()%>/imges/kakao_login.png" /></a>
+		<a href="https://kauth.kakao.com/oauth/authorize?client_id=a567f7c380e11df07ed70d544e8f86d8&redirect_uri=http://14.36.141.71:10079/GDJ79_main_semi/kakaologin&response_type=code"><img height="38px" src="<%=request.getContextPath()%>/imges/kakao_login.png" /></a>
 		 </div>
 		<div id="submenu">
 			<a href="<%=request.getContextPath()%>/member/signupPage">회원가입</a> 
