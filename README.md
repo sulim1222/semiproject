@@ -10,14 +10,30 @@
 
 ## 🚶 팀명 및 구성
 - 팀명 : SENERGY
-- 팀구성 : 팀장_강요한, 팀원_임성욱, 팀원_강동훈, 팀원_유선정, 팀원_김해진
+- <table>
+  <tbody>
+    <tr>
+      <td align="center"><a href=""><img src="width="100px;" alt=""/><br /><sub><b>팀장 : 강요한</b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>팀원 : 임성욱</b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>팀원 : 강동훈</b></sub></a><br /></td>
+     <tr/>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>팀원 : 유선정</b></sub></a><br /></td>
+      <td align="center"><a href=""><img src="" width="100px;" alt=""/><br /><sub><b>팀원 : 김해진</b></sub></a><br /></td>
+    </tr>
+  </tbody>
+</table>
 
 
 
 ## 📚 사용된 기술
 - FRONT_END :
 - BACK_END :
-
+### ✔️Frond-end
+<img src="https://img.shields.io/badge/Jsp-red?style=for-the-badge&logo=Jsp&logoColor=black">
+<img src="https://img.shields.io/badge/Css-1572B6?style=for-the-badge&logo=Css&logoColor=white">
+<img src="https://img.shields.io/badge/JavaScript-764ABC?style=for-the-badge&logo=JavaScript&logoColor=purple">
+### ✔️Back-end
+<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=green"><img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=yellow">
 
 
 ## ⚙️ 기술 스택
