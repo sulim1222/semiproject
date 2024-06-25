@@ -73,8 +73,9 @@ Header
   
 
 ## 📷 담당한 서비스 스크린샷
-![hompage_main](https://github.com/sulim1222/semiproject/assets/169763082/6afc196f-7100-4861-b665-44b5b1261089)
+![erd](https://github.com/sulim1222/semiproject/assets/169763082/77cbc2ac-9313-4eeb-9940-95a174f7a0ba)
 
+![hompage_main](https://github.com/sulim1222/semiproject/assets/169763082/6afc196f-7100-4861-b665-44b5b1261089)
 ![main](https://github.com/sulim1222/semiproject/assets/169763082/cef980e0-9d02-40cb-ad51-183dce98f116)
 ![keyward_search](https://github.com/sulim1222/semiproject/assets/169763082/bafc7989-abc8-49ae-95b9-3a7d2aeb8404)
 ![new](https://github.com/sulim1222/semiproject/assets/169763082/f6cec911-d5d1-488c-87ac-88a6aad3582c)
