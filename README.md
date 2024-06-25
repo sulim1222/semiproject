@@ -1,17 +1,23 @@
 ## 📆 진행기간
 2023.05.10 ~ 2023.05.29
 
+
+
 ## ✒️ 개요
 - 호텔 객실 예약관리
+
+
 
 ## 🚶 팀명 및 구성
 - 팀명 : SENERGY
 - 팀구성 : 팀장_강요한, 팀원_임성욱, 팀원_강동훈, 팀원_유선정, 팀원_김해진
 
 
+
 ## 📚 사용된 기술
 - FRONT_END :
 - BACK_END :
+
 
 
 ## ⚙️ 기술 스택
@@ -30,6 +36,7 @@
 
 
 
+
 ## 📜 구현 기능과 역할
 Header
 1. 관리자 페이지에서 홈페이지 및 각 카테고리 페이지로 이동하는 링크 구현
@@ -45,6 +52,8 @@ Header
 관리자 페이지(신규 예약,수정 및 취소)
 1. 홈페이지가 아닌 관리자를 통해서도 신규 예약이 가능
 2. 입실 날짜는 오늘 날짜부터 선택 가능하며 퇴실 날짜는 입실 날짜부터 선택 가능
+
+
   
 
 ## 📷 담당한 서비스 스크린샷
@@ -56,6 +65,8 @@ Header
 ![update](https://github.com/sulim1222/semiproject/assets/169763082/81c8aa9b-5aeb-4527-8c69-0045e95cd6e1)
 ![sales_by month](https://github.com/sulim1222/semiproject/assets/169763082/3e523ae9-bf7e-483e-a71b-4d116d9d1262)
 ![sales_by location](https://github.com/sulim1222/semiproject/assets/169763082/05da14ce-9410-4f89-8593-cec2751f9efe)
+
+
 
 
 ## 🔖 보완점 및 추가 기능 계획
