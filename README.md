@@ -24,17 +24,6 @@
 
 
 
-## 📚 사용된 기술
-- FRONT_END :
-- BACK_END :
-### ✔️Frond-end
-<img src="https://img.shields.io/badge/Jsp-red?style=for-the-badge&logo=Jsp&logoColor=black">
-<img src="https://img.shields.io/badge/Css-1572B6?style=for-the-badge&logo=Css&logoColor=white">
-<img src="https://img.shields.io/badge/JavaScript-764ABC?style=for-the-badge&logo=JavaScript&logoColor=purple">
-### ✔️Back-end
-<img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=Spring&logoColor=green"><img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=Spring Boot&logoColor=yellow">
-
-
 ## ⚙️ 기술 스택
 
 |  카테고리  |                                                                                                                                                                                                 스택                                                                                                                                                                                                 |
