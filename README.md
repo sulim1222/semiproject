@@ -13,11 +13,11 @@
 - <table>
   <tbody>
     <tr>
-      <td align="center"><br /><sub><b>팀장 : 강요한</b></sub></a><br /></td>
-      <td align="center"><br /><sub><b>팀원 : 임성욱</b></sub></a><br /></td>
-      <td align="center"><br /><sub><b>팀원 : 강동훈</b></sub></a><br /></td>
-      <td align="center"><br /><sub><b>팀원 : 유선정</b></sub></a><br /></td>
-      <td align="center"><br /><sub><b>팀원 : 김해진</b></sub></a><br /></td>
+      <td align="center"><sub><b>팀장 : 강요한</b></sub></a><br /></td>
+      <td align="center"><sub><b>팀원 : 임성욱</b></sub></a><br /></td>
+      <td align="center"><sub><b>팀원 : 강동훈</b></sub></a><br /></td>
+      <td align="center"><sub><b>팀원 : 유선정</b></sub></a><br /></td>
+      <td align="center"><sub><b>팀원 : 김해진</b></sub></a><br /></td>
     </tr>
   </tbody>
 </table>
