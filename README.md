@@ -62,13 +62,13 @@ Header
 
 ## 📷 담당한 서비스 스크린샷
 
-1. 사용자 페이지 메인
+1. ERD cloud
 ![erd](https://github.com/sulim1222/semiproject/assets/169763082/77cbc2ac-9313-4eeb-9940-95a174f7a0ba)
 
 - 프로젝트 시작 전 철저한 ERD 설계가 전체 개발 과정의 효율성을 크게 높일 수 있다는 것을 실감 했습니다.
 - 프로젝트의 목적과 요구 사항을 깊이 이해하는 것이 좋은 ERD 설계의 기초가 됨을 알게 되었습니다.
 
-2. 관리자 페이지 메인
+2. 사용자 페이지 메인
 ![hompage_main](https://github.com/sulim1222/semiproject/assets/169763082/6afc196f-7100-4861-b665-44b5b1261089)
 
 - UI 설계 계획: 각 지역별로 특색 있는 디자인을 적용하여 사용자들에게 시각적으로 차별화된 경험을 제공하고자 했습니다.
@@ -78,16 +78,21 @@ Header
 
 초기 계획은 프로젝트의 규모와 복잡성을 크게 증가시킬 수 있다는 점을 고려하여, 최종적으로는 더욱 집중적이고 관리 가능한 범위로 프로젝트를 조정하게 되었습니다.
 
+3. 관리자 페이지 메인
 ![main](https://github.com/sulim1222/semiproject/assets/169763082/cef980e0-9d02-40cb-ad51-183dce98f116)
-
-
 ![keyward_search](https://github.com/sulim1222/semiproject/assets/169763082/bafc7989-abc8-49ae-95b9-3a7d2aeb8404)
+- location과 keyword를 통해 부분 검색어에 포함한 데이터를 출력
+
+4. 신규 데이터
 ![new](https://github.com/sulim1222/semiproject/assets/169763082/f6cec911-d5d1-488c-87ac-88a6aad3582c)
+
+5. 기존 데이터 업데이트
 ![update](https://github.com/sulim1222/semiproject/assets/169763082/81c8aa9b-5aeb-4527-8c69-0045e95cd6e1)
 
 - JSP를 통해 각 필드 값을 넣어
 - AJAX를 사용하여 비동기적으로 서버로부터 예약 데이터를 가져오는데 이때 데이터 교환의 효율성과 편의성을 위해 JSON 형식을 활용하였습니다. 서버 측에서는 예약 정보를 JSON 형태로 응답하도록 구현하였고, 클라이언트 측에서는 AJAX 요청을 통해 이 JSON 데이터를 받아와 동적으로 폼을 채우는 방식으로 구현하였습니다.
 
+6. 월별, 지역별 매출
 ![sales_by month](https://github.com/sulim1222/semiproject/assets/169763082/3e523ae9-bf7e-483e-a71b-4d116d9d1262)
 ![sales_by location](https://github.com/sulim1222/semiproject/assets/169763082/05da14ce-9410-4f89-8593-cec2751f9efe)
 
